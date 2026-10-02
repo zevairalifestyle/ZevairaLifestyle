@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>ZevairaLifestyle | Luxury Perfumes Crafted for Pakistanâ€™s Climate</title>
+  <title>ZevairaLifestyle | Luxury Perfumes Crafted for Pakistan's Climate</title>
   <meta name="description" content="ZevairaLifestyle handcrafts high-concentration Extrait de Parfum designed to outlast extreme summer heat and humidity across Pakistan. Cash on delivery nationwide.">
   <meta name="keywords" content="perfumes Pakistan, long lasting perfumes, Extrait de parfum Karachi Lahore, ZevairaLifestyle, luxury fragrances Pakistan, cash on delivery perfumes">
   <meta property="og:title" content="ZevairaLifestyle | Scent that outlasts the heat">
@@ -12,12 +13,408 @@
   <meta property="og:image" content="favicon.svg">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   
-  <!-- Google Fonts -->
+  <!-- Google Fonts: Bodoni Moda (sturdier weights 500, 600, 700) + Hanken Grotesk -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,600;0,6..96,700;1,6..96,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /* ==========================================================================
+       CRITICAL MOBILE & DESKTOP POLISH (ZEVAIRALIFESTYLE)
+       ========================================================================== */
+
+    /* 1. Global Overflow & Box-Sizing Guards */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    
+    html, body {
+      max-width: 100%;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    body {
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* 2. Fluid & Sturdy Typography */
+    h1, h2, h3, h4, h5, h6, .hero-text h1 {
+      font-family: var(--display-font);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 7vw, 4.5rem);
+      line-height: 1.15;
+    }
+
+    h2 {
+      font-size: clamp(1.7rem, 5vw, 3rem);
+      line-height: 1.2;
+    }
+
+    /* 3. Centered Container */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin-inline: auto;
+      padding-inline: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding-inline: 16px;
+      }
+    }
+
+    /* 4. Hero Section Layout */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: clamp(32px, 5vw, 64px);
+      align-items: center;
+    }
+
+    .hero-media-wrap {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .film-box {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      max-height: 520px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: linear-gradient(180deg, #1C4631 0%, #0B1D14 100%);
+      border: 1px solid rgba(217, 177, 90, 0.4);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .film-box video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+
+    .film-box.has-video video {
+      display: block;
+    }
+
+    .film-badge {
+      position: absolute;
+      bottom: 14px;
+      left: 14px;
+      background: rgba(7, 23, 15, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: #CFD8C8;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      font-size: 11.5px;
+      font-weight: 500;
+      border: 1px solid rgba(217, 177, 90, 0.35);
+      z-index: 3;
+    }
+
+    .film-toggle-btn {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: rgba(7, 23, 15, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: #F5EFDC;
+      min-width: 44px;
+      min-height: 44px;
+      padding: 8px 14px;
+      border-radius: var(--radius-full);
+      font-size: 12px;
+      font-weight: 600;
+      border: 1px solid rgba(217, 177, 90, 0.4);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+      z-index: 4;
+      transition: all var(--duration) var(--ease);
+    }
+
+    .film-toggle-btn:hover {
+      background: var(--gold);
+      color: #0F2A1D;
+    }
+
+    .film-reel-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin-top: 14px;
+      width: 100%;
+    }
+
+    .film-reel-btn {
+      background: rgba(15, 42, 29, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: #D3E0D6;
+      border: 1px solid rgba(217, 177, 90, 0.35);
+      min-height: 44px;
+      padding: 8px 18px;
+      border-radius: var(--radius-full);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s var(--ease);
+    }
+
+    .film-reel-btn.active,
+    .film-reel-btn:hover {
+      background: var(--gold);
+      color: #0F2A1D;
+      border-color: var(--gold-light);
+      box-shadow: 0 4px 14px rgba(217, 177, 90, 0.4);
+    }
+
+    @media (max-width: 768px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .hero-text {
+        text-align: left;
+      }
+      .hero-cta-group {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 12px;
+      }
+      .hero-cta-group .btn {
+        width: 100%;
+        min-height: 48px;
+        padding: 14px 20px;
+        white-space: nowrap;
+        text-align: center;
+      }
+      .hero-guarantee {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        width: 100%;
+      }
+      .hero-guarantee span {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        line-height: 1.3;
+      }
+    }
+
+    /* 5. Why Zevaira Section (Story & Pillars) */
+    .story-pillars-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(32px, 6vw, 64px);
+      align-items: stretch;
+    }
+
+    .story-stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .story-pillars-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+    }
+
+    /* 6. Discovery Flight Section (Grid-Areas for Mobile Re-Ordering) */
+    .discovery-container {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      grid-template-areas:
+        "media title"
+        "media desc"
+        "media price"
+        "media cta";
+      gap: clamp(32px, 5vw, 64px);
+      align-items: center;
+    }
+
+    .discovery-title-area { grid-area: title; }
+    .discovery-desc-area  { grid-area: desc; }
+    .discovery-media-area { grid-area: media; display: grid; place-items: center; }
+    .discovery-price-area { grid-area: price; }
+    .discovery-cta-area   { grid-area: cta; }
+
+    .discovery-price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .discovery-price {
+      font-size: 34px;
+      font-weight: 700;
+      color: var(--gold-light);
+      white-space: nowrap;
+    }
+
+    .discovery-delivery-note {
+      color: #A9BBA9;
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      .discovery-container {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "title"
+          "desc"
+          "media"
+          "price"
+          "cta";
+        gap: 20px;
+        text-align: left;
+      }
+      .discovery-price-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
+      .discovery-cta-area {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 12px;
+      }
+      .discovery-cta-area .btn {
+        width: 100%;
+        min-height: 48px;
+        text-align: center;
+      }
+    }
+
+    /* 7. Reviews Carousel */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .reviews-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 16px;
+        padding: 10px 4px 24px;
+        scrollbar-width: none;
+      }
+      .reviews-grid::-webkit-scrollbar {
+        display: none;
+      }
+      .reviews-grid .checkout-card {
+        flex: 0 0 88%;
+        max-width: 330px;
+        scroll-snap-align: center;
+        scroll-snap-stop: always;
+        margin-bottom: 0;
+      }
+    }
+
+    /* 8. Scroll-Triggered Reveal Animations */
+    @media (prefers-reduced-motion: no-preference) {
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+        transition-delay: calc(var(--i, 0) * 100ms);
+        will-change: opacity, transform;
+      }
+
+      .reveal-left {
+        transform: translateX(-35px);
+      }
+
+      .reveal-right {
+        transform: translateX(35px);
+      }
+
+      .reveal-zoom {
+        transform: scale(0.93);
+      }
+
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0) translateX(0) scale(1);
+      }
+
+      /* Animated Gold Underline on Section Reveal */
+      .gold-divider {
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+      .gold-divider.center {
+        transform-origin: center;
+      }
+      .gold-divider.visible,
+      .reveal.visible .gold-divider,
+      .reveal.visible + .gold-divider {
+        transform: scaleX(1);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      .gold-divider {
+        transform: none !important;
+      }
+    }
+  </style>
+
+  <noscript>
+    <style>
+      .reveal { opacity: 1 !important; transform: none !important; }
+      .gold-divider { transform: none !important; }
+    </style>
+  </noscript>
 </head>
 <body>
 
@@ -29,7 +426,7 @@
     <!-- HERO SECTION -->
     <section class="hero-section">
       <div class="container hero-grid">
-        <div class="hero-text">
+        <div class="hero-text reveal">
           <span class="eyebrow" style="color:var(--gold-light);">Artisanal Extrait de Parfum</span>
           <h1>Scent that outlasts the heat.</h1>
           <p>
@@ -52,23 +449,25 @@
         </div>
 
         <!-- HERO VIDEO / ANIMATED BOTTLE -->
-        <div class="film-box" id="heroFilmBox" aria-label="ZevairaLifestyle hero showcase">
-          <video id="heroVideoEl" muted playsinline preload="auto"></video>
-          <div class="scene-fallback" id="heroSceneFallback">
-            <div class="mist-container" aria-hidden="true">
-              <i></i><i></i><i></i><i></i><i></i>
+        <div class="hero-media-wrap reveal reveal-zoom">
+          <div class="film-box" id="heroFilmBox" aria-label="ZevairaLifestyle hero showcase">
+            <video id="heroVideoEl" muted playsinline preload="auto"></video>
+            <div class="scene-fallback" id="heroSceneFallback">
+              <div class="mist-container" aria-hidden="true">
+                <i></i><i></i><i></i><i></i><i></i>
+              </div>
+              <div id="heroBottleMount" style="width:75%;max-width:260px;"></div>
             </div>
-            <div id="heroBottleMount" style="width:75%;max-width:260px;"></div>
+            <span class="film-badge" id="filmStatusBadge">Film I • The Essence</span>
+            <button class="film-toggle-btn" id="filmToggleBtn" type="button" aria-label="Toggle motion">Pause Motion</button>
           </div>
-          <span class="film-badge" id="filmStatusBadge">Film I • The Essence</span>
-          
+
+          <!-- Cinema Reel Selector Row Below Media -->
           <div class="film-reel-nav" id="heroFilmNav" aria-label="Switch hero film">
             <button type="button" class="film-reel-btn active" data-index="0" title="Film 1: Scent That Outlasts The Heat">Film 1</button>
             <button type="button" class="film-reel-btn" data-index="1" title="Film 2: Artisanal Distillation">Film 2</button>
             <button type="button" class="film-reel-btn" data-index="2" title="Film 3: Signature Sillage">Film 3</button>
           </div>
-
-          <button class="film-toggle-btn" id="filmToggleBtn" type="button" aria-label="Toggle motion">Pause Motion</button>
         </div>
       </div>
     </section>
@@ -76,7 +475,7 @@
     <!-- TRUST STRIP -->
     <section style="padding: 40px 0; background: var(--surface); border-bottom: 1px solid var(--line);">
       <div class="container trust-strip">
-        <div class="trust-item">
+        <div class="trust-item reveal" style="--i:0">
           <div class="trust-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
           </div>
@@ -85,7 +484,7 @@
             <p>Delivered safely to Karachi, Lahore, Islamabad, and every town nationwide.</p>
           </div>
         </div>
-        <div class="trust-item">
+        <div class="trust-item reveal" style="--i:1">
           <div class="trust-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
           </div>
@@ -94,7 +493,7 @@
             <p>Inspect your parcel at the doorstep. EasyPaisa, JazzCash & Bank transfer also accepted.</p>
           </div>
         </div>
-        <div class="trust-item">
+        <div class="trust-item reveal" style="--i:2">
           <div class="trust-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
           </div>
@@ -103,7 +502,7 @@
             <p>Highest oil concentration in Pakistan. Never diluted with excessive alcohol or water.</p>
           </div>
         </div>
-        <div class="trust-item">
+        <div class="trust-item reveal" style="--i:3">
           <div class="trust-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
           </div>
@@ -118,7 +517,7 @@
     <!-- SHOP BY CATEGORY -->
     <section>
       <div class="container">
-        <div class="section-header text-center">
+        <div class="section-header text-center reveal">
           <span class="eyebrow">Curated For Every Identity</span>
           <h2>Shop by Category</h2>
           <div class="gold-divider center"></div>
@@ -128,27 +527,27 @@
         </div>
 
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;">
-          <a href="shop.html?category=For+Him" class="trust-item" style="flex-direction:column;align-items:center;text-align:center;padding:32px 20px;border-radius:var(--radius-lg);">
+          <a href="shop.html?category=For+Him" class="trust-item reveal" style="--i:0;flex-direction:column;align-items:center;text-align:center;padding:32px 20px;border-radius:var(--radius-lg);">
             <div style="font-family:var(--display-font);font-size:24px;margin-bottom:8px;color:var(--ink);">For Him</div>
             <p style="font-size:13px;color:var(--muted);margin-bottom:14px;">Crisp vetiver, citrus bursts & regal woods</p>
             <span class="btn btn-outline btn-sm">Explore Men's</span>
           </a>
-          <a href="shop.html?category=For+Her" class="trust-item" style="flex-direction:column;align-items:center;text-align:center;padding:32px 20px;border-radius:var(--radius-lg);">
+          <a href="shop.html?category=For+Her" class="trust-item reveal" style="--i:1;flex-direction:column;align-items:center;text-align:center;padding:32px 20px;border-radius:var(--radius-lg);">
             <div style="font-family:var(--display-font);font-size:24px;margin-bottom:8px;color:var(--ink);">For Her</div>
             <p style="font-size:13px;color:var(--muted);margin-bottom:14px;">Sambac jasmine, Taif rose & velvet musk</p>
             <span class="btn btn-outline btn-sm">Explore Women's</span>
           </a>
-          <a href="shop.html?category=Unisex" class="trust-item" style="flex-direction:column;align-items:center;text-align:center;padding:32px 20px;border-radius:var(--radius-lg);">
+          <a href="shop.html?category=Unisex" class="trust-item reveal" style="--i:2;flex-direction:column;align-items:center;text-align:center;padding:32px 20px;border-radius:var(--radius-lg);">
             <div style="font-family:var(--display-font);font-size:24px;margin-bottom:8px;color:var(--ink);">Unisex</div>
             <p style="font-size:13px;color:var(--muted);margin-bottom:14px;">Monsoon rain, amber dunes & rare oud</p>
             <span class="btn btn-outline btn-sm">Explore Unisex</span>
           </a>
-          <a href="shop.html?category=Gift+Sets" class="trust-item" style="flex-direction:column;align-items:center;text-align:center;padding:32px 20px;border-radius:var(--radius-lg);">
+          <a href="shop.html?category=Gift+Sets" class="trust-item reveal" style="--i:3;flex-direction:column;align-items:center;text-align:center;padding:32px 20px;border-radius:var(--radius-lg);">
             <div style="font-family:var(--display-font);font-size:24px;margin-bottom:8px;color:var(--ink);">Gift Sets</div>
-            <p style="font-size:13px;color:var(--muted);margin-bottom:14px;">Curated 6-sample flight in luxury box</p>
+            <p style="font-size:13px;color:var(--muted);margin-bottom:14px;">Curated 8-sample flight in luxury box</p>
             <span class="btn btn-outline btn-sm">View Discovery</span>
           </a>
-          <a href="shop.html?size=10ml" class="trust-item" style="flex-direction:column;align-items:center;text-align:center;padding:32px 20px;border-radius:var(--radius-lg);">
+          <a href="shop.html?size=10ml" class="trust-item reveal" style="--i:4;flex-direction:column;align-items:center;text-align:center;padding:32px 20px;border-radius:var(--radius-lg);">
             <div style="font-family:var(--display-font);font-size:24px;margin-bottom:8px;color:var(--ink);">Travel Sizes</div>
             <p style="font-size:13px;color:var(--muted);margin-bottom:14px;">10ml pocket atomizers for on-the-go luxury</p>
             <span class="btn btn-outline btn-sm">Browse 10ml</span>
@@ -160,7 +559,7 @@
     <!-- BESTSELLERS GRID -->
     <section class="section-alt">
       <div class="container">
-        <div style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:20px;margin-bottom:40px;">
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:20px;margin-bottom:40px;" class="reveal">
           <div>
             <span class="eyebrow">Most Adored Across Pakistan</span>
             <h2>Our Bestsellers</h2>
@@ -178,18 +577,18 @@
     <!-- WHY ZEVAIRA FEATURE STORY -->
     <section>
       <div class="container">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,64px);align-items:center;">
-          <div>
+        <div class="story-pillars-grid">
+          <div class="reveal reveal-left">
             <span class="eyebrow">The Engineering of Scents</span>
             <h2>Why Zevaira Outlasts the Heat</h2>
             <div class="gold-divider"></div>
-            <p style="font-size:16px;color:var(--muted);line-height:1.7;margin-bottom:24px;">
-              Most imported perfumes are formulated in cool, dry European climates. When worn under 42Â°C heat in Lahore or the 85% relative humidity of Karachi, their top notes evaporate within 30 minutes, leaving a faint skin scent.
+            <p style="font-size:16px;color:var(--muted);line-height:1.7;margin-bottom:20px;">
+              Most imported perfumes are formulated in cool, dry European climates. When worn under 42°C heat in Lahore or the 85% relative humidity of Karachi, their top notes evaporate within 30 minutes, leaving a faint skin scent.
             </p>
-            <p style="font-size:16px;color:var(--muted);line-height:1.7;margin-bottom:28px;">
+            <p style="font-size:16px;color:var(--muted);line-height:1.7;margin-bottom:24px;">
               Zevaira perfumes are engineered with heavy molecular fixatives, authentic aged ambergris, and dense wood resins that anchor to the skin and cotton kurtas. We formulate strictly at Extrait de Parfum concentration (30% to 38% pure perfume oils).
             </p>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+            <div class="story-stats-grid">
               <div style="border-left:2px solid var(--gold);padding-left:14px;">
                 <h4 style="font-size:22px;color:var(--gold);margin-bottom:4px;">16+ Hours</h4>
                 <p style="font-size:13.5px;color:var(--muted);">Continuous projection verified through rigorous heat tests.</p>
@@ -201,33 +600,33 @@
             </div>
           </div>
 
-          <div style="background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:clamp(28px,4vw,48px);box-shadow:var(--shadow-md);">
+          <div class="reveal reveal-right" style="background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:clamp(24px,4vw,48px);box-shadow:var(--shadow-md);">
             <h3 style="font-size:24px;margin-bottom:20px;">Our Four Pillars of Quality</h3>
             
             <div style="display:flex;flex-direction:column;gap:18px;">
               <div style="display:flex;gap:14px;">
-                <span style="font-size:20px;color:var(--gold);">âœ¦</span>
+                <span style="font-size:20px;color:var(--gold);">✦</span>
                 <div>
                   <strong style="color:var(--ink);display:block;margin-bottom:2px;">Heat-Stabilized Fixatives</strong>
                   <span style="font-size:13.5px;color:var(--muted);">Resists sweat breakdown so you stay smelling pristine from morning meetings to late-night dinners.</span>
                 </div>
               </div>
               <div style="display:flex;gap:14px;">
-                <span style="font-size:20px;color:var(--gold);">âœ¦</span>
+                <span style="font-size:20px;color:var(--gold);">✦</span>
                 <div>
                   <strong style="color:var(--ink);display:block;margin-bottom:2px;">Authentic French & Oriental Oils</strong>
                   <span style="font-size:13.5px;color:var(--muted);">Sourced directly from Grasse, Haiti, and domestic attar distillers for unmatched depth.</span>
                 </div>
               </div>
               <div style="display:flex;gap:14px;">
-                <span style="font-size:20px;color:var(--gold);">âœ¦</span>
+                <span style="font-size:20px;color:var(--gold);">✦</span>
                 <div>
                   <strong style="color:var(--ink);display:block;margin-bottom:2px;">Small Batch Maturation</strong>
                   <span style="font-size:13.5px;color:var(--muted);">Every batch rests in temperature-controlled dark chambers for 45 days to eliminate sharp alcohol spikes.</span>
                 </div>
               </div>
               <div style="display:flex;gap:14px;">
-                <span style="font-size:20px;color:var(--gold);">âœ¦</span>
+                <span style="font-size:20px;color:var(--gold);">✦</span>
                 <div>
                   <strong style="color:var(--ink);display:block;margin-bottom:2px;">Non-Staining on Fabric</strong>
                   <span style="font-size:13.5px;color:var(--muted);">Formulated clean to safely spray on white cotton kurtas, raw silks, and formal pashminas.</span>
@@ -242,7 +641,7 @@
     <!-- BRAND CINEMA SHOWCASE: User's New Brand Films -->
     <section class="section-cinema" style="padding: clamp(60px, 8vw, 100px) 0; background: radial-gradient(circle at 50% 20%, #173827 0%, #0F2A1D 60%, #081710 100%); color: #F5EFDC; border-top: 1px solid rgba(217,177,90,0.3); border-bottom: 1px solid rgba(217,177,90,0.3);">
       <div class="container">
-        <div class="section-header text-center" style="margin-bottom: 48px;">
+        <div class="section-header text-center reveal" style="margin-bottom: 48px;">
           <span class="eyebrow" style="color: var(--gold-light);">The Atelier in Motion</span>
           <h2 style="color: #F5EFDC;">Cinematic Vision of Zevaira</h2>
           <div class="gold-divider center"></div>
@@ -253,7 +652,7 @@
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px;">
           <!-- Film Card 1 -->
-          <div style="background: rgba(15,42,29,0.7); border: 1px solid rgba(217,177,90,0.35); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 16px 40px rgba(0,0,0,0.4); display: flex; flex-direction: column;">
+          <div class="reveal reveal-left" style="background: rgba(15,42,29,0.7); border: 1px solid rgba(217,177,90,0.35); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 16px 40px rgba(0,0,0,0.4); display: flex; flex-direction: column;">
             <div style="position: relative; aspect-ratio: 16/9; background: #000; overflow: hidden;">
               <video src="videos/gemini_generated_video_5357ccaa.mp4" controls playsinline muted loop preload="metadata" style="width: 100%; height: 100%; object-fit: cover;"></video>
             </div>
@@ -273,7 +672,7 @@
           </div>
 
           <!-- Film Card 2 -->
-          <div style="background: rgba(15,42,29,0.7); border: 1px solid rgba(217,177,90,0.35); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 16px 40px rgba(0,0,0,0.4); display: flex; flex-direction: column;">
+          <div class="reveal reveal-right" style="background: rgba(15,42,29,0.7); border: 1px solid rgba(217,177,90,0.35); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 16px 40px rgba(0,0,0,0.4); display: flex; flex-direction: column;">
             <div style="position: relative; aspect-ratio: 16/9; background: #000; overflow: hidden;">
               <video src="videos/gemini_generated_video_8819b247.mp4" controls playsinline muted loop preload="metadata" style="width: 100%; height: 100%; object-fit: cover;"></video>
             </div>
@@ -298,7 +697,7 @@
     <!-- SCENT FAMILY GUIDE -->
     <section class="section-alt">
       <div class="container">
-        <div class="section-header text-center">
+        <div class="section-header text-center reveal">
           <span class="eyebrow">Find Your Olfactory Match</span>
           <h2>The Scent Family Guide</h2>
           <div class="gold-divider center"></div>
@@ -308,32 +707,32 @@
         </div>
 
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:20px;">
-          <a href="shop.html?family=Fresh" class="trust-item" style="flex-direction:column;padding:28px 20px;border-radius:var(--radius-md);">
-            <div style="font-size:28px;margin-bottom:8px;">ðŸŒŠ</div>
+          <a href="shop.html?family=Fresh" class="trust-item reveal" style="--i:0;flex-direction:column;padding:28px 20px;border-radius:var(--radius-md);">
+            <div style="font-size:28px;margin-bottom:8px;">🌊</div>
             <h4>Fresh & Aquatic</h4>
             <p style="font-size:13.5px;color:var(--muted);margin-bottom:12px;">Petrichor, wet earth, citrus zest & crisp vetiver.</p>
             <span style="color:var(--gold);font-weight:600;font-size:13px;">View Scents &rarr;</span>
           </a>
-          <a href="shop.html?family=Woody" class="trust-item" style="flex-direction:column;padding:28px 20px;border-radius:var(--radius-md);">
-            <div style="font-size:28px;margin-bottom:8px;">ðŸŒ²</div>
+          <a href="shop.html?family=Woody" class="trust-item reveal" style="--i:1;flex-direction:column;padding:28px 20px;border-radius:var(--radius-md);">
+            <div style="font-size:28px;margin-bottom:8px;">🌲</div>
             <h4>Woody & Earthy</h4>
             <p style="font-size:13.5px;color:var(--muted);margin-bottom:12px;">Atlas cedarwood, Haitian vetiver, cypress & oakmoss.</p>
             <span style="color:var(--gold);font-weight:600;font-size:13px;">View Scents &rarr;</span>
           </a>
-          <a href="shop.html?family=Floral" class="trust-item" style="flex-direction:column;padding:28px 20px;border-radius:var(--radius-md);">
-            <div style="font-size:28px;margin-bottom:8px;">ðŸŒ¸</div>
+          <a href="shop.html?family=Floral" class="trust-item reveal" style="--i:2;flex-direction:column;padding:28px 20px;border-radius:var(--radius-md);">
+            <div style="font-size:28px;margin-bottom:8px;">🌸</div>
             <h4>Radiant Floral</h4>
             <p style="font-size:13.5px;color:var(--muted);margin-bottom:12px;">Sambac jasmine (Mogra), Taif rose & orange blossom.</p>
             <span style="color:var(--gold);font-weight:600;font-size:13px;">View Scents &rarr;</span>
           </a>
-          <a href="shop.html?family=Oriental" class="trust-item" style="flex-direction:column;padding:28px 20px;border-radius:var(--radius-md);">
-            <div style="font-family:var(--display-font);font-size:28px;margin-bottom:8px;">âœ¨</div>
+          <a href="shop.html?family=Oriental" class="trust-item reveal" style="--i:3;flex-direction:column;padding:28px 20px;border-radius:var(--radius-md);">
+            <div style="font-family:var(--display-font);font-size:28px;margin-bottom:8px;">✨</div>
             <h4>Warm Oriental</h4>
             <p style="font-size:13.5px;color:var(--muted);margin-bottom:12px;">Kashmiri saffron, warm amber, vanilla bourbon & oud.</p>
             <span style="color:var(--gold);font-weight:600;font-size:13px;">View Scents &rarr;</span>
           </a>
-          <a href="shop.html?family=Citrus" class="trust-item" style="flex-direction:column;padding:28px 20px;border-radius:var(--radius-md);">
-            <div style="font-size:28px;margin-bottom:8px;">ðŸŠ</div>
+          <a href="shop.html?family=Citrus" class="trust-item reveal" style="--i:4;flex-direction:column;padding:28px 20px;border-radius:var(--radius-md);">
+            <div style="font-size:28px;margin-bottom:8px;">🍊</div>
             <h4>Zesty Citrus</h4>
             <p style="font-size:13.5px;color:var(--muted);margin-bottom:12px;">Blood orange, pink grapefruit, bergamot & sea salt.</p>
             <span style="color:var(--gold);font-weight:600;font-size:13px;">View Scents &rarr;</span>
@@ -343,38 +742,48 @@
     </section>
 
     <!-- DISCOVERY SAMPLE SET OFFER BANNER -->
-    <section style="background:radial-gradient(100% 80% at 50% 20%, #1F4A33 0%, #0F2A1D 100%);color:#F5EFDC;padding:clamp(60px,8vw,96px) 0;">
-      <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,64px);align-items:center;">
-        <div>
+    <section class="discovery-section" style="background:radial-gradient(100% 80% at 50% 20%, #1F4A33 0%, #0F2A1D 100%);color:#F5EFDC;padding:clamp(60px,8vw,96px) 0;">
+      <div class="container discovery-container">
+        
+        <div class="discovery-title-area reveal">
           <span class="eyebrow" style="color:var(--gold-light);">Blind-Buying Made Risk-Free</span>
           <h2 style="color:#F5EFDC;margin-bottom:16px;">The 6-Scent Discovery Flight</h2>
+        </div>
+
+        <div class="discovery-desc-area reveal">
           <p style="color:#CFD8C8;font-size:17px;line-height:1.6;margin-bottom:24px;">
-            Sample all six signature Zevaira creations in generous 5ml deluxe gold glass atomizers (over 400 sprays total).
-            Includes a <strong>Rs 1,000 gift voucher</strong> redeemable on your subsequent 50ml or 100ml purchase.
+            Sample all six signature Zevaira creations in generous deluxe gold glass atomizers.
+            Includes an exclusive <strong>Rs 1,000 gift voucher</strong> redeemable on your subsequent 50ml or 100ml purchase.
           </p>
-          <div style="display:flex;align-items:baseline;gap:16px;margin-bottom:28px;">
-            <span style="font-size:34px;font-weight:700;color:var(--gold-light);">Rs 2,450</span>
-            <span style="color:#A9BBA9;font-size:14px;">Free Nationwide Delivery Included</span>
+        </div>
+
+        <div class="discovery-media-area reveal reveal-zoom">
+          <div style="width:100%;max-width:360px;">
+            <div id="discoveryBoxPreviewMount"></div>
           </div>
+        </div>
+
+        <div class="discovery-price-area reveal">
+          <div class="discovery-price-row">
+            <span class="discovery-price">Rs 2,450</span>
+            <span class="discovery-delivery-note">Free Nationwide Delivery Included</span>
+          </div>
+        </div>
+
+        <div class="discovery-cta-area reveal">
           <div style="display:flex;gap:14px;flex-wrap:wrap;">
             <a href="product.html?id=discovery-set" class="btn btn-primary btn-lg">Order Discovery Box</a>
             <button onclick="addToCart('discovery-set','6 x 5ml Vials',1)" class="btn btn-outline-gold btn-lg">Quick Add to Cart</button>
           </div>
         </div>
 
-        <div style="display:grid;place-items:center;">
-          <div style="width:100%;max-width:380px;">
-            <!-- Render Discovery Box SVG -->
-            <div id="discoveryBoxPreviewMount"></div>
-          </div>
-        </div>
       </div>
     </section>
 
     <!-- CUSTOMER REVIEWS GRID -->
     <section>
       <div class="container">
-        <div class="section-header text-center">
+        <div class="section-header text-center reveal">
           <span class="eyebrow">Verified Customer Experiences</span>
           <h2>Loved From Karachi to Gilgit</h2>
           <div class="gold-divider center"></div>
@@ -383,32 +792,32 @@
           </p>
         </div>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;">
-          <div class="checkout-card" style="padding:28px;margin-bottom:0;">
-            <div class="product-rating-stars" style="margin-bottom:12px;">â˜…â˜…â˜…â˜…â˜…</div>
+        <div class="reviews-grid">
+          <div class="checkout-card reveal" style="--i:0;padding:28px;margin-bottom:0;">
+            <div class="product-rating-stars" style="margin-bottom:12px;">★★★★★</div>
             <p style="font-size:15px;line-height:1.6;color:var(--ink);margin-bottom:16px;">
-              "I applied Royal Vetiver for my brotherâ€™s daytime Mehndi in Lahore (41Â°C humidity). 9 hours later, relatives were still asking what niche perfume I was wearing. Genuinely lasts all day."
+              "I applied Royal Vetiver for my brother's daytime Mehndi in Lahore (41°C humidity). 9 hours later, relatives were still asking what niche perfume I was wearing. Genuinely lasts all day."
             </p>
             <div style="font-weight:600;font-size:14px;color:var(--ink);">Hamza Tariq</div>
-            <div style="font-size:12px;color:var(--muted);">Gulberg, Lahore â€¢ Verified Purchase</div>
+            <div style="font-size:12px;color:var(--muted);">Gulberg, Lahore • Verified Purchase</div>
           </div>
 
-          <div class="checkout-card" style="padding:28px;margin-bottom:0;">
-            <div class="product-rating-stars" style="margin-bottom:12px;">â˜…â˜…â˜…â˜…â˜…</div>
+          <div class="checkout-card reveal" style="--i:1;padding:28px;margin-bottom:0;">
+            <div class="product-rating-stars" style="margin-bottom:12px;">★★★★★</div>
             <p style="font-size:15px;line-height:1.6;color:var(--ink);margin-bottom:16px;">
               "Jasmine Blanc is breathtaking. It smells like fresh Karachi evening Mogra without being artificial or overwhelming. It stayed fragrant on my organza dupatta for two days!"
             </p>
             <div style="font-weight:600;font-size:14px;color:var(--ink);">Ayesha Khan</div>
-            <div style="font-size:12px;color:var(--muted);">DHA Phase 6, Karachi â€¢ Verified Purchase</div>
+            <div style="font-size:12px;color:var(--muted);">DHA Phase 6, Karachi • Verified Purchase</div>
           </div>
 
-          <div class="checkout-card" style="padding:28px;margin-bottom:0;">
-            <div class="product-rating-stars" style="margin-bottom:12px;">â˜…â˜…â˜…â˜…â˜…</div>
+          <div class="checkout-card reveal" style="--i:2;padding:28px;margin-bottom:0;">
+            <div class="product-rating-stars" style="margin-bottom:12px;">★★★★★</div>
             <p style="font-size:15px;line-height:1.6;color:var(--ink);margin-bottom:16px;">
               "Ordered Amber Mirage on Cash on Delivery. Parcel arrived in Islamabad within 48 hours via TCS. The saffron and oud blend rivals Tom Ford and Amouage at a fraction of the cost."
             </p>
             <div style="font-weight:600;font-size:14px;color:var(--ink);">Bilal Farooq</div>
-            <div style="font-size:12px;color:var(--muted);">F-7/2, Islamabad â€¢ Verified Purchase</div>
+            <div style="font-size:12px;color:var(--muted);">F-7/2, Islamabad • Verified Purchase</div>
           </div>
         </div>
       </div>
@@ -416,7 +825,7 @@
 
     <!-- INSTAGRAM GALLERY STRIP -->
     <section class="section-alt" style="padding: 48px 0;">
-      <div class="container text-center" style="margin-bottom:28px;">
+      <div class="container text-center reveal" style="margin-bottom:28px;">
         <span class="eyebrow">#ZevairaMoments</span>
         <h3 style="font-size:26px;margin-bottom:12px;">Follow the Scent Trail</h3>
         <div>
@@ -431,23 +840,23 @@
         </div>
       </div>
       <div class="container" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;">
-        <div style="background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:24px;text-align:center;">
-          <div style="font-size:32px;margin-bottom:8px;">ðŸŒ¿</div>
+        <div class="reveal" style="--i:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:24px;text-align:center;">
+          <div style="font-size:32px;margin-bottom:8px;">🌿</div>
           <strong style="display:block;font-size:13.5px;color:var(--ink);">Fresh Harvest</strong>
           <span style="font-size:12px;color:var(--muted);">Calabrian Bergamot</span>
         </div>
-        <div style="background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:24px;text-align:center;">
-          <div style="font-size:32px;margin-bottom:8px;">ðŸŒ§ï¸</div>
+        <div class="reveal" style="--i:1;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:24px;text-align:center;">
+          <div style="font-size:32px;margin-bottom:8px;">🌧️</div>
           <strong style="display:block;font-size:13.5px;color:var(--ink);">Petrichor Extracts</strong>
           <span style="font-size:12px;color:var(--muted);">Mitti & Cypress</span>
         </div>
-        <div style="background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:24px;text-align:center;">
-          <div style="font-size:32px;margin-bottom:8px;">ðŸªµ</div>
+        <div class="reveal" style="--i:2;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:24px;text-align:center;">
+          <div style="font-size:32px;margin-bottom:8px;">🪵</div>
           <strong style="display:block;font-size:13.5px;color:var(--ink);">Aged Assam Oud</strong>
           <span style="font-size:12px;color:var(--muted);">Smoked Wood Stills</span>
         </div>
-        <div style="background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:24px;text-align:center;">
-          <div style="font-size:32px;margin-bottom:8px;">âœ¨</div>
+        <div class="reveal" style="--i:3;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:24px;text-align:center;">
+          <div style="font-size:32px;margin-bottom:8px;">✨</div>
           <strong style="display:block;font-size:13.5px;color:var(--ink);">Shaadi Signature</strong>
           <span style="font-size:12px;color:var(--muted);">Golden Saffron</span>
         </div>
@@ -467,7 +876,6 @@
   <script type="module" src="js/firebase-config.js"></script>
   <script type="module" src="js/firestore-sync.js"></script>
   <script type="module" src="js/auth.js"></script>
-
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -561,8 +969,8 @@
       const bestsellersGrid = document.getElementById("homeBestsellersGrid");
       if (bestsellersGrid && typeof PRODUCTS !== "undefined") {
         const bestsellers = PRODUCTS.filter(p => p.id !== "discovery-set").slice(0, 4);
-        bestsellersGrid.innerHTML = bestsellers.map(p => `
-          <div class="product-card">
+        bestsellersGrid.innerHTML = bestsellers.map((p, idx) => `
+          <div class="product-card reveal" style="--i:${idx}">
             <div class="product-card-thumb" onclick="window.location.href='product.html?id=${p.id}'">
               <span class="badge product-badge-pos">${p.badge || 'Bestseller'}</span>
               <button class="wishlist-heart-btn ${isInWishlist(p.id) ? 'active' : ''}" onclick="event.stopPropagation(); toggleWishlist('${p.id}'); this.classList.toggle('active');" aria-label="Toggle wishlist">
@@ -588,7 +996,55 @@
           </div>
         `).join("");
       }
+
+      // 4. Lightweight IntersectionObserver Scroll Animations
+      initScrollAnimations();
     });
+
+    function initScrollAnimations() {
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+        document.querySelectorAll('.gold-divider').forEach(el => el.classList.add('visible'));
+        return;
+      }
+
+      if (!('IntersectionObserver' in window)) {
+        document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+        document.querySelectorAll('.gold-divider').forEach(el => el.classList.add('visible'));
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            const divider = entry.target.querySelector('.gold-divider');
+            if (divider) divider.classList.add('visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.15,
+        rootMargin: "0px 0px -60px 0px"
+      });
+
+      document.querySelectorAll('.reveal, .gold-divider').forEach(el => {
+        observer.observe(el);
+      });
+
+      // Subtle desktop-only parallax on hero media
+      if (window.innerWidth >= 1024) {
+        const heroBox = document.getElementById('heroFilmBox');
+        if (heroBox) {
+          window.addEventListener('scroll', () => {
+            const y = window.pageYOffset;
+            if (y < 800) {
+              heroBox.style.transform = `translate3d(0, ${y * 0.12}px, 0)`;
+            }
+          }, { passive: true });
+        }
+      }
+    }
   </script>
 </body>
 </html>

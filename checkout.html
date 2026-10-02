@@ -459,7 +459,7 @@
         localStorage.removeItem("zevaira_order_note");
         localStorage.removeItem("zevaira_checkout_meta");
 
-        // Also save to Firestore (non-blocking â€” WhatsApp still opens if Firestore fails)
+        // Also save to Firestore (non-blocking "” WhatsApp still opens if Firestore fails)
         if (typeof window.saveOrderToFirestore === "function") {
           window.saveOrderToFirestore(orderData).catch(() => {});
         }

@@ -294,11 +294,19 @@ function injectHeaderAndFooter() {
   const headerMarkup = `
     <!-- Top Announcement Bar -->
     <div class="announcement-bar" role="region" aria-label="Store announcement">
-      <div class="container">
-        <div class="announcement-content">
+      <div class="announcement-marquee">
+        <div class="announcement-track">
           <span>Free delivery above Rs 6,000</span>
+          <span class="announcement-dot">✦</span>
           <span>Cash on delivery across Pakistan</span>
-          <span>100% Authentic Extrait de Parfum</span>
+          <span class="announcement-dot">✦</span>
+          <span>100% Authentic Extrait de Parfum (35%)</span>
+          <span class="announcement-dot">✦</span>
+          <span>Free delivery above Rs 6,000</span>
+          <span class="announcement-dot">✦</span>
+          <span>Cash on delivery across Pakistan</span>
+          <span class="announcement-dot">✦</span>
+          <span>100% Authentic Extrait de Parfum (35%)</span>
         </div>
       </div>
     </div>
@@ -375,7 +383,8 @@ function injectHeaderAndFooter() {
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
               </svg>
-              <span>Cart (<span id="cartCountBadge">0</span>)</span>
+              <span class="cart-btn-label">Cart</span>
+              <span class="cart-count-pill" id="cartCountBadge">0</span>
             </a>
           </div>
 

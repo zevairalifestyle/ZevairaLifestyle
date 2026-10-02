@@ -2050,9 +2050,9 @@ footer.site-footer .instagram-link-badge:hover svg {
 }
 
 /* ==========================================================================
-   Responsive Adaptations
+   Responsive Navigation & Mobile Polish
    ========================================================================== */
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   nav.desktop-nav {
     display: none;
   }
@@ -2061,12 +2061,160 @@ footer.site-footer .instagram-link-badge:hover svg {
   }
 }
 
-@media (max-width: 480px) {
+@media (min-width: 1025px) {
+  nav.desktop-nav {
+    display: flex;
+  }
+  .hamburger-btn {
+    display: none !important;
+  }
+}
+
+/* Announcement Bar Marquee */
+.announcement-bar {
+  background: var(--deep-green);
+  color: #F5EFDC;
+  font-size: 12.5px;
+  font-weight: 500;
+  padding: 8px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  border-bottom: 1px solid rgba(184, 134, 43, 0.3);
+}
+
+.announcement-marquee {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+}
+
+.announcement-track {
+  display: inline-flex;
+  align-items: center;
+  gap: 28px;
+  animation: marqueeScroll 24s linear infinite;
+  white-space: nowrap;
+  padding-left: 20px;
+}
+
+.announcement-track span {
+  display: inline-flex;
+  align-items: center;
+}
+
+.announcement-dot {
+  color: var(--gold);
+  font-size: 10px;
+  opacity: 0.8;
+}
+
+@keyframes marqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Mobile Header Single-Row Tight Fit */
+@media (max-width: 768px) {
+  .site-header {
+    padding: 0;
+  }
+  .header-inner {
+    height: 64px;
+    gap: 8px;
+    justify-content: space-between;
+  }
+  .header-left {
+    gap: 8px;
+    min-width: 0;
+    flex-shrink: 1;
+  }
   .logo-brand {
-    font-size: 20px;
+    font-size: 18px;
+    gap: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .logo-brand svg {
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
   }
   .logo-brand .tagline-sub {
     display: none;
+  }
+  .header-right {
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .icon-btn {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    min-height: 38px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .theme-toggle-btn {
+    display: none; /* Accessible in mobile drawer; preserves header room */
+  }
+  .cart-pill-btn {
+    padding: 0;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: var(--gold);
+    color: #0F2A1D;
+    border: none;
+  }
+  .cart-pill-btn .cart-btn-label {
+    display: none;
+  }
+  .cart-count-pill {
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    background: var(--deep-green);
+    color: #F5EFDC;
+    border: 1.5px solid var(--gold);
+    width: 19px;
+    height: 19px;
+    border-radius: 50%;
+    font-size: 10.5px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 769px) {
+  .cart-pill-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    border-radius: var(--radius-full);
+    background: var(--gold);
+    color: #0F2A1D;
+    font-weight: 600;
+    font-size: 14px;
+    min-height: 44px;
+    border: 1px solid transparent;
+  }
+  .cart-count-pill::before {
+    content: "(";
+  }
+  .cart-count-pill::after {
+    content: ")";
   }
 }
 
