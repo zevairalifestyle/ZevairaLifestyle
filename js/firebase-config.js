@@ -16,14 +16,14 @@ import { initializeApp }     from 'https://www.gstatic.com/firebasejs/10.12.2/fi
 import { getFirestore }      from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 import { getAuth }           from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
 
-// ⚠️ REPLACE EVERY VALUE BELOW WITH YOUR OWN — copy from Firebase Console
 const firebaseConfig = {
-  apiKey:            "PASTE_YOUR_API_KEY_HERE",
-  authDomain:        "PASTE_YOUR_AUTH_DOMAIN_HERE",          // e.g. "your-project.firebaseapp.com"
-  projectId:         "PASTE_YOUR_PROJECT_ID_HERE",           // e.g. "zevairalifestyle"
-  storageBucket:     "PASTE_YOUR_STORAGE_BUCKET_HERE",       // e.g. "your-project.appspot.com"
-  messagingSenderId: "PASTE_YOUR_MESSAGING_SENDER_ID_HERE",  // e.g. "123456789012"
-  appId:             "PASTE_YOUR_APP_ID_HERE"                // e.g. "1:123456789012:web:abc123def456"
+  apiKey:            "AIzaSyCq1VV3Ut_WngX63TTEp0BlCsrSGT5NELw",
+  authDomain:        "zevairalifestyle-212ed.firebaseapp.com",
+  projectId:         "zevairalifestyle-212ed",
+  storageBucket:     "zevairalifestyle-212ed.firebasestorage.app",
+  messagingSenderId: "832478949535",
+  appId:             "1:832478949535:web:d967a0bce5a970c605b2aa",
+  measurementId:     "G-RH2Q53WT2Y"
 };
 
 // Initialise
