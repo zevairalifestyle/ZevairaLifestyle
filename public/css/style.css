@@ -408,7 +408,28 @@ header.site-header {
   font-weight: 600;
   letter-spacing: 0.02em;
   color: var(--ink);
+  /* No blue tap flash */
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-touch-callout: none;
 }
+
+.logo-brand:focus { outline: none; }
+.logo-brand:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* Brand name text wrapper */
+.logo-text-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Responsive name spans — default: show full, hide short */
+.brand-short { display: none; }
+.brand-full  { display: inline; }
 
 .logo-brand svg {
   width: 32px;
@@ -472,6 +493,14 @@ nav.desktop-nav a[aria-current="page"]::after {
   color: var(--ink);
   transition: all var(--duration) var(--ease);
   border: 1px solid transparent;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.icon-btn:focus { outline: none; }
+.icon-btn:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
 }
 
 .icon-btn:hover {
@@ -514,6 +543,14 @@ nav.desktop-nav a[aria-current="page"]::after {
   font-weight: 600;
   color: var(--ink);
   transition: all var(--duration) var(--ease);
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.cart-pill-btn:focus { outline: none; }
+.cart-pill-btn:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
 }
 
 .cart-pill-btn:hover {
@@ -533,6 +570,14 @@ nav.desktop-nav a[aria-current="page"]::after {
   border: 1px solid var(--line);
   align-items: center;
   justify-content: center;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.hamburger-btn:focus { outline: none; }
+.hamburger-btn:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
 }
 
 /* ==========================================================================
@@ -2120,60 +2165,72 @@ footer.site-footer .instagram-link-badge:hover svg {
   100% { transform: translateX(-50%); }
 }
 
-/* Mobile Header Single-Row Tight Fit */
+/* Mobile Header — tight single row, no clipping */
 @media (max-width: 768px) {
   .site-header {
     padding: 0;
   }
   .header-inner {
-    height: 64px;
-    gap: 8px;
+    height: 60px;
+    gap: 4px;
     justify-content: space-between;
   }
+
+  /* Logo area grows to fill all available space */
   .header-left {
-    gap: 8px;
+    flex: 1 1 0;
     min-width: 0;
-    flex-shrink: 1;
+    gap: 4px;
   }
+
+  /* Logo link: never clip, never ellipsis, flex-shrink:0 so it takes what it needs */
   .logo-brand {
-    font-size: clamp(13px, 3.8vw, 18px);
-    gap: 6px;
+    font-size: clamp(15px, 4.8vw, 22px);
+    gap: 5px;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    flex-shrink: 0;
+    overflow: visible;
+    text-overflow: unset;
     min-width: 0;
   }
+
   .logo-brand svg {
     width: 26px;
     height: 26px;
     flex-shrink: 0;
   }
+
   .logo-brand .tagline-sub {
     display: none;
   }
+
+  /* Icon strip: never grows, never shrinks */
   .header-right {
-    gap: 6px;
-    flex-shrink: 0;
+    flex: 0 0 auto;
+    gap: 2px;
   }
+
   .icon-btn {
-    width: 38px;
-    height: 38px;
-    min-width: 38px;
-    min-height: 38px;
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    min-height: 36px;
     padding: 0;
     display: inline-flex;
     align-items: center;
     justify-content: center;
   }
+
   .theme-toggle-btn {
-    display: none; /* Accessible in mobile drawer; preserves header room */
+    display: none; /* shown in mobile drawer instead */
   }
+
   .cart-pill-btn {
     padding: 0;
-    width: 44px;
-    height: 44px;
-    min-width: 44px;
-    min-height: 44px;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
     border-radius: 50%;
     display: inline-flex;
     align-items: center;
@@ -2183,9 +2240,11 @@ footer.site-footer .instagram-link-badge:hover svg {
     color: #0F2A1D;
     border: none;
   }
+
   .cart-pill-btn .cart-btn-label {
     display: none;
   }
+
   .cart-count-pill {
     position: absolute;
     top: -3px;
@@ -2193,10 +2252,10 @@ footer.site-footer .instagram-link-badge:hover svg {
     background: var(--deep-green);
     color: #F5EFDC;
     border: 1.5px solid var(--gold);
-    width: 19px;
-    height: 19px;
+    width: 18px;
+    height: 18px;
     border-radius: 50%;
-    font-size: 10.5px;
+    font-size: 10px;
     font-weight: 700;
     display: flex;
     align-items: center;
@@ -2204,8 +2263,15 @@ footer.site-footer .instagram-link-badge:hover svg {
   }
 }
 
+/* At ≤420px show short "Zevaira" instead of "ZevairaLifestyle" */
+@media (max-width: 420px) {
+  .brand-full  { display: none; }
+  .brand-short { display: inline; }
+}
+
+/* Below 360px: also hide the Z icon to free more room for icons */
 @media (max-width: 360px) {
-  .logo-brand > div {
+  .logo-brand svg {
     display: none;
   }
 }

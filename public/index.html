@@ -221,6 +221,8 @@
       display: flex;
       align-items: center;
       gap: 12px;
+      flex: 1 1 0;
+      min-width: 0;
     }
     .logo-brand {
       display: inline-flex;
@@ -232,7 +234,13 @@
       color: var(--gold-light);
       text-decoration: none;
       white-space: nowrap;
+      flex-shrink: 0;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      -webkit-touch-callout: none;
     }
+    .logo-brand:focus { outline: none; }
+    .logo-brand:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 4px; }
     .logo-brand svg {
       width: 32px;
       height: 32px;
@@ -240,6 +248,12 @@
       max-height: 32px;
       flex-shrink: 0;
     }
+    .logo-text-wrap {
+      display: flex;
+      flex-direction: column;
+    }
+    .brand-short { display: none; }
+    .brand-full  { display: inline; }
     .tagline-sub {
       font-size: 10px;
       display: block;
@@ -267,7 +281,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      flex-shrink: 0;
+      flex: 0 0 auto;
     }
     .icon-btn, .hamburger-btn {
       width: 40px;
@@ -283,7 +297,11 @@
       justify-content: center;
       cursor: pointer;
       transition: color 0.2s ease, background 0.2s ease;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
     }
+    .icon-btn:focus, .hamburger-btn:focus { outline: none; }
+    .icon-btn:focus-visible, .hamburger-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
     .icon-btn:hover, .hamburger-btn:hover {
       color: var(--gold-light);
       background: rgba(212, 175, 95, 0.1);
@@ -300,7 +318,11 @@
       font-size: 13.5px;
       min-height: 40px;
       border: none;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
     }
+    .cart-pill-btn:focus { outline: none; }
+    .cart-pill-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
     .cart-pill-btn:hover {
       background: var(--gold-light);
     }
@@ -315,9 +337,14 @@
     @media (max-width: 768px) {
       .header-inner {
         height: 60px;
+        gap: 4px;
+      }
+      .header-left {
+        gap: 4px;
       }
       .logo-brand {
-        font-size: 18px;
+        font-size: clamp(15px, 4.8vw, 22px);
+        gap: 5px;
       }
       .logo-brand svg {
         width: 26px;
@@ -328,6 +355,15 @@
       }
       .theme-toggle-btn {
         display: none !important;
+      }
+      .header-right {
+        gap: 2px;
+      }
+      .icon-btn, .hamburger-btn {
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+        min-height: 36px;
       }
       .cart-pill-btn {
         width: 40px;
@@ -358,6 +394,13 @@
         align-items: center;
         justify-content: center;
       }
+    }
+    @media (max-width: 420px) {
+      .brand-full  { display: none; }
+      .brand-short { display: inline; }
+    }
+    @media (max-width: 360px) {
+      .logo-brand svg { display: none; }
     }
 
     /* 4. Critical Announcement Bar */

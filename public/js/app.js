@@ -1,4 +1,4 @@
-﻿/**
+﻿﻿/**
  * ZevairaLifestyle - Master Application Engine
  * --------------------------------------------------------------------------
  * Handles:
@@ -295,15 +295,15 @@ function injectHeaderAndFooter() {
       <div class="announcement-marquee">
         <div class="announcement-track">
           <span>Free delivery above Rs 6,000</span>
-          <span class="announcement-dot">âœ¦</span>
+          <span class="announcement-dot">&#10022;</span>
           <span>Cash on delivery across Pakistan</span>
-          <span class="announcement-dot">âœ¦</span>
+          <span class="announcement-dot">&#10022;</span>
           <span>100% Authentic Extrait de Parfum (35%)</span>
-          <span class="announcement-dot">âœ¦</span>
+          <span class="announcement-dot">&#10022;</span>
           <span>Free delivery above Rs 6,000</span>
-          <span class="announcement-dot">âœ¦</span>
+          <span class="announcement-dot">&#10022;</span>
           <span>Cash on delivery across Pakistan</span>
-          <span class="announcement-dot">âœ¦</span>
+          <span class="announcement-dot">&#10022;</span>
           <span>100% Authentic Extrait de Parfum (35%)</span>
         </div>
       </div>
@@ -325,8 +325,8 @@ function injectHeaderAndFooter() {
                 <path d="M28 14h8v4h-8zM25 18h14v3H25z" fill="#D9B15A"/>
                 <path d="M20 25h24l-18 19h18v5H19l18-19H20v-5z" fill="#D9B15A"/>
               </svg>
-              <div>
-                ZevairaLifestyle
+              <div class="logo-text-wrap">
+                <span class="brand-full">ZevairaLifestyle</span><span class="brand-short">Zevaira</span>
                 <span class="tagline-sub">Maison de Parfum</span>
               </div>
             </a>
