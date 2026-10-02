@@ -1728,28 +1728,60 @@ footer.site-footer {
   padding-left: 4px;
 }
 
-.social-links {
-  display: flex;
-  gap: 12px;
-  margin-top: 16px;
-}
-
-.social-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 1px solid rgba(217, 177, 90, 0.3);
-  display: grid;
-  place-items: center;
-  color: #F5EFDC;
+.instagram-link-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--gold-border);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
   transition: all var(--duration) var(--ease);
+  text-decoration: none;
 }
 
-.social-icon:hover {
-  border-color: var(--gold);
+.instagram-link-badge svg {
+  width: 18px;
+  height: 18px;
+  color: var(--gold);
+  flex-shrink: 0;
+  transition: color var(--duration) var(--ease);
+}
+
+.instagram-link-badge:hover {
   background: var(--gold);
   color: #0F2A1D;
+  border-color: var(--gold);
+  box-shadow: var(--shadow-gold);
   transform: translateY(-2px);
+}
+
+.instagram-link-badge:hover svg {
+  color: #0F2A1D;
+}
+
+footer.site-footer .instagram-link-badge {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(217, 177, 90, 0.35);
+  color: #F5EFDC;
+}
+
+footer.site-footer .instagram-link-badge svg {
+  color: var(--gold-light);
+}
+
+footer.site-footer .instagram-link-badge:hover {
+  background: var(--gold);
+  color: #0F2A1D;
+  border-color: var(--gold);
+}
+
+footer.site-footer .instagram-link-badge:hover svg {
+  color: #0F2A1D;
 }
 
 .footer-bottom {

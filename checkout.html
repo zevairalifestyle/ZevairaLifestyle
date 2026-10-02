@@ -215,6 +215,11 @@
   <script src="js/products.js"></script>
   <script src="js/app.js"></script>
 
+  <!-- Firebase Firestore Integration (order saving) -->
+  <!-- These load as ES modules; they expose helpers on window after async init -->
+  <script type="module" src="js/firebase-config.js"></script>
+  <script type="module" src="js/firestore-sync.js"></script>
+
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const cart = getCart();
@@ -442,7 +447,7 @@
           paymentMethod: selectedPayment
         };
 
-        // Save order and clear cart
+        // Save order locally and clear cart
         localStorage.setItem("zevaira_last_order", JSON.stringify(orderData));
         clearCart();
         localStorage.removeItem("zevaira_active_coupon");
@@ -450,8 +455,14 @@
         localStorage.removeItem("zevaira_order_note");
         localStorage.removeItem("zevaira_checkout_meta");
 
-        // Redirect to success page
+        // Also save to Firestore (non-blocking — WhatsApp still opens if Firestore fails)
+        if (typeof window.saveOrderToFirestore === "function") {
+          window.saveOrderToFirestore(orderData).catch(() => {});
+        }
+
+        // Redirect to success page (opens WhatsApp from there)
         window.location.href = `order-success.html?orderId=${orderNumber}`;
+
       });
 
     });

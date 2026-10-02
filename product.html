@@ -319,6 +319,11 @@
   <script src="js/products.js"></script>
   <script src="js/app.js"></script>
 
+  <!-- Firebase: live products & settings (falls back to products.js if Firestore is empty) -->
+  <script type="module" src="js/firebase-config.js"></script>
+  <script type="module" src="js/firestore-sync.js"></script>
+
+
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       if (typeof PRODUCTS === "undefined") return;
@@ -350,7 +355,11 @@
           "@type": "Product",
           "name": product.name,
           "description": product.description,
-          "brand": { "@type": "Brand", "name": "ZevairaLifestyle" },
+          "brand": {
+            "@type": "Brand",
+            "name": "ZevairaLifestyle",
+            "sameAs": [window.INSTAGRAM_URL || "https://www.instagram.com/zevairalifestyle"]
+          },
           "offers": {
             "@type": "AggregateOffer",
             "priceCurrency": "PKR",

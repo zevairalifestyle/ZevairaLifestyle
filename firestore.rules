@@ -1,0 +1,94 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// ZevairaLifestyle — Cloud Firestore Security Rules
+// ─────────────────────────────────────────────────────────────────────────────
+// HOW TO APPLY:
+//   Firebase Console → Firestore Database → Rules tab → paste this → Publish
+//
+// HOW TO SET YOUR ADMIN UID:
+//   1. In Firebase Console → Authentication → Users
+//   2. Log in to admin.html with your email and password ONCE
+//   3. Come back to Authentication → Users — you will see your account listed
+//   4. Copy the UID (long string like "abc123XYZ...")
+//   5. Paste it as the value of ADMIN_UID below (replace the placeholder)
+//   6. Re-publish the rules
+//
+// WHY UID AND NOT EMAIL?
+//   Using email in rules requires extra lookups and is less secure.
+//   Checking UID is instant, reliable, and cannot be spoofed.
+// ─────────────────────────────────────────────────────────────────────────────
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ── Admin UID ───────────────────────────────────────────────────────────
+    // ⚠️  REPLACE the string below with your actual Firebase Auth UID
+    //     (found in Firebase Console → Authentication → Users after first login)
+    function isAdmin() {
+      return request.auth != null
+          && request.auth.uid == "PASTE_YOUR_ADMIN_UID_HERE";
+    }
+
+    // ── Helpers ─────────────────────────────────────────────────────────────
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function incomingData() {
+      return request.resource.data;
+    }
+
+    // ── products/{productId} ────────────────────────────────────────────────
+    // Anyone can read; only admin can write
+    match /products/{productId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // ── settings/store ──────────────────────────────────────────────────────
+    // Anyone can read; only admin can write
+    match /settings/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // ── discountCodes/{code} ────────────────────────────────────────────────
+    // Anyone can read (needed at checkout); only admin can write
+    match /discountCodes/{code} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // ── orders/{orderId} ────────────────────────────────────────────────────
+    // Anyone (unauthenticated customer) can CREATE an order — but only if
+    // all required fields are present and have the correct types / lengths.
+    // Only the admin can READ, UPDATE or DELETE orders.
+    match /orders/{orderId} {
+
+      allow create: if
+        // Required string fields must be present and non-empty
+        incomingData().orderId         is string  && incomingData().orderId.size()         > 0  &&
+        incomingData().customerName    is string  && incomingData().customerName.size()    >= 3 &&
+        incomingData().customerPhone   is string  && incomingData().customerPhone.size()   >= 7 &&
+        incomingData().city            is string  && incomingData().city.size()            > 0  &&
+        incomingData().address         is string  && incomingData().address.size()         >= 8 &&
+        incomingData().paymentMethod   is string  && incomingData().paymentMethod.size()   > 0  &&
+        // Numeric fields
+        incomingData().total           is number  && incomingData().total                  >= 0 &&
+        incomingData().subtotal        is number  && incomingData().subtotal               >= 0 &&
+        incomingData().deliveryFee     is number  && incomingData().deliveryFee            >= 0 &&
+        // Items must be a list
+        incomingData().items           is list    && incomingData().items.size()            > 0 &&
+        // Status must start as "New" (admin changes it later)
+        incomingData().status          == "New"   &&
+        // Optional but typed fields
+        (incomingData().customerEmail  == '' || incomingData().customerEmail is string)    &&
+        (incomingData().discountCode   == '' || incomingData().discountCode  is string)    &&
+        incomingData().discount        is number  &&
+        incomingData().giftWrap        is number;
+
+      allow read, update, delete: if isAdmin();
+    }
+
+  }
+}

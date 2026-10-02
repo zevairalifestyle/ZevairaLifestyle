@@ -17,6 +17,9 @@
    1. EDITABLE BUSINESS CONFIGURATION (EDIT YOUR DETAILS HERE)
    ========================================================================== */
 
+// Official Instagram Profile - ONLY social media link anywhere on the site
+const INSTAGRAM_URL = "https://www.instagram.com/zevairalifestyle";
+
 // WhatsApp Number for customer orders and support (format: country code + number without plus or dashes)
 // SAMPLE: Replace with your actual WhatsApp number, e.g., "923001234567"
 const WHATSAPP_NUMBER = "923001234567";
@@ -374,6 +377,14 @@ function injectHeaderAndFooter() {
         <a href="cart.html" ${isActive("cart.html")}>My Cart (<span class="mobile-cart-count">0</span>)</a>
       </div>
       <div class="mobile-menu-footer">
+        <a href="${INSTAGRAM_URL}" target="_blank" rel="noopener noreferrer" class="instagram-link-badge" aria-label="ZevairaLifestyle on Instagram" style="justify-content:center;margin-bottom:10px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+          <span>@zevairalifestyle</span>
+        </a>
         <a href="https://wa.me/${WHATSAPP_NUMBER}" target="_blank" rel="noopener" class="btn btn-whatsapp btn-sm btn-block">
           Order via WhatsApp
         </a>
@@ -414,18 +425,14 @@ function injectHeaderAndFooter() {
             <p style="color:#A9BBA9;font-size:14px;line-height:1.6;margin-bottom:18px;">
               Formulated specifically for Pakistan’s climate. High-concentration Extrait de Parfum handcrafted to stay fresh through scorching summer days and humid monsoons.
             </p>
-            <div class="social-links">
-              <a href="https://instagram.com" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-              </a>
-              <a href="https://facebook.com" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-              </a>
-              <a href="https://tiktok.com" target="_blank" rel="noopener" class="social-icon" aria-label="TikTok">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
-              </a>
-              <a href="https://wa.me/${WHATSAPP_NUMBER}" target="_blank" rel="noopener" class="social-icon" aria-label="WhatsApp">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            <div style="margin-top:16px;">
+              <a href="${INSTAGRAM_URL}" target="_blank" rel="noopener noreferrer" class="instagram-link-badge" aria-label="ZevairaLifestyle on Instagram">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+                <span>@zevairalifestyle</span>
               </a>
             </div>
           </div>
@@ -517,6 +524,21 @@ function injectHeaderAndFooter() {
     footerMount.outerHTML = footerMarkup;
   } else if (!document.querySelector("footer.site-footer")) {
     document.body.insertAdjacentHTML("beforeend", footerMarkup);
+  }
+
+  // Inject Organization Schema with Instagram sameAs
+  if (!document.getElementById("organizationSchema")) {
+    const orgScript = document.createElement("script");
+    orgScript.id = "organizationSchema";
+    orgScript.type = "application/ld+json";
+    orgScript.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "ZevairaLifestyle",
+      "url": "https://www.instagram.com/zevairalifestyle",
+      "sameAs": [INSTAGRAM_URL]
+    });
+    document.head.appendChild(orgScript);
   }
 
   // Setup Header Interactivity
@@ -763,6 +785,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Export globally
 if (typeof window !== "undefined") {
+  window.INSTAGRAM_URL = INSTAGRAM_URL;
   window.WHATSAPP_NUMBER = WHATSAPP_NUMBER;
   window.STORE_EMAIL = STORE_EMAIL;
   window.STORE_PHONE = STORE_PHONE;
