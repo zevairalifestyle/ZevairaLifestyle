@@ -1206,22 +1206,40 @@ section {
   align-items: start;
 }
 
+/* Desktop only: sticky gallery stays beside scrolling info panel */
+@media (min-width: 861px) {
+  .product-gallery {
+    position: sticky;
+    top: 110px;
+  }
+}
+
+/* Mobile: single column, image flows with page, no sticky */
 @media (max-width: 860px) {
   .product-detail-grid {
-    grid-template-columns: 1fr;
+    display: block; /* single column, image then info */
+  }
+  .product-gallery {
+    position: static;
+    top: auto;
+    min-height: auto;
+    height: auto;
+    margin-bottom: 24px;
+    /* Constrain on mobile so it doesn't dominate the viewport */
+    max-height: none;
   }
 }
 
 .product-gallery {
-  position: sticky;
-  top: 110px;
   background: linear-gradient(180deg, var(--surface-alt) 0%, var(--surface) 100%);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  padding: clamp(32px, 6vw, 64px) 24px;
+  padding: clamp(24px, 5vw, 56px) 24px;
   display: grid;
   place-items: center;
-  min-height: 480px;
+  /* No min-height here — let content dictate height */
+  position: relative;
+  z-index: 0;
 }
 
 .product-gallery svg {
@@ -1240,6 +1258,20 @@ section {
   border-radius: 16px;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
   border: 1px solid var(--gold-border);
+  position: relative;
+  z-index: 0;
+}
+
+/* On mobile, limit the gallery image height so it doesn't fill the whole screen */
+@media (max-width: 860px) {
+  .product-gallery img {
+    max-width: 100%;
+    aspect-ratio: 1 / 1;
+  }
+  .product-gallery svg {
+    width: 60%;
+    max-width: 220px;
+  }
 }
 
 .product-info-wrap {
