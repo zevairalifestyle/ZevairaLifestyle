@@ -2069,3 +2069,137 @@ footer.site-footer .instagram-link-badge:hover svg {
     display: none;
   }
 }
+
+/* ==========================================================================
+   LUXURY BUBBLE & TOUCH ANIMATIONS (SITE-WIDE)
+   ========================================================================== */
+
+/* ── 1. Ambient Fragrance Bubble Animation ── */
+.fragrance-bubbles-layer {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1; /* Floating behind interactive content, above background */
+}
+
+.fragrance-bubble {
+  position: absolute;
+  bottom: -60px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle at 35% 28%, rgba(255, 255, 255, 0.88) 0%, rgba(245, 239, 220, 0.5) 22%, rgba(217, 177, 90, 0.28) 50%, rgba(31, 74, 51, 0.1) 85%, transparent 100%);
+  border: 1px solid rgba(217, 177, 90, 0.45);
+  box-shadow: 
+    inset -2px -2px 6px rgba(184, 134, 43, 0.22),
+    inset 1.5px 1.5px 4px rgba(255, 255, 255, 0.75),
+    0 4px 16px rgba(217, 177, 90, 0.18);
+  backdrop-filter: blur(1.5px);
+  will-change: transform, opacity;
+  animation: riseFragranceBubble var(--bubble-duration, 14s) cubic-bezier(0.35, 0, 0.25, 1) infinite;
+}
+
+.fragrance-bubble::after {
+  content: '';
+  position: absolute;
+  top: 18%;
+  left: 22%;
+  width: 26%;
+  height: 26%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 80%);
+}
+
+@keyframes riseFragranceBubble {
+  0% {
+    transform: translateY(0) translateX(0) scale(0.6);
+    opacity: 0;
+  }
+  15% {
+    opacity: var(--bubble-opacity, 0.65);
+  }
+  50% {
+    transform: translateY(-50vh) translateX(var(--sway-x, 24px)) scale(1);
+    opacity: var(--bubble-opacity, 0.7);
+  }
+  85% {
+    opacity: var(--bubble-opacity, 0.5);
+  }
+  100% {
+    transform: translateY(-118vh) translateX(calc(var(--sway-x, 24px) * -0.8)) scale(1.08);
+    opacity: 0;
+  }
+}
+
+/* ── 2. Site-wide Touch & Click Animations ── */
+.touch-ripple {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0);
+  border: 1.5px solid rgba(217, 177, 90, 0.75);
+  background: radial-gradient(circle, rgba(217, 177, 90, 0.32) 0%, rgba(184, 134, 43, 0.14) 45%, rgba(217, 177, 90, 0) 75%);
+  box-shadow: 0 0 16px rgba(217, 177, 90, 0.4);
+  animation: touchRippleEffect 0.65s cubic-bezier(0.12, 0.8, 0.32, 1) forwards;
+  z-index: 99999;
+}
+
+@keyframes touchRippleEffect {
+  0% {
+    transform: translate(-50%, -50%) scale(0.15);
+    opacity: 0.95;
+  }
+  50% {
+    opacity: 0.65;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2.4);
+    opacity: 0;
+  }
+}
+
+/* Golden touch sparkle particles on interactive elements */
+.touch-sparkle {
+  position: fixed;
+  pointer-events: none;
+  border-radius: 50%;
+  background: radial-gradient(circle, #FFFFFF 0%, #F5EFDC 30%, #D9B15A 70%, transparent 100%);
+  box-shadow: 0 0 8px rgba(217, 177, 90, 0.9);
+  animation: touchSparkleBurst 0.6s cubic-bezier(0.15, 0.85, 0.35, 1) forwards;
+  z-index: 99999;
+}
+
+@keyframes touchSparkleBurst {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc(-50% + var(--dx, 20px)), calc(-50% + var(--dy, -20px))) scale(0);
+    opacity: 0;
+  }
+}
+
+/* Tactile feedback on touch / click */
+button, .btn, .icon-btn, .product-card-thumb, .wishlist-heart-btn, .cart-pill-btn, .hamburger-btn, .tab-btn {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.btn:active,
+button:active:not(:disabled),
+.cart-pill-btn:active,
+.icon-btn:active,
+.wishlist-heart-btn:active,
+.film-reel-btn:active {
+  transform: scale(0.96) !important;
+  transition: transform 0.1s ease !important;
+}
+
+.product-card:active {
+  transform: translateY(-2px) scale(0.99);
+  transition: transform 0.15s ease;
+}
+

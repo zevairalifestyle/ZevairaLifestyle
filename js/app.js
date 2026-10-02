@@ -807,10 +807,130 @@ function generateWhatsAppInquiryUrl(productName, size = "") {
 }
 
 /* ==========================================================================
+   8. LUXURY FRAGRANCE BUBBLES & TOUCH ANIMATIONS (SITE-WIDE)
+   ========================================================================== */
+
+/**
+ * Initializes floating ambient perfume bubbles across the site.
+ * Subtle, luxury champagne/flacon effervescence in the forest green and gold palette.
+ */
+function initFragranceBubbles() {
+  if (document.getElementById("fragranceBubblesLayer")) return;
+
+  const layer = document.createElement("div");
+  layer.id = "fragranceBubblesLayer";
+  layer.className = "fragrance-bubbles-layer";
+  layer.setAttribute("aria-hidden", "true");
+  document.body.appendChild(layer);
+
+  const BUBBLE_COUNT = window.innerWidth < 768 ? 12 : 20;
+
+  for (let i = 0; i < BUBBLE_COUNT; i++) {
+    createBubble(layer, true);
+  }
+
+  function createBubble(parent, isInitial = false) {
+    const bubble = document.createElement("div");
+    bubble.className = "fragrance-bubble";
+
+    const size = Math.floor(14 + Math.random() * 32);
+    bubble.style.width = `${size}px`;
+    bubble.style.height = `${size}px`;
+
+    const left = (2 + Math.random() * 94).toFixed(1);
+    bubble.style.left = `${left}%`;
+
+    const sway = Math.floor((Math.random() - 0.5) * 60);
+    bubble.style.setProperty("--sway-x", `${sway}px`);
+
+    const duration = (12 + Math.random() * 10).toFixed(1);
+    bubble.style.setProperty("--bubble-duration", `${duration}s`);
+
+    const opacity = (0.35 + Math.random() * 0.4).toFixed(2);
+    bubble.style.setProperty("--bubble-opacity", opacity);
+
+    if (isInitial) {
+      const delay = -(Math.random() * parseFloat(duration)).toFixed(1);
+      bubble.style.animationDelay = `${delay}s`;
+    }
+
+    parent.appendChild(bubble);
+  }
+
+  let lastScrollTime = 0;
+  window.addEventListener("scroll", () => {
+    const now = Date.now();
+    if (now - lastScrollTime > 600) {
+      lastScrollTime = now;
+      if (layer.children.length < 28) {
+        createBubble(layer, false);
+      }
+    }
+  }, { passive: true });
+}
+
+/**
+ * Universal luxury touch and click animations throughout the entire site.
+ * Radiates golden touch ripples on tap and fires micro-sparkles on interactive elements.
+ */
+function initTouchAnimations() {
+  document.addEventListener("pointerdown", (e) => {
+    // 1. Expanding Golden Halo Ripple at touch point
+    const ripple = document.createElement("div");
+    ripple.className = "touch-ripple";
+    ripple.style.left = `${e.clientX}px`;
+    ripple.style.top = `${e.clientY}px`;
+    const rippleSize = Math.max(50, Math.min(80, window.innerWidth * 0.15));
+    ripple.style.width = `${rippleSize}px`;
+    ripple.style.height = `${rippleSize}px`;
+    document.body.appendChild(ripple);
+
+    setTimeout(() => {
+      if (ripple.parentNode) ripple.remove();
+    }, 700);
+
+    // 2. Interactive Element Touch Sparkle Burst
+    const interactiveTarget = e.target.closest(
+      "button, .btn, .icon-btn, .product-card, .product-card-thumb, a, .tab-btn, .film-reel-btn, .cart-pill-btn, .wishlist-heart-btn, input, label"
+    );
+
+    if (interactiveTarget) {
+      const count = 5;
+      for (let i = 0; i < count; i++) {
+        const sparkle = document.createElement("div");
+        sparkle.className = "touch-sparkle";
+        sparkle.style.left = `${e.clientX}px`;
+        sparkle.style.top = `${e.clientY}px`;
+
+        const pSize = Math.floor(4 + Math.random() * 5);
+        sparkle.style.width = `${pSize}px`;
+        sparkle.style.height = `${pSize}px`;
+
+        const angle = (i / count) * Math.PI * 2 + (Math.random() - 0.5) * 0.5;
+        const dist = 24 + Math.random() * 32;
+        const dx = Math.cos(angle) * dist;
+        const dy = Math.sin(angle) * dist;
+
+        sparkle.style.setProperty("--dx", `${dx.toFixed(1)}px`);
+        sparkle.style.setProperty("--dy", `${dy.toFixed(1)}px`);
+
+        document.body.appendChild(sparkle);
+
+        setTimeout(() => {
+          if (sparkle.parentNode) sparkle.remove();
+        }, 650);
+      }
+    }
+  }, { passive: true });
+}
+
+/* ==========================================================================
    AUTO-INITIALIZE ON DOM CONTENT LOADED
    ========================================================================== */
 document.addEventListener("DOMContentLoaded", () => {
   injectHeaderAndFooter();
+  initFragranceBubbles();
+  initTouchAnimations();
 });
 
 // Export globally
@@ -845,6 +965,8 @@ if (typeof window !== "undefined") {
   window.getRecentlyViewed = getRecentlyViewed;
 
   window.showToast = showToast;
+  window.initFragranceBubbles = initFragranceBubbles;
+  window.initTouchAnimations = initTouchAnimations;
   window.generateWhatsAppOrderUrl = generateWhatsAppOrderUrl;
   window.generateWhatsAppInquiryUrl = generateWhatsAppInquiryUrl;
   window.handleNewsletterSubmit = handleNewsletterSubmit;
