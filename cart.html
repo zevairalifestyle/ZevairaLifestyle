@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=2">
 </head>
 <body>
 
@@ -145,8 +145,8 @@
               </div>
 
               <div style="font-size:12.5px;color:var(--muted);margin-bottom:20px;line-height:1.5;">
-                "¢ Cash on delivery & Online payments accepted at checkout.<br>
-                "¢ Orders confirmed on WhatsApp prior to dispatch.
+                "� Cash on delivery & Online payments accepted at checkout.<br>
+                "� Orders confirmed on WhatsApp prior to dispatch.
               </div>
 
               <button type="button" id="proceedToCheckoutBtn" class="btn btn-primary btn-block btn-lg">
@@ -224,12 +224,12 @@
               </div>
               <div class="cart-item-details">
                 <h4><a href="product.html?id=${item.id}">${item.name}</a></h4>
-                <div class="item-variant">Size: <strong>${item.size}</strong> "¢ ${formatPKR(item.price)} each</div>
+                <div class="item-variant">Size: <strong>${item.size}</strong> "� ${formatPKR(item.price)} each</div>
                 <button type="button" class="btn-remove-item" onclick="handleRemoveItem('${item.id}', '${item.size}')">Remove</button>
               </div>
               <div>
                 <div class="quantity-control" style="height:38px;">
-                  <button type="button" onclick="handleQtyChange('${item.id}', '${item.size}', ${item.qty - 1})">âˆ’</button>
+                  <button type="button" onclick="handleQtyChange('${item.id}', '${item.size}', ${item.qty - 1})">−</button>
                   <input type="text" value="${item.qty}" readonly>
                   <button type="button" onclick="handleQtyChange('${item.id}', '${item.size}', ${item.qty + 1})">+</button>
                 </div>
@@ -250,7 +250,7 @@
         // Progress toward free delivery
         if (subtotal >= freeThreshold) {
           progressBar.style.width = "100%";
-          deliveryMessage.innerHTML = "âœ¨ <strong>Congratulations!</strong> You have unlocked <strong>FREE Delivery</strong> across Pakistan!";
+          deliveryMessage.innerHTML = "✨ <strong>Congratulations!</strong> You have unlocked <strong>FREE Delivery</strong> across Pakistan!";
         } else {
           const needed = freeThreshold - subtotal;
           const percent = Math.min(100, Math.round((subtotal / freeThreshold) * 100));

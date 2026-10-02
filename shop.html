@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=2">
 </head>
 <body>
 
@@ -109,7 +109,7 @@
 
         <!-- EMPTY RESULTS MESSAGE -->
         <div id="emptyCatalogState" style="display:none;background:var(--surface);border:1px dashed var(--line);border-radius:var(--radius-md);padding:64px 20px;text-align:center;margin-top:24px;">
-          <div style="font-size:42px;margin-bottom:12px;">ðŸ•¯ï¸</div>
+          <div style="font-size:42px;margin-bottom:12px;">🕯️</div>
           <h3 style="font-size:24px;margin-bottom:8px;">No Fragrances Found</h3>
           <p style="color:var(--muted);max-width:44ch;margin:0 auto 20px;">
             We couldn't find any scents matching your active filters. Try adjusting your search term or clearing your selections.
@@ -252,11 +252,11 @@
                 ${getBottleSvg(p, "100%", "auto")}
               </div>
               <div class="product-card-body">
-                <div class="product-card-family">${p.category} • ${p.scentFamily}</div>
+                <div class="product-card-family">${p.category} � ${p.scentFamily}</div>
                 <h3 class="product-card-title"><a href="product.html?id=${p.id}">${p.name}</a></h3>
                 <p class="product-card-tagline">${p.tagline}</p>
                 <div class="product-rating-stars">
-                  ★★★★★ <span class="count">(${p.reviewCount})</span>
+                  ????? <span class="count">(${p.reviewCount})</span>
                 </div>
                 <div class="product-card-foot">
                   <div class="price-display">

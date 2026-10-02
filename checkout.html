@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=2">
 </head>
 <body>
 
@@ -275,7 +275,7 @@
         <div style="display:flex;justify-content:space-between;align-items:center;font-size:14px;padding-bottom:8px;border-bottom:1px solid var(--line);">
           <div>
             <strong>${item.name}</strong> <span style="color:var(--muted);font-size:12px;">(${item.size})</span>
-            <div style="color:var(--muted);font-size:12px;">Qty: ${item.qty} Ã— ${formatPKR(item.price)}</div>
+            <div style="color:var(--muted);font-size:12px;">Qty: ${item.qty} × ${formatPKR(item.price)}</div>
           </div>
           <div style="font-weight:600;">${formatPKR(item.price * item.qty)}</div>
         </div>
@@ -294,7 +294,7 @@
         <label class="payment-method-card">
           <div class="payment-header">
             <input type="radio" name="paymentOption" value="Cash on Delivery (COD)" checked style="accent-color:var(--gold);">
-            <span>ðŸ’µ Cash on Delivery (COD)</span>
+            <span>💵 Cash on Delivery (COD)</span>
           </div>
           <div class="payment-instructions">
             ${accounts.cod ? accounts.cod.desc : "Pay with exact cash directly to courier rider upon delivery at your doorstep."}
@@ -305,7 +305,7 @@
         <label class="payment-method-card">
           <div class="payment-header">
             <input type="radio" name="paymentOption" value="EasyPaisa" style="accent-color:var(--gold);">
-            <span>ðŸ“± EasyPaisa Mobile Wallet</span>
+            <span>📱 EasyPaisa Mobile Wallet</span>
           </div>
           <div class="payment-instructions">
             ${accounts.easypaisa ? accounts.easypaisa.instructions : "Transfer to EasyPaisa Account: 0300 1234567 (Title: Zevaira Lifestyle). Send screenshot on WhatsApp."}
@@ -316,7 +316,7 @@
         <label class="payment-method-card">
           <div class="payment-header">
             <input type="radio" name="paymentOption" value="JazzCash" style="accent-color:var(--gold);">
-            <span>ðŸ“± JazzCash Mobile Wallet</span>
+            <span>📱 JazzCash Mobile Wallet</span>
           </div>
           <div class="payment-instructions">
             ${accounts.jazzcash ? accounts.jazzcash.instructions : "Transfer to JazzCash Account: 0300 1234567 (Title: Zevaira Lifestyle). Send screenshot on WhatsApp."}
@@ -327,7 +327,7 @@
         <label class="payment-method-card">
           <div class="payment-header">
             <input type="radio" name="paymentOption" value="UPaisa" style="accent-color:var(--gold);">
-            <span>ðŸ“± UPaisa Wallet</span>
+            <span>📱 UPaisa Wallet</span>
           </div>
           <div class="payment-instructions">
             ${accounts.upaisa ? accounts.upaisa.instructions : "Transfer to UPaisa Account: 0300 1234567 (Title: Zevaira Lifestyle)."}
@@ -338,7 +338,7 @@
         <label class="payment-method-card">
           <div class="payment-header">
             <input type="radio" name="paymentOption" value="Bank Transfer" style="accent-color:var(--gold);">
-            <span>ðŸ¦ Direct Online Bank Transfer</span>
+            <span>🏦 Direct Online Bank Transfer</span>
           </div>
           <div class="payment-instructions">
             ${accounts.bank ? accounts.bank.instructions : "Transfer to Meezan Bank Ltd (Title: Zevaira Lifestyle | Account: 01020304050607 | IBAN: PK64MEZN0001020304050607)."}
@@ -459,7 +459,7 @@
         localStorage.removeItem("zevaira_order_note");
         localStorage.removeItem("zevaira_checkout_meta");
 
-        // Also save to Firestore (non-blocking "” WhatsApp still opens if Firestore fails)
+        // Also save to Firestore (non-blocking "� WhatsApp still opens if Firestore fails)
         if (typeof window.saveOrderToFirestore === "function") {
           window.saveOrderToFirestore(orderData).catch(() => {});
         }

@@ -18,12 +18,40 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,600;0,6..96,700;1,6..96,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=2">
 
   <style>
     /* ==========================================================================
-       CRITICAL MOBILE & DESKTOP POLISH (ZEVAIRALIFESTYLE)
+       CRITICAL FALLBACK CSS & DEFENSIVE GUARDS (ZEVAIRALIFESTYLE)
+       Guarantees luxury styling and hides overlays even if external CSS fails
        ========================================================================== */
+
+    :root {
+      --bg: #0C1A12;
+      --surface: #12251A;
+      --surface-alt: #172F21;
+      --ink: #F3ECD6;
+      --ink-light: #E4DAC0;
+      --muted: #A9B8A8;
+      --line: #26402F;
+      --line-light: rgba(217, 177, 90, 0.18);
+      --forest: #2A5E42;
+      --deep-green: #07170F;
+      --accent: #D4AF5F;
+      --accent-ink: #0C1A12;
+      --gold: #D4AF5F;
+      --gold-light: #EAD085;
+      --gold-tint: rgba(217, 177, 90, 0.15);
+      --gold-border: rgba(217, 177, 90, 0.35);
+      --display-font: 'Bodoni Moda', 'Didot', Georgia, serif;
+      --body-font: 'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 16px;
+      --radius-full: 9999px;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --duration: 0.25s;
+    }
 
     /* 1. Global Overflow & Box-Sizing Guards */
     *, *::before, *::after {
@@ -34,13 +62,393 @@
       max-width: 100%;
       overflow-x: hidden;
       width: 100%;
-    }
-
-    body {
-      line-height: 1.6;
+      background-color: #0C1A12;
+      color: #F3ECD6;
+      font-family: var(--body-font);
+      margin: 0;
+      padding: 0;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       text-rendering: optimizeLegibility;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img, video {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* 2. Critical Hidden Elements Guards (Never Show As Raw Plain Text) */
+    .drawer-scrim,
+    #mobileScrim {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 42, 29, 0.6);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 100;
+    }
+    .drawer-scrim.open,
+    #mobileScrim.open {
+      display: block !important;
+    }
+
+    .mobile-menu,
+    #mobileDrawer {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: min(340px, 86%);
+      background: #0F2A1D;
+      color: #F5EFDC;
+      border-right: 1px solid rgba(212, 175, 95, 0.3);
+      z-index: 101;
+      transform: translateX(-105%);
+      transition: transform 0.35s var(--ease);
+      flex-direction: column;
+      padding: 24px;
+      overflow-y: auto;
+    }
+    .mobile-menu.open,
+    #mobileDrawer.open {
+      display: flex !important;
+      transform: translateX(0) !important;
+    }
+    .mobile-menu-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--line);
+    }
+    .mobile-menu-links {
+      display: flex;
+      flex-direction: column;
+      padding: 20px 0;
+      gap: 6px;
+    }
+    .mobile-menu-links a {
+      padding: 12px 14px;
+      font-family: var(--display-font);
+      font-size: 18px;
+      color: var(--ink);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .mobile-menu-links a:hover,
+    .mobile-menu-links a.active {
+      background: var(--gold-tint);
+      color: var(--gold-light);
+    }
+    .mobile-menu-footer {
+      margin-top: auto;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .search-modal-backdrop,
+    #searchModal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .search-modal-backdrop.open,
+    #searchModal.open {
+      display: flex !important;
+    }
+    .search-modal-box {
+      width: 100%;
+      max-width: 600px;
+      background: #0F2A1D;
+      border: 1px solid rgba(212, 175, 95, 0.4);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+    .search-modal-header {
+      display: flex;
+      align-items: center;
+      padding: 16px 20px;
+      gap: 12px;
+      border-bottom: 1px solid rgba(212, 175, 95, 0.2);
+    }
+    .search-modal-header input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: #F5EFDC;
+      font-size: 16px;
+      outline: none;
+    }
+
+    /* 3. Critical Header & Logo Guards (Never Unstyled or Giant) */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 90;
+      background: rgba(12, 26, 18, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(212, 175, 95, 0.2);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      gap: 12px;
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--display-font);
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--gold-light);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .logo-brand svg {
+      width: 32px;
+      height: 32px;
+      max-width: 32px;
+      max-height: 32px;
+      flex-shrink: 0;
+    }
+    .tagline-sub {
+      font-size: 10px;
+      display: block;
+      color: var(--gold);
+      letter-spacing: 1px;
+      font-weight: 400;
+      font-family: var(--body-font);
+    }
+    .desktop-nav {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .desktop-nav a {
+      color: #CFD8C8;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+    .desktop-nav a:hover,
+    .desktop-nav a.active {
+      color: var(--gold-light);
+    }
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .icon-btn, .hamburger-btn {
+      width: 40px;
+      height: 40px;
+      min-width: 40px;
+      min-height: 40px;
+      border-radius: 50%;
+      background: transparent;
+      border: none;
+      color: #CFD8C8;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: color 0.2s ease, background 0.2s ease;
+    }
+    .icon-btn:hover, .hamburger-btn:hover {
+      color: var(--gold-light);
+      background: rgba(212, 175, 95, 0.1);
+    }
+    .cart-pill-btn {
+      background: var(--gold);
+      color: #0F2A1D;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      font-size: 13.5px;
+      min-height: 40px;
+      border: none;
+    }
+    .cart-pill-btn:hover {
+      background: var(--gold-light);
+    }
+    .cart-count-pill {
+      font-weight: 700;
+    }
+    @media (max-width: 900px) {
+      .desktop-nav {
+        display: none !important;
+      }
+    }
+    @media (max-width: 768px) {
+      .header-inner {
+        height: 60px;
+      }
+      .logo-brand {
+        font-size: 18px;
+      }
+      .logo-brand svg {
+        width: 26px;
+        height: 26px;
+      }
+      .tagline-sub {
+        display: none;
+      }
+      .theme-toggle-btn {
+        display: none !important;
+      }
+      .cart-pill-btn {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        min-height: 40px;
+        padding: 0;
+        border-radius: 50%;
+        justify-content: center;
+        position: relative;
+      }
+      .cart-pill-btn .cart-btn-label {
+        display: none;
+      }
+      .cart-count-pill {
+        position: absolute;
+        top: -3px;
+        right: -3px;
+        background: var(--deep-green);
+        color: #F5EFDC;
+        border: 1.5px solid var(--gold);
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        font-size: 10px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    /* 4. Critical Announcement Bar */
+    .announcement-bar {
+      background: #081710;
+      color: var(--gold-light);
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      padding: 6px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      border-bottom: 1px solid rgba(212, 175, 95, 0.15);
+    }
+    .announcement-marquee {
+      display: flex;
+      width: 100%;
+      overflow: hidden;
+    }
+    .announcement-track {
+      display: inline-flex;
+      gap: 24px;
+      animation: marqueeScroll 24s linear infinite;
+    }
+    .announcement-track span {
+      display: inline-flex;
+      align-items: center;
+    }
+    .announcement-dot {
+      color: var(--gold);
+      font-size: 10px;
+      opacity: 0.8;
+    }
+    @keyframes marqueeScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* 5. Critical Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 24px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 14.5px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      text-decoration: none;
+      border: 1px solid transparent;
+    }
+    .btn-primary {
+      background: var(--gold);
+      color: #0F2A1D;
+      border-color: var(--gold);
+    }
+    .btn-primary:hover {
+      background: var(--gold-light);
+    }
+    .btn-outline-gold {
+      background: transparent;
+      color: var(--gold-light);
+      border-color: var(--gold);
+    }
+    .btn-outline-gold:hover {
+      background: var(--gold);
+      color: #0F2A1D;
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--gold-light);
+      border-color: rgba(212, 175, 95, 0.4);
+    }
+    .btn-lg {
+      min-height: 48px;
+      padding: 14px 28px;
+      font-size: 15px;
+    }
+    .btn-sm {
+      min-height: 36px;
+      padding: 8px 16px;
+      font-size: 13px;
+    }
+    .btn-block {
+      width: 100%;
+    }
+    .btn-whatsapp {
+      background: #25D366;
+      color: #0B1D14;
+      font-weight: 700;
     }
 
     /* 2. Fluid & Sturdy Typography */
