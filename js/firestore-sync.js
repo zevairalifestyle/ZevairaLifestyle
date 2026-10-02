@@ -118,6 +118,8 @@ async function saveOrderToFirestore(orderData) {
     const payload = {
       orderId:       orderData.orderId       || '',
       createdAt:     serverTimestamp(),
+      userId:        orderData.userId        || '',
+      userEmail:     orderData.userEmail     || '',
       customerName:  orderData.customer?.name    || '',
       customerPhone: orderData.customer?.phone   || '',
       customerEmail: orderData.customer?.email   || '',

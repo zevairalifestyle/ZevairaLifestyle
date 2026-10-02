@@ -341,6 +341,14 @@ function injectHeaderAndFooter() {
               <span class="icon-badge" id="wishlistBadge" style="display:none">0</span>
             </a>
 
+            <!-- Account / Sign In -->
+            <a href="account.html" class="icon-btn" id="headerAccountBtn" aria-label="Sign in to your account">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+            </a>
+
             <!-- Cart Pill Button -->
             <a href="cart.html" class="cart-pill-btn" aria-label="View Cart">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -375,6 +383,7 @@ function injectHeaderAndFooter() {
         <a href="faq.html" ${isActive("faq.html")}>FAQ</a>
         <a href="contact.html" ${isActive("contact.html")}>Contact Us</a>
         <a href="cart.html" ${isActive("cart.html")}>My Cart (<span class="mobile-cart-count">0</span>)</a>
+        <a href="account.html" ${isActive("account.html")}>👤 My Account</a>
       </div>
       <div class="mobile-menu-footer">
         <a href="${INSTAGRAM_URL}" target="_blank" rel="noopener noreferrer" class="instagram-link-badge" aria-label="ZevairaLifestyle on Instagram" style="justify-content:center;margin-bottom:10px;">

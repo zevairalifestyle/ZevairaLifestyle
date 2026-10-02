@@ -88,6 +88,8 @@ service cloud.firestore {
         incomingData().giftWrap        is number;
 
       allow read, update, delete: if isAdmin();
+      // Logged-in customers can read only their own orders
+      allow read: if request.auth != null && request.auth.uid == resource.data.userId;
     }
 
   }
