@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -271,7 +271,7 @@
       text += `*Message:* ${message}\n`;
 
       const waUrl = `https://wa.me/${window.WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
-      window.open(waUrl, "_blank");
+      window.location.href = waUrl;
       showToast("Redirecting to WhatsApp with your inquiry...");
     }
 
