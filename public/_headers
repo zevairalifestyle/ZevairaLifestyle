@@ -1,18 +1,38 @@
 /*
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
 
+# HTML pages: always revalidate — never serve stale page from Cloudflare cache
 /*.html
   Content-Type: text/html; charset=utf-8
+  Cache-Control: no-cache, no-store, must-revalidate
+  Pragma: no-cache
 
 /
   Content-Type: text/html; charset=utf-8
+  Cache-Control: no-cache, no-store, must-revalidate
+  Pragma: no-cache
 
+# CSS with cache-busting query string (?v=2) — 7 day browser cache
 /css/*
   Content-Type: text/css; charset=utf-8
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
 
+# JS files — 7 day cache (cache-busted by ?v= query string where needed)
 /js/*
   Content-Type: text/javascript; charset=utf-8
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
 
+# Images and videos — long cache (filenames are content-addressed)
+/images/*
+  Cache-Control: public, max-age=2592000, immutable
+
+/videos/*
+  Cache-Control: public, max-age=2592000, immutable
+
+# SVG favicon
 /favicon.svg
-  Content-Type: image/svg+xml; charset=utf-8
+  Content-Type: image/svg+xml
+  Cache-Control: public, max-age=86400

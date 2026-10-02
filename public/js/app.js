@@ -858,8 +858,21 @@ function initTouchAnimations() {
 /* ==========================================================================
    AUTO-INITIALIZE ON DOM CONTENT LOADED
    ========================================================================== */
+
+// Apply theme IMMEDIATELY (synchronous) before any paint to prevent FOUC
+// The inline script in <head> already does this as a safety net; this is
+// the fallback in case the inline snippet is removed.
+(function applyThemeEarly() {
+  try {
+    const t = localStorage.getItem(THEME_STORAGE_KEY) ||
+      (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+
 document.addEventListener("DOMContentLoaded", () => {
   injectHeaderAndFooter();
+  initTheme();           // wire toggle button after header is injected
   initFragranceBubbles();
   initTouchAnimations();
 });

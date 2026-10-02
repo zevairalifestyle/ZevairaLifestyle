@@ -1,6 +1,12 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
+<script>/* Inline theme restore — runs before first paint, prevents FOUC */
+(function(){try{var t=localStorage.getItem('zevaira_theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+<style>/* Prevent background flash before stylesheet loads */
+html,body{background:#0c1a12;color:#f3ecd6;}
+</style>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Terms & Conditions | ZevairaLifestyle Pakistan</title>
@@ -89,8 +95,8 @@
   <div id="site-footer"></div>
 
   <!-- Shared Scripts -->
-  <script src="js/products.js"></script>
-  <script src="js/app.js"></script>
+  <script src="js/products.js" defer></script>
+  <script src="js/app.js" defer></script>
   <script type="module" src="js/firebase-config.js"></script>
   <script type="module" src="js/firestore-sync.js"></script>
   <script type="module" src="js/auth.js"></script>

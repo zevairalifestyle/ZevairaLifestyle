@@ -1,6 +1,12 @@
-<!DOCTYPE html>
+ï»¿<!DOCTYPE html>
 <html lang="en">
 <head>
+<script>/* Inline theme restore â€” runs before first paint, prevents FOUC */
+(function(){try{var t=localStorage.getItem('zevaira_theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+<style>/* Prevent background flash before stylesheet loads */
+html,body{background:#0c1a12;color:#f3ecd6;}
+</style>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Delivery & Returns | ZevairaLifestyle Pakistan</title>
@@ -85,32 +91,32 @@
               <tbody>
                 <tr style="border-bottom:1px solid var(--line);">
                   <td style="padding:14px 24px;"><strong>Karachi (Hub)</strong></td>
-                  <td style="padding:14px 24px;color:var(--gold);font-weight:600;">1 "“ 2 Business Days</td>
+                  <td style="padding:14px 24px;color:var(--gold);font-weight:600;">1 "ï¿½ 2 Business Days</td>
                   <td style="padding:14px 24px;color:var(--muted);">TCS Express, Trax Direct</td>
                 </tr>
                 <tr style="border-bottom:1px solid var(--line);">
                   <td style="padding:14px 24px;"><strong>Lahore (Hub)</strong></td>
-                  <td style="padding:14px 24px;color:var(--gold);font-weight:600;">1 "“ 2 Business Days</td>
+                  <td style="padding:14px 24px;color:var(--gold);font-weight:600;">1 "ï¿½ 2 Business Days</td>
                   <td style="padding:14px 24px;color:var(--muted);">Call Courier, TCS Overnight</td>
                 </tr>
                 <tr style="border-bottom:1px solid var(--line);">
                   <td style="padding:14px 24px;"><strong>Islamabad & Rawalpindi</strong></td>
-                  <td style="padding:14px 24px;font-weight:600;">2 "“ 3 Business Days</td>
+                  <td style="padding:14px 24px;font-weight:600;">2 "ï¿½ 3 Business Days</td>
                   <td style="padding:14px 24px;color:var(--muted);">TCS, Call Courier</td>
                 </tr>
                 <tr style="border-bottom:1px solid var(--line);">
                   <td style="padding:14px 24px;"><strong>Faisalabad, Multan, Gujranwala, Sialkot, Peshawar</strong></td>
-                  <td style="padding:14px 24px;font-weight:600;">2 "“ 3 Business Days</td>
+                  <td style="padding:14px 24px;font-weight:600;">2 "ï¿½ 3 Business Days</td>
                   <td style="padding:14px 24px;color:var(--muted);">TCS, Trax, Leopard</td>
                 </tr>
                 <tr style="border-bottom:1px solid var(--line);">
                   <td style="padding:14px 24px;"><strong>Quetta, Hyderabad, Sukkur, Bahawalpur, Abbottabad</strong></td>
-                  <td style="padding:14px 24px;font-weight:600;">3 "“ 4 Business Days</td>
+                  <td style="padding:14px 24px;font-weight:600;">3 "ï¿½ 4 Business Days</td>
                   <td style="padding:14px 24px;color:var(--muted);">TCS Express</td>
                 </tr>
                 <tr>
                   <td style="padding:14px 24px;"><strong>Gilgit, Skardu, Gwadar, AJK & Remote Towns</strong></td>
-                  <td style="padding:14px 24px;font-weight:600;">3 "“ 5 Business Days</td>
+                  <td style="padding:14px 24px;font-weight:600;">3 "ï¿½ 5 Business Days</td>
                   <td style="padding:14px 24px;color:var(--muted);">TCS / Pakistan Post Air</td>
                 </tr>
               </tbody>
@@ -208,8 +214,8 @@
   <div id="site-footer"></div>
 
   <!-- Shared Scripts -->
-  <script src="js/products.js"></script>
-  <script src="js/app.js"></script>
+  <script src="js/products.js" defer></script>
+  <script src="js/app.js" defer></script>
   <script type="module" src="js/firebase-config.js"></script>
   <script type="module" src="js/firestore-sync.js"></script>
   <script type="module" src="js/auth.js"></script>

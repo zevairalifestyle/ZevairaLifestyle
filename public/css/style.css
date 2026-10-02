@@ -374,6 +374,21 @@ h4 {
   margin-right: 20px;
 }
 
+/* ==========================================================================
+   Anti-FOUC: html/body base colors match the dark theme so there is never
+   a white flash before CSS or the theme toggle script runs.
+   ========================================================================== */
+html {
+  background: #0c1a12;        /* deep forest — matches dark --bg */
+  color: #f3ecd6;             /* cream — matches dark --ink */
+}
+
+/* Reserve header height before JS injects it, preventing layout shift */
+#site-header:empty {
+  min-height: 40px;           /* announcement bar height */
+  background: #07170f;        /* deep-green announcement bar color */
+}
+
 header.site-header {
   position: sticky;
   top: 0;
