@@ -609,9 +609,17 @@ html,body{background:#0c1f18;color:#f6f0e1;}
     }
 
     @media (max-width: 768px) {
+      .hero-section {
+        padding-top: 36px;
+        padding-bottom: 24px;
+      }
       .hero-grid {
         grid-template-columns: 1fr;
-        gap: 32px;
+        gap: 24px;
+      }
+      .hero-media-wrap, .film-box {
+        margin-bottom: 0;
+      }
       }
       .hero-text {
         text-align: left;
@@ -836,54 +844,6 @@ html,body{background:#0c1f18;color:#f6f0e1;}
     .hero-grid {
       position: relative;
       z-index: 1;
-    }
-
-    .bubble-sound-btn {
-      position: absolute;
-      bottom: 16px;
-      left: 24px;
-      right: auto;
-      background: rgba(7, 23, 15, 0.75);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      color: #CFD8C8;
-      min-height: 44px;
-      min-width: 44px;
-      padding: 8px 16px;
-      border-radius: var(--radius-full);
-      font-size: 12px;
-      font-weight: 600;
-      border: 1px solid rgba(217, 177, 90, 0.35);
-      z-index: 4;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-      transition: all 0.25s var(--ease);
-      -webkit-tap-highlight-color: transparent;
-      touch-action: manipulation;
-    }
-
-    .bubble-sound-btn:hover {
-      background: var(--gold);
-      color: #0F2A1D;
-      border-color: var(--gold-light);
-    }
-
-    .bubble-sound-btn.sound-on {
-      border-color: var(--gold);
-      color: var(--gold-light);
-      background: rgba(15, 42, 29, 0.9);
-    }
-
-    @media (max-width: 768px) {
-      .bubble-sound-btn {
-        bottom: 12px;
-        left: 16px;
-        right: auto;
-        padding: 8px 12px;
-        font-size: 11px;
-      }
     }
 
     /* Cinema Video Showcase - Full Frame Aspect Ratio & Fullscreen */
@@ -1212,21 +1172,6 @@ html,body{background:#0c1f18;color:#f6f0e1;}
         <canvas id="heroBubbleCanvas"></canvas>
       </div>
 
-      <!-- Sound toggle button (Web Audio soft pop) -->
-      <button id="bubbleSoundToggle" class="bubble-sound-btn" type="button" aria-label="Toggle bubble pop sound" title="Bubble Sound: Muted">
-        <svg class="sound-icon-off" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-          <line x1="23" y1="9" x2="17" y2="15"></line>
-          <line x1="17" y1="9" x2="23" y2="15"></line>
-        </svg>
-        <svg class="sound-icon-on" style="display:none;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-          <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-          <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
-        </svg>
-        <span class="sound-label">Sound Off</span>
-      </button>
-
       <div class="container hero-grid">
         <div class="hero-text reveal">
           <span class="eyebrow" style="color:var(--gold-light);">Artisanal Extrait de Parfum</span>
@@ -1253,7 +1198,7 @@ html,body{background:#0c1f18;color:#f6f0e1;}
         <!-- HERO VIDEO / ANIMATED BOTTLE -->
         <div class="hero-media-wrap reveal reveal-zoom">
           <div class="film-box" id="heroFilmBox" aria-label="ZevairaLifestyle hero showcase">
-            <video id="heroVideoEl" muted playsinline preload="auto"></video>
+            <video id="heroVideoEl" muted playsinline loop autoplay preload="auto"></video>
             <div class="scene-fallback" id="heroSceneFallback">
               <div class="mist-container" aria-hidden="true">
                 <i></i><i></i><i></i><i></i><i></i>
@@ -1275,7 +1220,7 @@ html,body{background:#0c1f18;color:#f6f0e1;}
     </section>
 
     <!-- TRUST STRIP -->
-    <section style="padding: 40px 0; background: var(--surface); border-bottom: 1px solid var(--line);">
+    <section style="padding: clamp(24px, 4vw, 36px) 0; background: var(--surface); border-bottom: 1px solid var(--line);">
       <div class="container trust-strip">
         <div class="trust-item reveal" style="--i:0">
           <div class="trust-icon">
@@ -1751,6 +1696,7 @@ html,body{background:#0c1f18;color:#f6f0e1;}
     document.addEventListener("DOMContentLoaded", () => {
       // 1. Render Hero Video Playlist & Controls
       const videoEl = document.getElementById("heroVideoEl");
+      if (videoEl) { videoEl.muted = true; videoEl.playsInline = true; }
       const filmBox = document.getElementById("heroFilmBox");
       const bottleMount = document.getElementById("heroBottleMount");
       const toggleBtn = document.getElementById("filmToggleBtn");
@@ -1779,6 +1725,8 @@ html,body{background:#0c1f18;color:#f6f0e1;}
         currentFilmIndex = index;
         const film = playlist[index];
         videoEl.src = film.src;
+        videoEl.muted = true;
+        videoEl.playsInline = true;
         videoEl.load();
 
         videoEl.play().then(() => {
@@ -1942,69 +1890,6 @@ html,body{background:#0c1f18;color:#f6f0e1;}
     function initHeroBubbles() {
       const heroSection = document.querySelector('.hero-section');
       const canvas = document.getElementById('heroBubbleCanvas');
-      const soundToggleBtn = document.getElementById('bubbleSoundToggle');
-      if (!heroSection || !canvas) return;
-
-      const ctx = canvas.getContext('2d');
-      if (!ctx) return;
-
-      // 1. Web Audio Synthesizer for Pop Sound (Muted by default)
-      let audioCtx = null;
-      let soundEnabled = false;
-
-      function initAudioContext() {
-        if (!audioCtx) {
-          const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
-          if (AudioCtxClass) audioCtx = new AudioCtxClass();
-        }
-        if (audioCtx && audioCtx.state === 'suspended') {
-          audioCtx.resume();
-        }
-      }
-
-      function playPopSound() {
-        if (!soundEnabled) return;
-        initAudioContext();
-        if (!audioCtx) return;
-        try {
-          const now = audioCtx.currentTime;
-          const osc = audioCtx.createOscillator();
-          const gain = audioCtx.createGain();
-
-          osc.type = 'sine';
-          const startFreq = 480 + Math.random() * 140;
-          osc.frequency.setValueAtTime(startFreq, now);
-          osc.frequency.exponentialRampToValueAtTime(130, now + 0.055);
-
-          gain.gain.setValueAtTime(0.12, now);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.055);
-
-          osc.connect(gain);
-          gain.connect(audioCtx.destination);
-
-          osc.start(now);
-          osc.stop(now + 0.06);
-        } catch (e) {}
-      }
-
-      if (soundToggleBtn) {
-        soundToggleBtn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          soundEnabled = !soundEnabled;
-          initAudioContext();
-
-          soundToggleBtn.classList.toggle('sound-on', soundEnabled);
-          const iconOff = soundToggleBtn.querySelector('.sound-icon-off');
-          const iconOn = soundToggleBtn.querySelector('.sound-icon-on');
-          const label = soundToggleBtn.querySelector('.sound-label');
-
-          if (iconOff) iconOff.style.display = soundEnabled ? 'none' : 'inline-block';
-          if (iconOn) iconOn.style.display = soundEnabled ? 'inline-block' : 'none';
-          if (label) label.textContent = soundEnabled ? 'Sound On' : 'Sound Off';
-          soundToggleBtn.title = soundEnabled ? 'Bubble Sound: Active' : 'Bubble Sound: Muted';
-
-          if (soundEnabled) playPopSound();
-        });
       }
 
       // 2. Responsive Sizing & Canvas Setup (devicePixelRatio capped at 2)
@@ -2159,9 +2044,6 @@ html,body{background:#0c1f18;color:#f6f0e1;}
           try { navigator.vibrate(10); } catch (e) {}
         }
 
-        // Web Audio soft pop
-        playPopSound();
-
         // Push neighboring bubbles within 120px away from pop
         for (let i = 0; i < bubbles.length; i++) {
           const other = bubbles[i];
@@ -2224,7 +2106,7 @@ html,body{background:#0c1f18;color:#f6f0e1;}
 
       heroSection.addEventListener('pointerdown', (e) => {
         // Do not intercept if clicking buttons, links, video player, or sound toggle
-        if (e.target.closest('a, button, input, select, textarea, .film-box, .film-reel-nav, #bubbleSoundToggle')) {
+        if (e.target.closest('a, button, input, select, textarea, .film-box, .film-reel-nav')) {
           return;
         }
         isPointerDown = true;
@@ -2233,7 +2115,7 @@ html,body{background:#0c1f18;color:#f6f0e1;}
 
       heroSection.addEventListener('pointermove', (e) => {
         if (!isPointerDown) return;
-        if (e.target.closest('a, button, input, select, textarea, .film-box, .film-reel-nav, #bubbleSoundToggle')) {
+        if (e.target.closest('a, button, input, select, textarea, .film-box, .film-reel-nav')) {
           return;
         }
         hitTestAndPop(e.clientX, e.clientY);

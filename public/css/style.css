@@ -708,7 +708,7 @@ nav.desktop-nav a[aria-current="page"]::after {
     #0a1d14              100%
   );
   color: var(--text-primary);
-  padding: clamp(48px, 8vw, 96px) 0;
+  padding: clamp(40px, 6vw, 72px) 0 clamp(28px, 4vw, 44px);
   position: relative;
   overflow: hidden;
   border-bottom: 1px solid var(--border);
@@ -2345,6 +2345,18 @@ footer.site-footer .instagram-link-badge:hover svg {
     align-items: center;
     justify-content: center;
   }
+
+  /* Clean hero bottom spacing on mobile — normal gap before next section */
+  .hero-section {
+    padding-top: 36px;
+    padding-bottom: 24px;
+  }
+  .hero-grid {
+    gap: 24px;
+  }
+  .hero-media-wrap, .film-box {
+    margin-bottom: 0;
+  }
 }
 
 /* At ≤420px show short "Zevaira" instead of "ZevairaLifestyle" */
@@ -2386,7 +2398,7 @@ footer.site-footer .instagram-link-badge:hover svg {
    LUXURY BUBBLE & TOUCH ANIMATIONS (SITE-WIDE)
    ========================================================================== */
 
-/* ── 1. Hero Soap-Bubble Canvas & Sound Toggle ── */
+/* ── 1. Hero Soap-Bubble Canvas ── */
 .hero-section {
   position: relative;
   overflow: hidden;
@@ -2417,52 +2429,6 @@ footer.site-footer .instagram-link-badge:hover svg {
   z-index: 1;
 }
 
-/* Sound Toggle Button */
-.bubble-sound-btn {
-  position: absolute;
-  bottom: 16px;
-  right: 20px;
-  background: rgba(7, 23, 15, 0.75);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  color: #CFD8C8;
-  min-height: 44px;
-  min-width: 44px;
-  padding: 8px 16px;
-  border-radius: var(--radius-full);
-  font-size: 12px;
-  font-weight: 600;
-  border: 1px solid rgba(217, 177, 90, 0.35);
-  z-index: 4;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-  transition: all 0.25s var(--ease);
-  -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
-}
-
-.bubble-sound-btn:hover {
-  background: var(--gold);
-  color: #0F2A1D;
-  border-color: var(--gold-light);
-}
-
-.bubble-sound-btn.sound-on {
-  border-color: var(--gold);
-  color: var(--gold-light);
-  background: rgba(15, 42, 29, 0.9);
-}
-
-@media (max-width: 768px) {
-  .bubble-sound-btn {
-    bottom: 12px;
-    right: 12px;
-    padding: 8px 12px;
-    font-size: 11px;
-  }
-}
 
 /* ── 2. Touch Ripple & Tactile Feedback ── */
 button, .btn, .icon-btn, .product-card-thumb, .wishlist-heart-btn, .cart-pill-btn, .hamburger-btn, .tab-btn {
