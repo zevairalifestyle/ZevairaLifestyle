@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Shop Luxury Fragrances | ZevairaLifestyle Pakistan</title>
+  <meta name="description" content="Browse our complete collection of handcrafted Extrait de Parfum. Long-lasting perfumes formulated for Pakistani weather. Cash on delivery nationwide.">
+  <meta property="og:title" content="Shop Luxury Fragrances | ZevairaLifestyle">
+  <meta property="og:description" content="Discover long-lasting perfumes made for Pakistani heat. Free delivery above Rs 6,000.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Dynamic Header Injected by JS -->
+  <div id="site-header"></div>
+
+  <main id="main-content">
+
+    <!-- PAGE HERO BANNER -->
+    <section style="background: radial-gradient(100% 70% at 50% 10%, #1F4A33 0%, #0F2A1D 100%); color:#F5EFDC; padding: clamp(48px, 6vw, 72px) 0; border-bottom: 1px solid rgba(184,134,43,0.3);">
+      <div class="container text-center">
+        <span class="eyebrow" style="color:var(--gold-light);">The Fragrance Atelier</span>
+        <h1 style="color:#F5EFDC;">The Complete Collection</h1>
+        <div class="gold-divider center"></div>
+        <p class="lead" style="margin-inline:auto; color:#CFD8C8;">
+          Artisanal Extrait de Parfum blended with uncompromised oil concentrations. Designed to outlast high humidity and intense sunshine across Pakistan.
+        </p>
+      </div>
+    </section>
+
+    <!-- SHOPPING & FILTER SECTION -->
+    <section>
+      <div class="container">
+
+        <!-- LIVE FILTER CONTROLS BAR -->
+        <div class="filter-bar">
+          
+          <!-- Search box -->
+          <div class="form-group">
+            <label for="shopSearch">Search Catalog</label>
+            <input type="search" id="shopSearch" class="form-control" placeholder="Search name, notes (e.g. Vetiver, Oud)...">
+          </div>
+
+          <!-- Category filter -->
+          <div class="form-group">
+            <label for="filterCategory">Category</label>
+            <select id="filterCategory" class="form-control">
+              <option value="all">All Categories</option>
+              <option value="For Him">For Him</option>
+              <option value="For Her">For Her</option>
+              <option value="Unisex">Unisex</option>
+              <option value="Gift Sets">Gift Sets</option>
+            </select>
+          </div>
+
+          <!-- Scent Family filter -->
+          <div class="form-group">
+            <label for="filterFamily">Scent Family</label>
+            <select id="filterFamily" class="form-control">
+              <option value="all">All Scent Families</option>
+              <option value="Fresh">Fresh & Aquatic</option>
+              <option value="Woody">Woody & Earthy</option>
+              <option value="Floral">Radiant Floral</option>
+              <option value="Oriental">Warm Oriental</option>
+              <option value="Citrus">Zesty Citrus</option>
+            </select>
+          </div>
+
+          <!-- Sort filter -->
+          <div class="form-group">
+            <label for="sortOrder">Sort By</label>
+            <select id="sortOrder" class="form-control">
+              <option value="popular">Most Popular</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="rating">Highest Rated</option>
+              <option value="newest">New Arrivals</option>
+            </select>
+          </div>
+
+        </div>
+
+        <!-- SECONDARY FILTER CHIPS: QUICK TOGGLES -->
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:28px;">
+          <div class="category-chips" id="quickChips" style="margin-bottom:0;">
+            <button class="chip-btn active" data-filter="all">All Products</button>
+            <button class="chip-btn" data-filter="bestseller">Bestsellers</button>
+            <button class="chip-btn" data-filter="new">New Arrivals</button>
+            <button class="chip-btn" data-filter="wishlist">My Wishlist</button>
+          </div>
+
+          <!-- Live Product Count Display -->
+          <div id="productCountStatus" style="font-size:14px;color:var(--muted);font-weight:600;">
+            Loading fragrances...
+          </div>
+        </div>
+
+        <!-- PRODUCT GRID -->
+        <div class="product-grid" id="catalogGrid">
+          <!-- Populated by JavaScript -->
+        </div>
+
+        <!-- EMPTY RESULTS MESSAGE -->
+        <div id="emptyCatalogState" style="display:none;background:var(--surface);border:1px dashed var(--line);border-radius:var(--radius-md);padding:64px 20px;text-align:center;margin-top:24px;">
+          <div style="font-size:42px;margin-bottom:12px;">🕯️</div>
+          <h3 style="font-size:24px;margin-bottom:8px;">No Fragrances Found</h3>
+          <p style="color:var(--muted);max-width:44ch;margin:0 auto 20px;">
+            We couldn't find any scents matching your active filters. Try adjusting your search term or clearing your selections.
+          </p>
+          <button id="resetFiltersBtn" class="btn btn-primary btn-sm">Reset All Filters</button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Dynamic Footer Injected by JS -->
+  <div id="site-footer"></div>
+
+  <!-- Shared Scripts -->
+  <script src="js/products.js"></script>
+  <script src="js/app.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const searchInput = document.getElementById("shopSearch");
+      const categorySelect = document.getElementById("filterCategory");
+      const familySelect = document.getElementById("filterFamily");
+      const sortSelect = document.getElementById("sortOrder");
+      const grid = document.getElementById("catalogGrid");
+      const emptyState = document.getElementById("emptyCatalogState");
+      const countStatus = document.getElementById("productCountStatus");
+      const resetBtn = document.getElementById("resetFiltersBtn");
+      const chipButtons = document.querySelectorAll("#quickChips .chip-btn");
+
+      let currentQuickFilter = "all";
+
+      // 1. Parse initial URL parameters
+      const urlParams = new URLSearchParams(window.location.search);
+      const paramCategory = urlParams.get("category");
+      const paramFamily = urlParams.get("family");
+      const paramFilter = urlParams.get("filter");
+      const paramSearch = urlParams.get("search");
+
+      if (paramCategory && categorySelect) {
+        categorySelect.value = paramCategory;
+      }
+      if (paramFamily && familySelect) {
+        familySelect.value = paramFamily;
+      }
+      if (paramSearch && searchInput) {
+        searchInput.value = paramSearch;
+      }
+      if (paramFilter) {
+        currentQuickFilter = paramFilter.toLowerCase();
+        chipButtons.forEach(btn => {
+          if (btn.dataset.filter === currentQuickFilter) btn.classList.add("active");
+          else btn.classList.remove("active");
+        });
+      }
+
+      // 2. Filter & Render Engine
+      function renderCatalog() {
+        if (typeof PRODUCTS === "undefined") return;
+
+        const query = searchInput.value.trim().toLowerCase();
+        const selectedCat = categorySelect.value;
+        const selectedFam = familySelect.value;
+        const selectedSort = sortSelect.value;
+        const wishlist = getWishlist();
+
+        let filtered = PRODUCTS.filter(p => {
+          // Search query check
+          if (query) {
+            const notesStr = (p.notes.top.join(" ") + " " + p.notes.heart.join(" ") + " " + p.notes.base.join(" ")).toLowerCase();
+            const matchSearch = p.name.toLowerCase().includes(query) ||
+                                p.tagline.toLowerCase().includes(query) ||
+                                p.scentFamily.toLowerCase().includes(query) ||
+                                p.category.toLowerCase().includes(query) ||
+                                notesStr.includes(query);
+            if (!matchSearch) return false;
+          }
+
+          // Category check
+          if (selectedCat !== "all" && p.category !== selectedCat) {
+            return false;
+          }
+
+          // Scent Family check
+          if (selectedFam !== "all" && p.scentFamily !== selectedFam) {
+            return false;
+          }
+
+          // Quick Filter chips
+          if (currentQuickFilter === "bestseller") {
+            if (!p.badge || !p.badge.toLowerCase().includes("bestseller")) return false;
+          } else if (currentQuickFilter === "new") {
+            if (!p.badge || !p.badge.toLowerCase().includes("new")) return false;
+          } else if (currentQuickFilter === "wishlist") {
+            if (!wishlist.includes(p.id)) return false;
+          }
+
+          return true;
+        });
+
+        // Sorting
+        if (selectedSort === "price-asc") {
+          filtered.sort((a, b) => a.sizes[0].price - b.sizes[0].price);
+        } else if (selectedSort === "price-desc") {
+          filtered.sort((a, b) => b.sizes[0].price - a.sizes[0].price);
+        } else if (selectedSort === "rating") {
+          filtered.sort((a, b) => b.rating - a.rating);
+        } else if (selectedSort === "newest") {
+          filtered.sort((a, b) => (b.badge && b.badge.includes("New") ? 1 : 0) - (a.badge && a.badge.includes("New") ? 1 : 0));
+        } else {
+          // popular: review count / bestsellers
+          filtered.sort((a, b) => b.reviewCount - a.reviewCount);
+        }
+
+        // Update Count
+        countStatus.textContent = `Showing ${filtered.length} of ${PRODUCTS.length} Fragrances`;
+
+        // Render Results
+        if (filtered.length === 0) {
+          grid.innerHTML = "";
+          emptyState.style.display = "block";
+        } else {
+          emptyState.style.display = "none";
+          grid.innerHTML = filtered.map(p => `
+            <div class="product-card">
+              <div class="product-card-thumb" onclick="window.location.href='product.html?id=${p.id}'">
+                <span class="badge product-badge-pos">${p.badge || 'Extrait'}</span>
+                <button class="wishlist-heart-btn ${isInWishlist(p.id) ? 'active' : ''}" 
+                  onclick="event.stopPropagation(); toggleWishlist('${p.id}'); this.classList.toggle('active'); renderCatalog();" 
+                  aria-label="Save ${p.name} to wishlist">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="${isInWishlist(p.id) ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </button>
+                ${getBottleSvg(p, "60%")}
+              </div>
+              <div class="product-card-body">
+                <div class="product-card-family">${p.category} • ${p.scentFamily}</div>
+                <h3 class="product-card-title"><a href="product.html?id=${p.id}">${p.name}</a></h3>
+                <p class="product-card-tagline">${p.tagline}</p>
+                <div class="product-rating-stars">
+                  ★★★★★ <span class="count">(${p.reviewCount})</span>
+                </div>
+                <div class="product-card-foot">
+                  <div class="price-display">
+                    <span class="currency">Starts at</span>
+                    <span class="amount">${formatPKR(p.sizes[0].price)}</span>
+                  </div>
+                  <button class="btn btn-outline-gold btn-sm" onclick="addToCart('${p.id}', '${p.sizes[0].size}', 1)">Add to Cart</button>
+                </div>
+              </div>
+            </div>
+          `).join("");
+        }
+      }
+
+      // Event Listeners for Live Filtering (No reload)
+      searchInput.addEventListener("input", renderCatalog);
+      categorySelect.addEventListener("change", renderCatalog);
+      familySelect.addEventListener("change", renderCatalog);
+      sortSelect.addEventListener("change", renderCatalog);
+
+      // Chip Buttons
+      chipButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+          chipButtons.forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          currentQuickFilter = btn.dataset.filter;
+          renderCatalog();
+        });
+      });
+
+      // Reset Button
+      if (resetBtn) {
+        resetBtn.addEventListener("click", () => {
+          searchInput.value = "";
+          categorySelect.value = "all";
+          familySelect.value = "all";
+          sortSelect.value = "popular";
+          currentQuickFilter = "all";
+          chipButtons.forEach(b => b.classList.remove("active"));
+          chipButtons[0].classList.add("active");
+          renderCatalog();
+        });
+      }
+
+      // Initial execution
+      renderCatalog();
+    });
+  </script>
+</body>
+</html>

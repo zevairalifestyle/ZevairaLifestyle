@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Fragrance Details | ZevairaLifestyle</title>
+  <meta name="description" content="Handcrafted Extrait de Parfum formulated for Pakistani weather. 16+ hours longevity. Cash on delivery across Pakistan.">
+  <meta property="og:title" content="Fragrance Details | ZevairaLifestyle">
+  <meta property="og:description" content="Explore notes, longevity meters, and customer reviews.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Dynamic JSON-LD Schema Mount -->
+  <script id="productSchemaMount" type="application/ld+json"></script>
+</head>
+<body>
+
+  <!-- Dynamic Header Injected by JS -->
+  <div id="site-header"></div>
+
+  <main id="main-content">
+
+    <!-- BREADCRUMB NAVIGATION -->
+    <div style="background:var(--surface);border-bottom:1px solid var(--line);padding:14px 0;font-size:13.5px;">
+      <div class="container" style="display:flex;align-items:center;gap:8px;color:var(--muted);flex-wrap:wrap;">
+        <a href="index.html">Home</a>
+        <span>/</span>
+        <a href="shop.html">Shop</a>
+        <span>/</span>
+        <span id="breadcrumbCategory">Perfume</span>
+        <span>/</span>
+        <span id="breadcrumbTitle" style="color:var(--ink);font-weight:600;">Loading...</span>
+      </div>
+    </div>
+
+    <!-- MAIN PRODUCT SECTION -->
+    <section>
+      <div class="container product-detail-grid">
+        
+        <!-- PRODUCT GALLERY / LARGE BOTTLE ILLUSTATION -->
+        <div class="product-gallery">
+          <!-- REAL IMAGE DROP-IN: Swap SVG inside this container with <img src="images/your-photo.jpg"> -->
+          <div id="productGalleryMount" style="width:100%;display:grid;place-items:center;">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- PRODUCT INFORMATION & ORDER CONTROLS -->
+        <div class="product-info-wrap">
+          
+          <div class="product-meta-row">
+            <span class="badge" id="productBadge">Bestseller</span>
+            <div class="product-rating-stars" id="productRatingRow">
+              ★★★★★ <span class="count" id="productReviewCountText">(180 reviews)</span>
+            </div>
+          </div>
+
+          <h1 id="productTitle" style="margin-bottom:6px;">Fragrance Name</h1>
+          <p id="productTagline" style="font-size:16px;color:var(--muted);margin-bottom:12px;">Tagline</p>
+          <div id="productConcentration" style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:var(--gold);text-transform:uppercase;">Extrait de Parfum (35%)</div>
+
+          <!-- Price Display -->
+          <div class="price-hero" style="margin:8px 0 16px;">
+            <span class="current-price" id="currentPriceDisplay">Rs 4,200</span>
+            <span style="font-size:13px;color:var(--muted);">Includes all taxes • Cash on delivery available</span>
+          </div>
+
+          <p id="productDescription" style="color:var(--ink-light);line-height:1.7;font-size:15.5px;">
+            Description loading...
+          </p>
+
+          <!-- Size Selector -->
+          <div class="size-selector-group">
+            <label style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);">
+              Select Size & Presentation:
+            </label>
+            <div class="size-options" id="sizeOptionsContainer">
+              <!-- Dynamically populated size radio buttons -->
+            </div>
+          </div>
+
+          <!-- Quantity, Add to Cart, Buy Now, Wishlist -->
+          <div class="purchase-actions">
+            <!-- Quantity Control -->
+            <div class="quantity-control" aria-label="Quantity Selector">
+              <button type="button" id="qtyMinusBtn" aria-label="Decrease quantity">−</button>
+              <input type="text" id="qtyInput" value="1" readonly aria-label="Selected quantity">
+              <button type="button" id="qtyPlusBtn" aria-label="Increase quantity">+</button>
+            </div>
+
+            <!-- Add to Cart -->
+            <button type="button" id="addToCartBtn" class="btn btn-primary">
+              Add to Cart
+            </button>
+
+            <!-- Buy Now -->
+            <button type="button" id="buyNowBtn" class="btn btn-forest">
+              Buy Now
+            </button>
+          </div>
+
+          <!-- Wishlist & WhatsApp Inquiries -->
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding-top:8px;">
+            <button type="button" id="toggleWishlistBtn" class="btn btn-outline btn-sm">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              <span id="wishlistBtnText">Add to Wishlist</span>
+            </button>
+
+            <a id="askWhatsAppBtn" href="#" target="_blank" rel="noopener" class="btn btn-whatsapp btn-sm">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+              Ask on WhatsApp
+            </a>
+          </div>
+
+          <!-- Delivery Estimate Strip -->
+          <div style="background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px 16px;display:flex;align-items:center;gap:12px;font-size:13.5px;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+            <div>
+              <strong>Fast Pakistan Delivery:</strong> Karachi & Lahore: 2–3 business days. Islamabad & other cities: 3–4 business days. Free delivery above Rs 6,000.
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SCENT PYRAMID & PERFORMANCE METERS -->
+    <section class="section-alt">
+      <div class="container">
+        
+        <div style="display:grid;grid-template-columns:1.1fr 0.9fr;gap:clamp(32px,5vw,64px);align-items:start;">
+          
+          <!-- Olfactory Pyramid -->
+          <div>
+            <span class="eyebrow">Fragrance Architecture</span>
+            <h2>The Scent Pyramid</h2>
+            <div class="gold-divider"></div>
+            
+            <div class="pyramid-card">
+              <div class="pyramid-step">
+                <div class="pyramid-label">Top Notes</div>
+                <div class="pyramid-notes" id="pyramidTopNotes">
+                  <!-- Populated by JS -->
+                </div>
+              </div>
+              <div class="pyramid-step">
+                <div class="pyramid-label">Heart Notes</div>
+                <div class="pyramid-notes" id="pyramidHeartNotes">
+                  <!-- Populated by JS -->
+                </div>
+              </div>
+              <div class="pyramid-step">
+                <div class="pyramid-label">Base Notes</div>
+                <div class="pyramid-notes" id="pyramidBaseNotes">
+                  <!-- Populated by JS -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Longevity & Climate Meters -->
+          <div>
+            <span class="eyebrow">Tested in Pakistani Heat</span>
+            <h2>Performance Profile</h2>
+            <div class="gold-divider"></div>
+
+            <div class="meters-grid" style="margin-bottom:24px;">
+              <div class="meter-card">
+                <div class="meter-header">
+                  <strong>Longevity (Skin & Kurta)</strong>
+                  <span id="longevityScoreText" class="text-gold">95%</span>
+                </div>
+                <div class="meter-track">
+                  <div class="meter-fill" id="longevityMeterFill" style="width: 95%;"></div>
+                </div>
+                <p id="longevityDesc" style="font-size:12.5px;color:var(--muted);margin-top:8px;">
+                  16+ Hours in Summer Heat
+                </p>
+              </div>
+
+              <div class="meter-card">
+                <div class="meter-header">
+                  <strong>Projection / Sillage</strong>
+                  <span id="projectionScoreText" class="text-gold">88%</span>
+                </div>
+                <div class="meter-track">
+                  <div class="meter-fill" id="projectionMeterFill" style="width: 88%;"></div>
+                </div>
+                <p id="projectionDesc" style="font-size:12.5px;color:var(--muted);margin-top:8px;">
+                  2.5m Radiant Sillage
+                </p>
+              </div>
+            </div>
+
+            <!-- Best Season & Occasion Badges -->
+            <div style="background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-md);padding:20px;display:flex;flex-direction:column;gap:12px;">
+              <div>
+                <span style="font-size:12px;font-weight:700;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4px;">Ideal Season:</span>
+                <span id="bestSeasonBadge" style="font-weight:600;color:var(--ink);">Summer, Monsoon & High Humidity</span>
+              </div>
+              <div>
+                <span style="font-size:12px;font-weight:700;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4px;">Recommended Occasion:</span>
+                <span id="bestOccasionBadge" style="font-weight:600;color:var(--ink);">Office, Signature Daily & Receptions</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- WEARING TIPS & ACCORDION DETAILS -->
+    <section>
+      <div class="container" style="max-width:860px;">
+        
+        <div class="section-header text-center">
+          <span class="eyebrow">Maison Guidelines</span>
+          <h2>Craft, Ingredients & Care</h2>
+          <div class="gold-divider center"></div>
+        </div>
+
+        <!-- Accordions -->
+        <div class="accordion-item open" id="acc1">
+          <button class="accordion-trigger" onclick="this.parentElement.classList.toggle('open')">
+            How to Wear & Store in Pakistani Summers
+          </button>
+          <div class="accordion-content">
+            <p>
+              Due to our high 35% oil concentration, spray directly onto pulse points (sides of neck, wrists, collarbone). For extreme 40°C+ heat, spray 2 mists on your cotton kurta or linen shirt from 8 inches away—the textile fibers anchor the base notes for up to 24 hours. Always store your flacon away from direct bathroom sunlight and car gloveboxes.
+            </p>
+          </div>
+        </div>
+
+        <div class="accordion-item" id="acc2">
+          <button class="accordion-trigger" onclick="this.parentElement.classList.toggle('open')">
+            Full Olfactory Ingredients & Composition
+          </button>
+          <div class="accordion-content">
+            <p>
+              Denatured Perfumer's Alcohol, Parfum (Fragrance Compound 30-38%), Limonene, Linalool, Coumarin, Evernia Prunastri (Oakmoss Extract), Benzyl Benzoate, Citronellol, Geraniol, Iso E Super, Ambergris Accord. Formulated to adhere to IFRA standards. Free from phthalates and parabens. Cruelty-free.
+            </p>
+          </div>
+        </div>
+
+        <div class="accordion-item" id="acc3">
+          <button class="accordion-trigger" onclick="this.parentElement.classList.toggle('open')">
+            7-Day Exchange & Delivery Guarantee
+          </button>
+          <div class="accordion-content">
+            <p>
+              We want you to wear Zevaira with complete confidence. If you open your parcel and feel the fragrance profile doesn't suit your skin chemistry, simply notify us on WhatsApp (+92 300 1234567) within 7 days. Sealed flacons or bottles tested with minimal sprays can be exchanged for any other fragrance from our collection.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CUSTOMER REVIEWS LIST -->
+    <section class="section-alt">
+      <div class="container">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:32px;">
+          <div>
+            <span class="eyebrow">Customer Voices</span>
+            <h2>Verified Reviews</h2>
+          </div>
+          <a id="leaveReviewWhatsApp" href="#" target="_blank" rel="noopener" class="btn btn-outline btn-sm">
+            Write a Review on WhatsApp
+          </a>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;" id="productReviewsContainer">
+          <!-- Reviews injected by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- YOU MAY ALSO LIKE (RELATED PRODUCTS) -->
+    <section>
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="eyebrow">Harmonious Pairings</span>
+          <h2>You May Also Like</h2>
+          <div class="gold-divider center"></div>
+        </div>
+        <div class="product-grid" id="relatedProductsGrid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- RECENTLY VIEWED PRODUCTS -->
+    <section class="section-alt" id="recentSection" style="display:none;">
+      <div class="container">
+        <div style="margin-bottom:24px;">
+          <span class="eyebrow">Recently Explored</span>
+          <h3>Your Browsing History</h3>
+        </div>
+        <div class="product-grid" id="recentlyViewedGrid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Dynamic Footer Injected by JS -->
+  <div id="site-footer"></div>
+
+  <!-- Shared Scripts -->
+  <script src="js/products.js"></script>
+  <script src="js/app.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (typeof PRODUCTS === "undefined") return;
+
+      // 1. Get Product by ID from query string
+      const urlParams = new URLSearchParams(window.location.search);
+      let prodId = urlParams.get("id");
+      let product = PRODUCTS.find(p => p.id === prodId);
+
+      // Fallback to first product if missing
+      if (!product) {
+        product = PRODUCTS[0];
+        prodId = product.id;
+      }
+
+      // Track recently viewed
+      trackRecentlyViewed(prodId);
+
+      // Set page Title and SEO meta
+      document.title = `${product.name} Extrait de Parfum | ZevairaLifestyle Pakistan`;
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) metaDesc.content = `${product.name} (${product.category}, ${product.scentFamily}). ${product.tagline}. Formulated for Pakistani heat.`;
+
+      // Injected Schema.org JSON-LD
+      const schemaMount = document.getElementById("productSchemaMount");
+      if (schemaMount) {
+        schemaMount.textContent = JSON.stringify({
+          "@context": "https://schema.org/",
+          "@type": "Product",
+          "name": product.name,
+          "description": product.description,
+          "brand": { "@type": "Brand", "name": "ZevairaLifestyle" },
+          "offers": {
+            "@type": "AggregateOffer",
+            "priceCurrency": "PKR",
+            "lowPrice": product.sizes[0].price,
+            "highPrice": product.sizes[product.sizes.length - 1].price,
+            "availability": "https://schema.org/InStock"
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": product.rating,
+            "reviewCount": product.reviewCount
+          }
+        });
+      }
+
+      // Populate Breadcrumb
+      document.getElementById("breadcrumbCategory").textContent = product.category;
+      document.getElementById("breadcrumbTitle").textContent = product.name;
+
+      // Populate Gallery Bottle
+      document.getElementById("productGalleryMount").innerHTML = getBottleSvg(product, "85%", "auto");
+
+      // Details
+      document.getElementById("productBadge").textContent = product.badge || "Extrait de Parfum";
+      document.getElementById("productReviewCountText").textContent = `(${product.reviewCount} customer reviews)`;
+      document.getElementById("productTitle").textContent = product.name;
+      document.getElementById("productTagline").textContent = product.tagline;
+      document.getElementById("productConcentration").textContent = product.concentration;
+      document.getElementById("productDescription").textContent = product.description;
+
+      // Scent Pyramid Notes
+      document.getElementById("pyramidTopNotes").innerHTML = product.notes.top.map(n => `<span class="note-tag">${n}</span>`).join("");
+      document.getElementById("pyramidHeartNotes").innerHTML = product.notes.heart.map(n => `<span class="note-tag">${n}</span>`).join("");
+      document.getElementById("pyramidBaseNotes").innerHTML = product.notes.base.map(n => `<span class="note-tag">${n}</span>`).join("");
+
+      // Longevity & Projection Meters
+      document.getElementById("longevityScoreText").textContent = `${product.longevityScore}%`;
+      document.getElementById("longevityMeterFill").style.width = `${product.longevityScore}%`;
+      document.getElementById("longevityDesc").textContent = product.longevity;
+
+      document.getElementById("projectionScoreText").textContent = `${product.projectionScore}%`;
+      document.getElementById("projectionMeterFill").style.width = `${product.projectionScore}%`;
+      document.getElementById("projectionDesc").textContent = product.projection;
+
+      document.getElementById("bestSeasonBadge").textContent = product.season;
+      document.getElementById("bestOccasionBadge").textContent = product.occasion;
+
+      // Size Options & Price Update Engine
+      let selectedSize = product.sizes[0].size;
+      let selectedPrice = product.sizes[0].price;
+      const sizeContainer = document.getElementById("sizeOptionsContainer");
+      const priceDisplay = document.getElementById("currentPriceDisplay");
+
+      function updatePriceDisplay() {
+        priceDisplay.textContent = formatPKR(selectedPrice);
+      }
+
+      sizeContainer.innerHTML = product.sizes.map((s, idx) => `
+        <div>
+          <input type="radio" name="productSize" id="size_${idx}" class="size-radio" value="${s.size}" ${idx === 0 ? 'checked' : ''}>
+          <label for="size_${idx}" class="size-label">
+            <span>${s.size}</span>
+            <span style="color:var(--gold);font-size:12px;">• ${formatPKR(s.price)}</span>
+          </label>
+        </div>
+      `).join("");
+
+      sizeContainer.addEventListener("change", (e) => {
+        if (e.target.name === "productSize") {
+          selectedSize = e.target.value;
+          const found = product.sizes.find(s => s.size === selectedSize);
+          if (found) {
+            selectedPrice = found.price;
+            updatePriceDisplay();
+            updateWhatsAppBtn();
+          }
+        }
+      });
+      updatePriceDisplay();
+
+      // Quantity Engine
+      let quantity = 1;
+      const qtyInput = document.getElementById("qtyInput");
+      const minusBtn = document.getElementById("qtyMinusBtn");
+      const plusBtn = document.getElementById("qtyPlusBtn");
+
+      minusBtn.addEventListener("click", () => {
+        if (quantity > 1) {
+          quantity--;
+          qtyInput.value = quantity;
+        }
+      });
+      plusBtn.addEventListener("click", () => {
+        quantity++;
+        qtyInput.value = quantity;
+      });
+
+      // Add to Cart
+      document.getElementById("addToCartBtn").addEventListener("click", () => {
+        addToCart(product.id, selectedSize, quantity);
+      });
+
+      // Buy Now
+      document.getElementById("buyNowBtn").addEventListener("click", () => {
+        addToCart(product.id, selectedSize, quantity);
+        window.location.href = "checkout.html";
+      });
+
+      // Wishlist Button
+      const wishBtn = document.getElementById("toggleWishlistBtn");
+      const wishText = document.getElementById("wishlistBtnText");
+
+      function syncWishlistState() {
+        const inWish = isInWishlist(product.id);
+        if (inWish) {
+          wishText.textContent = "Saved in Wishlist";
+          wishBtn.classList.add("btn-primary");
+          wishBtn.classList.remove("btn-outline");
+        } else {
+          wishText.textContent = "Add to Wishlist";
+          wishBtn.classList.remove("btn-primary");
+          wishBtn.classList.add("btn-outline");
+        }
+      }
+      syncWishlistState();
+
+      wishBtn.addEventListener("click", () => {
+        toggleWishlist(product.id);
+        syncWishlistState();
+      });
+
+      // WhatsApp Ask Button
+      function updateWhatsAppBtn() {
+        const askBtn = document.getElementById("askWhatsAppBtn");
+        if (askBtn) {
+          askBtn.href = generateWhatsAppInquiryUrl(product.name, selectedSize);
+        }
+      }
+      updateWhatsAppBtn();
+
+      // Leave review on WhatsApp link
+      const revLink = document.getElementById("leaveReviewWhatsApp");
+      if (revLink) {
+        revLink.href = `https://wa.me/${window.WHATSAPP_NUMBER}?text=Hi%20ZevairaLifestyle!%20I%20would%20like%20to%20submit%20a%20customer%20review%20for%20${encodeURIComponent(product.name)}.`;
+      }
+
+      // Reviews rendering
+      const reviewsContainer = document.getElementById("productReviewsContainer");
+      if (reviewsContainer) {
+        reviewsContainer.innerHTML = `
+          <div class="checkout-card" style="padding:24px;margin-bottom:0;">
+            <div class="product-rating-stars" style="margin-bottom:8px;">★★★★★</div>
+            <strong style="color:var(--ink);display:block;margin-bottom:4px;">Stunning Heat Resistance</strong>
+            <p style="font-size:14px;color:var(--muted);line-height:1.5;margin-bottom:12px;">
+              "Tested during a wedding reception in 38°C Karachi weather. Still projecting strongly at midnight. Packaging is breathtaking."
+            </p>
+            <div style="font-size:12px;color:var(--ink);font-weight:600;">Saad Munir • Karachi (Verified)</div>
+          </div>
+          <div class="checkout-card" style="padding:24px;margin-bottom:0;">
+            <div class="product-rating-stars" style="margin-bottom:8px;">★★★★★</div>
+            <strong style="color:var(--ink);display:block;margin-bottom:4px;">Authentic Luxury Presentation</strong>
+            <p style="font-size:14px;color:var(--muted);line-height:1.5;margin-bottom:12px;">
+              "The weight of the bottle and the quality of atomization are on par with international niche perfume houses. Highly recommended."
+            </p>
+            <div style="font-size:12px;color:var(--ink);font-weight:600;">Dr. Zainab Tariq • Lahore (Verified)</div>
+          </div>
+          <div class="checkout-card" style="padding:24px;margin-bottom:0;">
+            <div class="product-rating-stars" style="margin-bottom:8px;">★★★★★</div>
+            <strong style="color:var(--ink);display:block;margin-bottom:4px;">Fast COD Delivery</strong>
+            <p style="font-size:14px;color:var(--muted);line-height:1.5;margin-bottom:12px;">
+              "Ordered via Cash on Delivery. Rider called before arrival and allowed parcel inspection. Scent is 10/10."
+            </p>
+            <div style="font-size:12px;color:var(--ink);font-weight:600;">Usman Qureshi • Islamabad (Verified)</div>
+          </div>
+        `;
+      }
+
+      // Related Products
+      const relatedGrid = document.getElementById("relatedProductsGrid");
+      if (relatedGrid) {
+        const related = PRODUCTS.filter(p => p.id !== product.id && p.id !== "discovery-set").slice(0, 3);
+        relatedGrid.innerHTML = related.map(p => `
+          <div class="product-card">
+            <div class="product-card-thumb" onclick="window.location.href='product.html?id=${p.id}'">
+              <span class="badge product-badge-pos">${p.badge || 'Extrait'}</span>
+              ${getBottleSvg(p, "60%")}
+            </div>
+            <div class="product-card-body">
+              <div class="product-card-family">${p.category} • ${p.scentFamily}</div>
+              <h3 class="product-card-title"><a href="product.html?id=${p.id}">${p.name}</a></h3>
+              <p class="product-card-tagline">${p.tagline}</p>
+              <div class="product-card-foot">
+                <div class="price-display">
+                  <span class="currency">Starts at</span>
+                  <span class="amount">${formatPKR(p.sizes[0].price)}</span>
+                </div>
+                <a href="product.html?id=${p.id}" class="btn btn-outline-gold btn-sm">View Scents</a>
+              </div>
+            </div>
+          </div>
+        `).join("");
+      }
+
+      // Recently Viewed
+      const recentIds = getRecentlyViewed().filter(id => id !== product.id);
+      const recentSection = document.getElementById("recentSection");
+      const recentGrid = document.getElementById("recentlyViewedGrid");
+
+      if (recentIds.length > 0 && recentSection && recentGrid) {
+        recentSection.style.display = "block";
+        const recentItems = recentIds.map(id => getProductById(id)).filter(Boolean);
+        recentGrid.innerHTML = recentItems.map(p => `
+          <div class="product-card">
+            <div class="product-card-thumb" onclick="window.location.href='product.html?id=${p.id}'">
+              ${getBottleSvg(p, "55%")}
+            </div>
+            <div class="product-card-body">
+              <h4 style="font-size:18px;"><a href="product.html?id=${p.id}">${p.name}</a></h4>
+              <div style="font-size:12px;color:var(--muted);">${p.category} • From ${formatPKR(p.sizes[0].price)}</div>
+            </div>
+          </div>
+        `).join("");
+      }
+
+    });
+  </script>
+</body>
+</html>

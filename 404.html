@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Page Not Found | ZevairaLifestyle Pakistan</title>
+  <meta name="description" content="The fragrance page you requested could not be found. Explore our artisanal collection of long-lasting perfumes.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Dynamic Header Injected by JS -->
+  <div id="site-header"></div>
+
+  <main id="main-content">
+
+    <section style="padding: clamp(64px, 10vw, 120px) 0;">
+      <div class="container text-center" style="max-width:640px;">
+        
+        <div style="font-family:var(--display-font);font-size:clamp(64px,12vw,120px);color:var(--gold);line-height:1;margin-bottom:12px;">
+          404
+        </div>
+        
+        <span class="eyebrow" style="color:var(--muted);">Olfactory Note Not Found</span>
+        <h1 style="font-size:clamp(26px,4vw,38px);margin-bottom:16px;">This Scent Has Evaporated</h1>
+        <div class="gold-divider center"></div>
+        
+        <p class="lead" style="margin-inline:auto;margin-bottom:32px;font-size:16px;">
+          The page or formulation you are looking for may have been moved, renamed, or is currently undergoing seasonal maceration.
+        </p>
+
+        <!-- Search Input -->
+        <div style="max-width:440px;margin:0 auto 32px;display:flex;gap:8px;">
+          <input type="search" id="quickSearch404" class="form-control" placeholder="Search for Vetiver, Jasmine, Oud...">
+          <button type="button" onclick="handleSearch404()" class="btn btn-primary btn-sm" style="white-space:nowrap;">Search</button>
+        </div>
+
+        <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+          <a href="index.html" class="btn btn-forest">Return to Home</a>
+          <a href="shop.html" class="btn btn-outline-gold">Browse All Fragrances</a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Dynamic Footer Injected by JS -->
+  <div id="site-footer"></div>
+
+  <!-- Shared Scripts -->
+  <script src="js/products.js"></script>
+  <script src="js/app.js"></script>
+
+  <script>
+    function handleSearch404() {
+      const q = document.getElementById("quickSearch404").value.trim();
+      if (q) {
+        window.location.href = `shop.html?search=${encodeURIComponent(q)}`;
+      }
+    }
+  </script>
+</body>
+</html>

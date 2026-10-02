@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D9B15A"/>
+      <stop offset="50%" stop-color="#F5EFDC"/>
+      <stop offset="100%" stop-color="#B8862B"/>
+    </linearGradient>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1F4A33"/>
+      <stop offset="100%" stop-color="#0F2A1D"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#bgGrad)"/>
+  <rect x="2.5" y="2.5" width="59" height="59" rx="11.5" stroke="#B8862B" stroke-width="1.5" stroke-opacity="0.6"/>
+  <!-- Elegant flacon crown -->
+  <path d="M28 14h8v4h-8z" fill="url(#goldGrad)"/>
+  <path d="M25 18h14v3H25z" fill="url(#goldGrad)"/>
+  <!-- Z Monogram -->
+  <path d="M20 25h24l-18 19h18v5H19l18-19H20v-5z" fill="url(#goldGrad)"/>
+</svg>

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Shopping Cart | ZevairaLifestyle Pakistan</title>
+  <meta name="description" content="View your selected perfumes, apply promo codes, and check progress towards free nationwide shipping.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Dynamic Header Injected by JS -->
+  <div id="site-header"></div>
+
+  <main id="main-content">
+
+    <section style="background:var(--surface);border-bottom:1px solid var(--line);padding:clamp(32px,5vw,56px) 0;">
+      <div class="container text-center">
+        <span class="eyebrow">Your Olfactory Selection</span>
+        <h1>Shopping Cart</h1>
+        <div class="gold-divider center"></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+
+        <!-- EMPTY CART STATE -->
+        <div id="emptyCartView" style="display:none;background:var(--surface);border:1px dashed var(--line);border-radius:var(--radius-md);padding:64px 20px;text-align:center;max-width:680px;margin:0 auto;">
+          <div style="font-size:56px;margin-bottom:16px;">🛍️</div>
+          <h2 style="font-size:28px;margin-bottom:8px;">Your Cart is Empty</h2>
+          <p style="color:var(--muted);max-width:44ch;margin:0 auto 28px;line-height:1.6;">
+            You have not added any perfumes to your shopping bag yet. Explore our signature collection of heat-resistant Extrait de Parfum.
+          </p>
+          <a href="shop.html" class="btn btn-primary btn-lg">Browse Fragrance Collection</a>
+        </div>
+
+        <!-- ACTIVE CART LAYOUT -->
+        <div class="cart-layout" id="activeCartView">
+          
+          <!-- LEFT COLUMN: LINE ITEMS & OPTIONS -->
+          <div>
+            
+            <!-- FREE DELIVERY PROGRESS BAR -->
+            <div class="delivery-progress-box">
+              <div style="display:flex;justify-content:space-between;align-items:center;font-size:14px;font-weight:600;">
+                <span id="freeDeliveryMessage">Add Rs 1,800 more for FREE Nationwide Delivery!</span>
+                <span class="text-gold" id="deliveryThresholdGoal">Rs 6,000</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill" id="deliveryProgressBar" style="width:0%;"></div>
+              </div>
+            </div>
+
+            <!-- LINE ITEMS CONTAINER -->
+            <div class="cart-table-wrap">
+              <div id="cartItemsMount">
+                <!-- Injected by JS -->
+              </div>
+            </div>
+
+            <!-- GIFT WRAP & ORDER NOTE OPTIONS -->
+            <div class="checkout-card" style="margin-top:24px;">
+              <h4 style="font-size:18px;margin-bottom:14px;">Special Touches</h4>
+              
+              <!-- Gift Wrap Checkbox -->
+              <label style="display:flex;align-items:center;gap:12px;cursor:pointer;font-size:14.5px;padding-bottom:16px;border-bottom:1px solid var(--line);margin-bottom:16px;">
+                <input type="checkbox" id="giftWrapCheck" style="width:18px;height:18px;accent-color:var(--gold);">
+                <div>
+                  <strong>Add Luxury Gift Packaging (+Rs 200)</strong>
+                  <div style="font-size:13px;color:var(--muted);">Includes embossed forest-green gift box, satin gold ribbon, and personalized card.</div>
+                </div>
+              </label>
+
+              <!-- Order Note -->
+              <div class="form-group">
+                <label for="cartOrderNote">Special Order Instructions / Gift Message:</label>
+                <textarea id="cartOrderNote" class="form-control" rows="3" placeholder="Add specific delivery instructions (e.g., Gate code, timing) or a note for gift recipient..."></textarea>
+              </div>
+            </div>
+
+            <div style="margin-top:20px;">
+              <a href="shop.html" class="btn btn-outline">
+                &larr; Continue Shopping
+              </a>
+            </div>
+
+          </div>
+
+          <!-- RIGHT COLUMN: ORDER SUMMARY -->
+          <div>
+            <div class="order-summary-card">
+              <h3 style="font-size:22px;margin-bottom:16px;border-bottom:1px solid var(--line);padding-bottom:12px;">Order Summary</h3>
+              
+              <!-- Voucher / Promo Code Box -->
+              <div class="promo-form">
+                <input type="text" id="voucherCodeInput" class="form-control" placeholder="Discount Code (e.g. ZEVAIRA10)" uppercase style="text-transform:uppercase;">
+                <button type="button" id="applyVoucherBtn" class="btn btn-outline-gold btn-sm">Apply</button>
+              </div>
+
+              <!-- Applied Promo Display -->
+              <div id="appliedPromoBadge" class="promo-applied-badge" style="display:none;">
+                <span id="promoLabelText">Code Applied</span>
+                <button type="button" id="removePromoBtn" style="color:var(--danger);font-weight:700;font-size:16px;line-height:1;" aria-label="Remove code">&times;</button>
+              </div>
+
+              <div class="summary-rows">
+                <div class="summary-row">
+                  <span style="color:var(--muted);">Subtotal</span>
+                  <span id="summarySubtotal" style="font-weight:600;">Rs 0</span>
+                </div>
+                
+                <div class="summary-row" id="discountRow" style="display:none;color:var(--success);">
+                  <span>Promo Discount</span>
+                  <span id="summaryDiscount" style="font-weight:600;">-Rs 0</span>
+                </div>
+
+                <div class="summary-row" id="giftWrapRow" style="display:none;">
+                  <span style="color:var(--muted);">Luxury Gift Box</span>
+                  <span style="font-weight:600;">+Rs 200</span>
+                </div>
+
+                <div class="summary-row">
+                  <span style="color:var(--muted);">Standard Delivery</span>
+                  <span id="summaryDelivery" style="font-weight:600;">Rs 250</span>
+                </div>
+
+                <div class="summary-row summary-total">
+                  <span>Estimated Total</span>
+                  <span id="summaryGrandTotal" class="text-gold">Rs 0</span>
+                </div>
+              </div>
+
+              <div style="font-size:12.5px;color:var(--muted);margin-bottom:20px;line-height:1.5;">
+                • Cash on delivery & Online payments accepted at checkout.<br>
+                • Orders confirmed on WhatsApp prior to dispatch.
+              </div>
+
+              <button type="button" id="proceedToCheckoutBtn" class="btn btn-primary btn-block btn-lg">
+                Proceed to Checkout
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Dynamic Footer Injected by JS -->
+  <div id="site-footer"></div>
+
+  <!-- Shared Scripts -->
+  <script src="js/products.js"></script>
+  <script src="js/app.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const emptyView = document.getElementById("emptyCartView");
+      const activeView = document.getElementById("activeCartView");
+      const itemsMount = document.getElementById("cartItemsMount");
+      const progressBar = document.getElementById("deliveryProgressBar");
+      const deliveryMessage = document.getElementById("freeDeliveryMessage");
+
+      const subtotalEl = document.getElementById("summarySubtotal");
+      const discountRow = document.getElementById("discountRow");
+      const discountEl = document.getElementById("summaryDiscount");
+      const giftWrapRow = document.getElementById("giftWrapRow");
+      const deliveryEl = document.getElementById("summaryDelivery");
+      const grandTotalEl = document.getElementById("summaryGrandTotal");
+
+      const voucherInput = document.getElementById("voucherCodeInput");
+      const applyVoucherBtn = document.getElementById("applyVoucherBtn");
+      const promoBadge = document.getElementById("appliedPromoBadge");
+      const promoLabel = document.getElementById("promoLabelText");
+      const removePromoBtn = document.getElementById("removePromoBtn");
+
+      const giftWrapCheck = document.getElementById("giftWrapCheck");
+      const orderNoteInput = document.getElementById("cartOrderNote");
+      const checkoutBtn = document.getElementById("proceedToCheckoutBtn");
+
+      // Load saved state
+      let activeDiscountCode = localStorage.getItem("zevaira_active_coupon") || "";
+      let isGiftWrapped = localStorage.getItem("zevaira_gift_wrap") === "true";
+      giftWrapCheck.checked = isGiftWrapped;
+      orderNoteInput.value = localStorage.getItem("zevaira_order_note") || "";
+
+      function renderCartUI() {
+        const cart = getCart();
+
+        if (cart.length === 0) {
+          emptyView.style.display = "block";
+          activeView.style.display = "none";
+          return;
+        }
+
+        emptyView.style.display = "none";
+        activeView.style.display = "grid";
+
+        // Render line items
+        itemsMount.innerHTML = cart.map(item => {
+          const product = getProductById(item.id);
+          const svgThumb = product ? getBottleSvg(product, "50px") : "";
+
+          return `
+            <div class="cart-item-row">
+              <div class="cart-thumb">
+                ${svgThumb}
+              </div>
+              <div class="cart-item-details">
+                <h4><a href="product.html?id=${item.id}">${item.name}</a></h4>
+                <div class="item-variant">Size: <strong>${item.size}</strong> • ${formatPKR(item.price)} each</div>
+                <button type="button" class="btn-remove-item" onclick="handleRemoveItem('${item.id}', '${item.size}')">Remove</button>
+              </div>
+              <div>
+                <div class="quantity-control" style="height:38px;">
+                  <button type="button" onclick="handleQtyChange('${item.id}', '${item.size}', ${item.qty - 1})">−</button>
+                  <input type="text" value="${item.qty}" readonly>
+                  <button type="button" onclick="handleQtyChange('${item.id}', '${item.size}', ${item.qty + 1})">+</button>
+                </div>
+              </div>
+              <div class="cart-item-price">
+                ${formatPKR(item.price * item.qty)}
+              </div>
+            </div>
+          `;
+        }).join("");
+
+        // Calculate Totals
+        const subtotal = getCartSubtotal();
+        const freeThreshold = window.FREE_DELIVERY_THRESHOLD || 6000;
+        const standardFee = window.STANDARD_DELIVERY_FEE || 250;
+        const giftWrapFee = giftWrapCheck.checked ? (window.GIFT_WRAP_FEE || 200) : 0;
+
+        // Progress toward free delivery
+        if (subtotal >= freeThreshold) {
+          progressBar.style.width = "100%";
+          deliveryMessage.innerHTML = "✨ <strong>Congratulations!</strong> You have unlocked <strong>FREE Delivery</strong> across Pakistan!";
+        } else {
+          const needed = freeThreshold - subtotal;
+          const percent = Math.min(100, Math.round((subtotal / freeThreshold) * 100));
+          progressBar.style.width = `${percent}%`;
+          deliveryMessage.innerHTML = `Add <strong>${formatPKR(needed)}</strong> more to qualify for <strong>FREE Nationwide Delivery</strong>!`;
+        }
+
+        // Delivery Fee
+        const deliveryFee = subtotal >= freeThreshold ? 0 : standardFee;
+
+        // Discount calculation
+        let discountAmount = 0;
+        if (activeDiscountCode && window.DISCOUNT_CODES[activeDiscountCode]) {
+          const rate = window.DISCOUNT_CODES[activeDiscountCode].rate;
+          discountAmount = Math.round(subtotal * rate);
+          discountRow.style.display = "flex";
+          discountEl.textContent = `-${formatPKR(discountAmount)}`;
+          promoBadge.style.display = "flex";
+          promoLabel.textContent = `${activeDiscountCode} applied (${rate * 100}% off)`;
+        } else {
+          discountRow.style.display = "none";
+          promoBadge.style.display = "none";
+        }
+
+        // Gift Wrap Row
+        if (giftWrapCheck.checked) {
+          giftWrapRow.style.display = "flex";
+        } else {
+          giftWrapRow.style.display = "none";
+        }
+
+        // Summary Values
+        subtotalEl.textContent = formatPKR(subtotal);
+        deliveryEl.textContent = deliveryFee === 0 ? "FREE" : formatPKR(deliveryFee);
+        const grandTotal = Math.max(0, subtotal - discountAmount + giftWrapFee + deliveryFee);
+        grandTotalEl.textContent = formatPKR(grandTotal);
+
+        // Store checkout pre-calculations in localStorage
+        localStorage.setItem("zevaira_checkout_meta", JSON.stringify({
+          subtotal,
+          discount: discountAmount,
+          discountCode: activeDiscountCode,
+          giftWrap: giftWrapFee,
+          deliveryFee,
+          total: grandTotal,
+          note: orderNoteInput.value
+        }));
+      }
+
+      // Handlers
+      window.handleQtyChange = (id, size, newQty) => {
+        updateCartQty(id, size, newQty);
+        renderCartUI();
+      };
+
+      window.handleRemoveItem = (id, size) => {
+        removeFromCart(id, size);
+        renderCartUI();
+      };
+
+      // Promo Code Actions
+      applyVoucherBtn.addEventListener("click", () => {
+        const code = voucherInput.value.trim().toUpperCase();
+        if (!code) return;
+
+        if (window.DISCOUNT_CODES && window.DISCOUNT_CODES[code]) {
+          activeDiscountCode = code;
+          localStorage.setItem("zevaira_active_coupon", code);
+          showToast(`Coupon "${code}" applied! You saved ${window.DISCOUNT_CODES[code].rate * 100}%.`);
+          voucherInput.value = "";
+          renderCartUI();
+        } else {
+          showToast("Invalid discount code. Try ZEVAIRA10 or WELCOME5.", "error");
+        }
+      });
+
+      removePromoBtn.addEventListener("click", () => {
+        activeDiscountCode = "";
+        localStorage.removeItem("zevaira_active_coupon");
+        showToast("Discount code removed.");
+        renderCartUI();
+      });
+
+      // Gift Wrap Checkbox
+      giftWrapCheck.addEventListener("change", () => {
+        localStorage.setItem("zevaira_gift_wrap", giftWrapCheck.checked);
+        renderCartUI();
+      });
+
+      // Order Note
+      orderNoteInput.addEventListener("input", () => {
+        localStorage.setItem("zevaira_order_note", orderNoteInput.value);
+      });
+
+      // Checkout Button
+      checkoutBtn.addEventListener("click", () => {
+        window.location.href = "checkout.html";
+      });
+
+      // Initial run
+      renderCartUI();
+    });
+  </script>
+</body>
+</html>
