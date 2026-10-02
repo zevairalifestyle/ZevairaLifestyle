@@ -1,4 +1,4 @@
-﻿﻿/**
+/**
  * ZevairaLifestyle - Master Application Engine
  * --------------------------------------------------------------------------
  * Handles:
@@ -68,37 +68,17 @@ const DISCOUNT_CODES = {
   "WELCOME5": { rate: 0.05, label: "5% Welcome Discount (WELCOME5)" }
 };
 
-// SAMPLE PAYMENT ACCOUNT DETAILS (Edit these once, used everywhere)
+// PAYMENT ACCOUNT DETAILS (COD + JazzCash only)
 const PAYMENT_ACCOUNTS = {
   cod: {
     name: "Cash on Delivery (COD)",
     desc: "Pay in cash directly to the courier rider upon delivery at your doorstep anywhere in Pakistan."
   },
-  easypaisa: {
-    name: "EasyPaisa",
-    title: "Zevaira Lifestyle",
-    accountNumber: "0300 1234567",
-    instructions: "Transfer to EasyPaisa Mobile Account: 0300 1234567 (Title: Zevaira Lifestyle). Send screenshot on WhatsApp for instant confirmation."
-  },
   jazzcash: {
-    name: "JazzCash",
+    name: "JazzCash Mobile Wallet",
     title: "Zevaira Lifestyle",
-    accountNumber: "0300 1234567",
-    instructions: "Transfer to JazzCash Mobile Account: 0300 1234567 (Title: Zevaira Lifestyle). Send screenshot on WhatsApp for instant confirmation."
-  },
-  upaisa: {
-    name: "UPaisa",
-    title: "Zevaira Lifestyle",
-    accountNumber: "0300 1234567",
-    instructions: "Transfer to UPaisa Wallet: 0300 1234567 (Title: Zevaira Lifestyle). Share receipt on WhatsApp."
-  },
-  bank: {
-    name: "Bank Transfer",
-    bankName: "Meezan Bank Ltd",
-    title: "Zevaira Lifestyle",
-    accountNumber: "01020304050607",
-    iban: "PK64MEZN0001020304050607",
-    instructions: "Transfer to Meezan Bank Ltd (Title: Zevaira Lifestyle | Account: 01020304050607 | IBAN: PK64MEZN0001020304050607). Share transfer receipt on WhatsApp."
+    accountNumber: "+92 334 7555147",
+    instructions: "Send payment to JazzCash: +92 334 7555147 (Zevaira Lifestyle). After sending, share the payment screenshot on WhatsApp to confirm your order."
   }
 };
 
@@ -532,14 +512,11 @@ function injectHeaderAndFooter() {
         <!-- Bottom Bar -->
         <div class="footer-bottom">
           <div>
-            Â© 2026 ZevairaLifestyle. All rights reserved. Handcrafted in Pakistan.
+            &copy; 2026 ZevairaLifestyle. All rights reserved. Handcrafted in Pakistan.
           </div>
           <div class="payment-badges-row">
             <span class="payment-pill">Cash on Delivery</span>
-            <span class="payment-pill">EasyPaisa</span>
             <span class="payment-pill">JazzCash</span>
-            <span class="payment-pill">UPaisa</span>
-            <span class="payment-pill">Direct Bank</span>
           </div>
         </div>
       </div>
