@@ -21,15 +21,13 @@
 const INSTAGRAM_URL = "https://www.instagram.com/zevairalifestyle";
 
 // WhatsApp Number for customer orders and support (format: country code + number without plus or dashes)
-// SAMPLE: Replace with your actual WhatsApp number, e.g., "923001234567"
-const WHATSAPP_NUMBER = "923001234567";
+const WHATSAPP_NUMBER = "923347555147";
 
 // Store Support Email
-// SAMPLE: Replace with your actual email
 const STORE_EMAIL = "zevairalifestyle@gmail.com";
 
 // Store Phone for standard telephone calls
-const STORE_PHONE = "+92 300 1234567";
+const STORE_PHONE = "+92 334 7555147";
 
 // Hero Video Playlist (Showcasing all user's real artisanal videos)
 const HERO_VIDEOS = [
@@ -343,7 +341,7 @@ function injectHeaderAndFooter() {
             <a href="about.html" ${isActive("about.html")}>Our Story</a>
             <a href="delivery-returns.html" ${isActive("delivery-returns.html")}>Delivery</a>
             <a href="faq.html" ${isActive("faq.html")}>FAQ</a>
-            <a href="contact.html" ${isActive("contact.html")}>Contact</a>
+            <a href="#footer-contact">Contact</a>
           </nav>
 
           <!-- Right: Search, Wishlist, Cart, Theme -->
@@ -411,7 +409,7 @@ function injectHeaderAndFooter() {
         <a href="about.html" ${isActive("about.html")}>Our Story</a>
         <a href="delivery-returns.html" ${isActive("delivery-returns.html")}>Delivery & Returns</a>
         <a href="faq.html" ${isActive("faq.html")}>FAQ</a>
-        <a href="contact.html" ${isActive("contact.html")}>Contact Us</a>
+        <a href="#footer-contact" onclick="closeMobileMenu()">Contact Us</a>
         <a href="cart.html" ${isActive("cart.html")}>My Cart (<span class="mobile-cart-count">0</span>)</a>
         <a href="account.html" ${isActive("account.html")}>👤 My Account</a>
       </div>
@@ -424,7 +422,7 @@ function injectHeaderAndFooter() {
           </svg>
           <span>@zevairalifestyle</span>
         </a>
-        <a href="https://wa.me/${WHATSAPP_NUMBER}" target="_blank" rel="noopener" class="btn btn-whatsapp btn-sm btn-block">
+        <a href="https://wa.me/923347555147?text=Hello%20ZevairaLifestyle%2C%20I%20would%20like%20to%20order" target="_blank" rel="noopener" class="btn btn-whatsapp btn-sm btn-block">
           Order via WhatsApp
         </a>
         <div style="font-size:12px;color:var(--muted);text-align:center;">
@@ -503,20 +501,30 @@ function injectHeaderAndFooter() {
             </ul>
           </div>
 
-          <!-- Col 4: Newsletter & Inquiries -->
-          <div class="footer-col">
-            <h4>Stay Connected</h4>
-            <p style="font-size:13.5px;color:#A9BBA9;margin-bottom:12px;">
-              Join the Zevaira private circle for exclusive launch invites and 10% off your first flacon.
+          <!-- Col 4: Contact Concierge & Newsletter -->
+          <div class="footer-col" id="footer-contact">
+            <h4>Contact Concierge</h4>
+            <div class="footer-contact-list" style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px;">
+              <a href="https://wa.me/923347555147?text=Hello%20ZevairaLifestyle%2C%20I%20would%20like%20to%20order" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;min-height:44px;color:#F5EFDC;text-decoration:none;font-size:13.5px;padding:4px 0;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#25D366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                <span><strong>WhatsApp:</strong> +92 334 7555147</span>
+              </a>
+              <a href="tel:+923347555147" style="display:inline-flex;align-items:center;gap:10px;min-height:44px;color:#F5EFDC;text-decoration:none;font-size:13.5px;padding:4px 0;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D4AF5F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <span><strong>Call:</strong> +92 334 7555147</span>
+              </a>
+              <a href="mailto:zevairalifestyle@gmail.com" style="display:inline-flex;align-items:center;gap:10px;min-height:44px;color:#F5EFDC;text-decoration:none;font-size:13.5px;padding:4px 0;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D4AF5F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <span><strong>Email:</strong> zevairalifestyle@gmail.com</span>
+              </a>
+            </div>
+            <p style="font-size:13px;color:#A9BBA9;margin-bottom:8px;">
+              Join our VIP circle for launch access:
             </p>
-            <form onsubmit="handleNewsletterSubmit(event)" style="display:flex;gap:6px;margin-bottom:14px;">
+            <form onsubmit="handleNewsletterSubmit(event)" style="display:flex;gap:6px;">
               <input type="email" required placeholder="Enter your email" style="background:#172F21;border:1px solid #26402F;color:#F5EFDC;padding:10px 12px;border-radius:4px;font-size:13px;flex:1;">
               <button type="submit" class="btn btn-primary btn-sm" style="padding:10px 14px;">Join</button>
             </form>
-            <div style="font-size:13px;color:#A9BBA9;">
-              <div>WhatsApp: <strong>+${WHATSAPP_NUMBER}</strong></div>
-              <div>Email: <strong>${STORE_EMAIL}</strong></div>
-            </div>
           </div>
 
         </div>
@@ -542,7 +550,7 @@ function injectHeaderAndFooter() {
       <button class="btn-back-to-top" id="backToTopBtn" aria-label="Back to top">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
       </button>
-      <a href="https://wa.me/${WHATSAPP_NUMBER}?text=Hi%20ZevairaLifestyle!%20I'm%20interested%20in%20your%20perfumes." target="_blank" rel="noopener" class="btn-floating-whatsapp" aria-label="Chat with ZevairaLifestyle on WhatsApp">
+      <a href="https://wa.me/923347555147?text=Hello%20ZevairaLifestyle%2C%20I%20would%20like%20to%20order" target="_blank" rel="noopener" class="btn-floating-whatsapp" aria-label="Chat with ZevairaLifestyle on WhatsApp">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
         </svg>

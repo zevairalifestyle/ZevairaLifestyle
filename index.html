@@ -119,22 +119,6 @@
       display: block;
     }
 
-    .film-badge {
-      position: absolute;
-      bottom: 14px;
-      left: 14px;
-      background: rgba(7, 23, 15, 0.85);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      color: #CFD8C8;
-      padding: 6px 14px;
-      border-radius: var(--radius-full);
-      font-size: 11.5px;
-      font-weight: 500;
-      border: 1px solid rgba(217, 177, 90, 0.35);
-      z-index: 3;
-    }
-
     .film-toggle-btn {
       position: absolute;
       top: 14px;
@@ -143,60 +127,28 @@
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       color: #F5EFDC;
-      min-width: 44px;
-      min-height: 44px;
-      padding: 8px 14px;
-      border-radius: var(--radius-full);
-      font-size: 12px;
-      font-weight: 600;
+      width: 40px;
+      height: 40px;
+      min-width: 40px;
+      min-height: 40px;
+      padding: 0;
+      border-radius: 50%;
       border: 1px solid rgba(217, 177, 90, 0.4);
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
       cursor: pointer;
       z-index: 4;
+      align-self: flex-start;
       transition: all var(--duration) var(--ease);
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
     }
 
     .film-toggle-btn:hover {
       background: var(--gold);
       color: #0F2A1D;
-    }
-
-    .film-reel-nav {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-      margin-top: 14px;
-      width: 100%;
-    }
-
-    .film-reel-btn {
-      background: rgba(15, 42, 29, 0.85);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      color: #D3E0D6;
-      border: 1px solid rgba(217, 177, 90, 0.35);
-      min-height: 44px;
-      padding: 8px 18px;
-      border-radius: var(--radius-full);
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.25s var(--ease);
-    }
-
-    .film-reel-btn.active,
-    .film-reel-btn:hover {
-      background: var(--gold);
-      color: #0F2A1D;
       border-color: var(--gold-light);
-      box-shadow: 0 4px 14px rgba(217, 177, 90, 0.4);
     }
 
     @media (max-width: 768px) {
@@ -432,7 +384,8 @@
     .bubble-sound-btn {
       position: absolute;
       bottom: 16px;
-      right: 20px;
+      left: 24px;
+      right: auto;
       background: rgba(7, 23, 15, 0.75);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
@@ -468,11 +421,71 @@
 
     @media (max-width: 768px) {
       .bubble-sound-btn {
-        bottom: 10px;
-        right: 12px;
+        bottom: 12px;
+        left: 16px;
+        right: auto;
         padding: 8px 12px;
         font-size: 11px;
       }
+    }
+
+    /* Cinema Video Showcase - Full Frame Aspect Ratio & Fullscreen */
+    .cinema-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+      align-items: stretch;
+    }
+
+    @media (max-width: 768px) {
+      .cinema-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+    }
+
+    .cinema-card {
+      background: rgba(15, 42, 29, 0.7);
+      border: 1px solid rgba(217, 177, 90, 0.35);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .cinema-video-stage {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      background: #081710;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cinema-video-stage video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #081710;
+      display: block;
+    }
+
+    video:fullscreen {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #000;
+    }
+
+    video:-webkit-full-screen {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #000;
     }
 
     /* Tactile button & card feedback */
@@ -614,15 +627,15 @@
               </div>
               <div id="heroBottleMount" style="width:75%;max-width:260px;"></div>
             </div>
-            <span class="film-badge" id="filmStatusBadge">Film I • The Essence</span>
-            <button class="film-toggle-btn" id="filmToggleBtn" type="button" aria-label="Toggle motion">Pause Motion</button>
-          </div>
-
-          <!-- Cinema Reel Selector Row Below Media -->
-          <div class="film-reel-nav" id="heroFilmNav" aria-label="Switch hero film">
-            <button type="button" class="film-reel-btn active" data-index="0" title="Film 1: Scent That Outlasts The Heat">Film 1</button>
-            <button type="button" class="film-reel-btn" data-index="1" title="Film 2: Artisanal Distillation">Film 2</button>
-            <button type="button" class="film-reel-btn" data-index="2" title="Film 3: Signature Sillage">Film 3</button>
+            <button class="film-toggle-btn" id="filmToggleBtn" type="button" aria-label="Pause motion" title="Pause Motion">
+              <svg class="icon-pause" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="6" y="4" width="4" height="16"></rect>
+                <rect x="14" y="4" width="4" height="16"></rect>
+              </svg>
+              <svg class="icon-play" style="display:none; margin-left:2px;" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+            </button>
           </div>
         </div>
       </div>
@@ -806,11 +819,11 @@
           </p>
         </div>
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px;">
+        <div class="cinema-grid">
           <!-- Film Card 1 -->
-          <div class="reveal reveal-left" style="background: rgba(15,42,29,0.7); border: 1px solid rgba(217,177,90,0.35); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 16px 40px rgba(0,0,0,0.4); display: flex; flex-direction: column;">
-            <div style="position: relative; aspect-ratio: 16/9; background: #000; overflow: hidden;">
-              <video src="videos/gemini_generated_video_5357ccaa.mp4" controls playsinline muted loop preload="metadata" style="width: 100%; height: 100%; object-fit: cover;"></video>
+          <div class="cinema-card reveal reveal-left">
+            <div class="cinema-video-stage">
+              <video src="videos/gemini_generated_video_5357ccaa.mp4" controls playsinline muted loop preload="metadata"></video>
             </div>
             <div style="padding: 24px; flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
               <div>
@@ -828,9 +841,9 @@
           </div>
 
           <!-- Film Card 2 -->
-          <div class="reveal reveal-right" style="background: rgba(15,42,29,0.7); border: 1px solid rgba(217,177,90,0.35); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 16px 40px rgba(0,0,0,0.4); display: flex; flex-direction: column;">
-            <div style="position: relative; aspect-ratio: 16/9; background: #000; overflow: hidden;">
-              <video src="videos/gemini_generated_video_8819b247.mp4" controls playsinline muted loop preload="metadata" style="width: 100%; height: 100%; object-fit: cover;"></video>
+          <div class="cinema-card reveal reveal-right">
+            <div class="cinema-video-stage">
+              <video src="videos/gemini_generated_video_8819b247.mp4" controls playsinline muted loop preload="metadata"></video>
             </div>
             <div style="padding: 24px; flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
               <div>
@@ -1040,8 +1053,6 @@
       const filmBox = document.getElementById("heroFilmBox");
       const bottleMount = document.getElementById("heroBottleMount");
       const toggleBtn = document.getElementById("filmToggleBtn");
-      const statusBadge = document.getElementById("filmStatusBadge");
-      const navButtons = document.querySelectorAll("#heroFilmNav .film-reel-btn");
 
       const playlist = window.HERO_VIDEOS || [
         { id: "film-1", badge: "Film I • The Essence", src: "videos/gemini_generated_video_5357ccaa.mp4" },
@@ -1052,6 +1063,16 @@
       let currentFilmIndex = 0;
       let isPaused = false;
 
+      function updateToggleIcon(paused) {
+        if (!toggleBtn) return;
+        const iconPause = toggleBtn.querySelector(".icon-pause");
+        const iconPlay = toggleBtn.querySelector(".icon-play");
+        if (iconPause) iconPause.style.display = paused ? "none" : "block";
+        if (iconPlay) iconPlay.style.display = paused ? "block" : "none";
+        toggleBtn.setAttribute("aria-label", paused ? "Resume motion" : "Pause motion");
+        toggleBtn.title = paused ? "Resume Motion" : "Pause Motion";
+      }
+
       function loadFilm(index) {
         if (!videoEl || !playlist[index]) return;
         currentFilmIndex = index;
@@ -1059,18 +1080,12 @@
         videoEl.src = film.src;
         videoEl.load();
 
-        if (statusBadge) statusBadge.textContent = film.badge || `Film ${index + 1}`;
-
-        navButtons.forEach((btn, i) => {
-          btn.classList.toggle("active", i === index);
-        });
-
         videoEl.play().then(() => {
-          filmBox.classList.add("has-video");
-          if (toggleBtn) toggleBtn.textContent = "Pause Motion";
+          if (filmBox) filmBox.classList.add("has-video");
           isPaused = false;
+          updateToggleIcon(false);
         }).catch(() => {
-          filmBox.classList.remove("has-video");
+          if (filmBox) filmBox.classList.remove("has-video");
         });
       }
 
@@ -1085,27 +1100,18 @@
         });
       }
 
-      // Nav click handlers
-      navButtons.forEach(btn => {
-        btn.addEventListener("click", (e) => {
-          e.stopPropagation();
-          const idx = parseInt(btn.getAttribute("data-index"), 10) || 0;
-          loadFilm(idx);
-        });
-      });
-
       // Pause/Play toggle button
       if (toggleBtn) {
         toggleBtn.addEventListener("click", () => {
           isPaused = !isPaused;
-          if (filmBox.classList.contains("has-video") && videoEl) {
+          if (filmBox && filmBox.classList.contains("has-video") && videoEl) {
             if (isPaused) videoEl.pause();
             else videoEl.play();
           } else {
             const mist = document.querySelector(".mist-container");
             if (mist) mist.style.animationPlayState = isPaused ? "paused" : "running";
           }
-          toggleBtn.textContent = isPaused ? "Resume Motion" : "Pause Motion";
+          updateToggleIcon(isPaused);
         });
       }
 
