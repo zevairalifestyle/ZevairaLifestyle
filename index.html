@@ -556,6 +556,182 @@
       0% { transform: translate(-50%, -50%) scale(0); opacity: 0.7; }
       100% { transform: translate(-50%, -50%) scale(2.5); opacity: 0; }
     }
+
+    /* ==========================================================================
+       CART DRAWER / MODAL (EMPTY & ACTIVE STATES)
+       ========================================================================== */
+    .cart-drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 300ms ease, visibility 300ms ease;
+      z-index: 99998;
+    }
+
+    .cart-drawer-backdrop.active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .cart-drawer-panel {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      max-width: 420px;
+      background: #0f2a1f;
+      border-left: 1px solid rgba(212, 175, 95, 0.3);
+      box-shadow: -10px 0 35px rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      padding: 32px;
+      box-sizing: border-box;
+      transform: translateX(100%);
+      opacity: 0;
+      visibility: hidden;
+      transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), opacity 300ms ease, visibility 300ms ease;
+      overflow-y: auto;
+    }
+
+    .cart-drawer-panel.active {
+      transform: translateX(0);
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .cart-drawer-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      min-height: 44px;
+      background: transparent;
+      border: none;
+      color: #cfd8c8;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: color 0.2s ease, background 0.2s ease;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    .cart-drawer-close:hover {
+      color: #d4af5f;
+      background: rgba(212, 175, 95, 0.1);
+    }
+
+    .cart-drawer-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      width: 100%;
+    }
+
+    .cart-empty-icon-wrap {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: rgba(212, 175, 95, 0.08);
+      border: 1px solid rgba(212, 175, 95, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    .cart-empty-bag-svg {
+      display: block;
+    }
+
+    .cart-empty-title {
+      font-family: var(--display-font);
+      color: #f5efdc;
+      font-size: clamp(22px, 5vw, 26px);
+      font-weight: 600;
+      margin: 0 0 12px 0;
+      line-height: 1.2;
+    }
+
+    .cart-empty-desc {
+      color: rgba(245, 239, 220, 0.85);
+      font-size: 14.5px;
+      line-height: 1.6;
+      margin: 0 0 28px 0;
+      max-width: 32ch;
+    }
+
+    .cart-browse-btn {
+      background: #d4af5f;
+      color: #0f2a1f;
+      width: 100%;
+      height: 48px;
+      min-height: 48px;
+      border: none;
+      border-radius: var(--radius-sm, 4px);
+      font-size: 14.5px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.1s ease;
+      box-shadow: 0 4px 16px rgba(212, 175, 95, 0.3);
+      text-decoration: none;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    .cart-browse-btn:hover {
+      background: #e2c27c;
+      color: #081710;
+    }
+
+    .cart-browse-btn:active {
+      transform: scale(0.98);
+    }
+
+    /* Mobile Bottom Sheet (max-width: 768px) */
+    @media (max-width: 768px) {
+      .cart-drawer-panel {
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        max-width: 100%;
+        max-height: 85vh;
+        border-left: none;
+        border-top: 1px solid rgba(212, 175, 95, 0.3);
+        border-radius: 20px 20px 0 0;
+        box-shadow: 0 -10px 35px rgba(0, 0, 0, 0.65);
+        transform: translateY(100%);
+        padding: 32px 24px 28px;
+      }
+
+      .cart-drawer-panel.active {
+        transform: translateY(0);
+      }
+    }
   </style>
 
   <noscript>
@@ -752,7 +928,7 @@
             <h2>Why Zevaira Outlasts the Heat</h2>
             <div class="gold-divider"></div>
             <p style="font-size:16px;color:var(--muted);line-height:1.7;margin-bottom:20px;">
-              Most imported perfumes are formulated in cool, dry European climates. When worn under 42°C heat in Lahore or the 85% relative humidity of Karachi, their top notes evaporate within 30 minutes, leaving a faint skin scent.
+              Most imported perfumes are formulated in cool, dry European climates. When worn under 42&deg;C heat in Lahore or the 85% relative humidity of Karachi, their top notes evaporate within 30 minutes, leaving a faint skin scent.
             </p>
             <p style="font-size:16px;color:var(--muted);line-height:1.7;margin-bottom:24px;">
               Zevaira perfumes are engineered with heavy molecular fixatives, authentic aged ambergris, and dense wood resins that anchor to the skin and cotton kurtas. We formulate strictly at Extrait de Parfum concentration (30% to 38% pure perfume oils).
@@ -773,29 +949,29 @@
             <h3 style="font-size:24px;margin-bottom:20px;">Our Four Pillars of Quality</h3>
             
             <div style="display:flex;flex-direction:column;gap:18px;">
-              <div style="display:flex;gap:14px;">
-                <span style="font-size:20px;color:var(--gold);">✦</span>
+              <div style="display:flex;gap:14px;align-items:flex-start;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="#D4AF5F" stroke="none" aria-hidden="true" style="flex-shrink:0;margin-top:3px;"><path d="M12 1L14.8 9.2L23 12L14.8 14.8L12 23L9.2 14.8L1 12L9.2 9.2L12 1Z"/></svg>
                 <div>
                   <strong style="color:var(--ink);display:block;margin-bottom:2px;">Heat-Stabilized Fixatives</strong>
                   <span style="font-size:13.5px;color:var(--muted);">Resists sweat breakdown so you stay smelling pristine from morning meetings to late-night dinners.</span>
                 </div>
               </div>
-              <div style="display:flex;gap:14px;">
-                <span style="font-size:20px;color:var(--gold);">✦</span>
+              <div style="display:flex;gap:14px;align-items:flex-start;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="#D4AF5F" stroke="none" aria-hidden="true" style="flex-shrink:0;margin-top:3px;"><path d="M12 1L14.8 9.2L23 12L14.8 14.8L12 23L9.2 14.8L1 12L9.2 9.2L12 1Z"/></svg>
                 <div>
                   <strong style="color:var(--ink);display:block;margin-bottom:2px;">Authentic French & Oriental Oils</strong>
                   <span style="font-size:13.5px;color:var(--muted);">Sourced directly from Grasse, Haiti, and domestic attar distillers for unmatched depth.</span>
                 </div>
               </div>
-              <div style="display:flex;gap:14px;">
-                <span style="font-size:20px;color:var(--gold);">✦</span>
+              <div style="display:flex;gap:14px;align-items:flex-start;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="#D4AF5F" stroke="none" aria-hidden="true" style="flex-shrink:0;margin-top:3px;"><path d="M12 1L14.8 9.2L23 12L14.8 14.8L12 23L9.2 14.8L1 12L9.2 9.2L12 1Z"/></svg>
                 <div>
                   <strong style="color:var(--ink);display:block;margin-bottom:2px;">Small Batch Maturation</strong>
                   <span style="font-size:13.5px;color:var(--muted);">Every batch rests in temperature-controlled dark chambers for 45 days to eliminate sharp alcohol spikes.</span>
                 </div>
               </div>
-              <div style="display:flex;gap:14px;">
-                <span style="font-size:20px;color:var(--gold);">✦</span>
+              <div style="display:flex;gap:14px;align-items:flex-start;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="#D4AF5F" stroke="none" aria-hidden="true" style="flex-shrink:0;margin-top:3px;"><path d="M12 1L14.8 9.2L23 12L14.8 14.8L12 23L9.2 14.8L1 12L9.2 9.2L12 1Z"/></svg>
                 <div>
                   <strong style="color:var(--ink);display:block;margin-bottom:2px;">Non-Staining on Fabric</strong>
                   <span style="font-size:13.5px;color:var(--muted);">Formulated clean to safely spray on white cotton kurtas, raw silks, and formal pashminas.</span>
@@ -827,14 +1003,14 @@
             </div>
             <div style="padding: 24px; flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
               <div>
-                <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--gold-light); font-weight: 600;">Chapter I • The Essence</span>
+                <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--gold-light); font-weight: 600;">Chapter I &bull; The Essence</span>
                 <h3 style="font-size: 20px; color: #F5EFDC; margin: 6px 0 10px;">Scent That Outlasts The Heat</h3>
                 <p style="font-size: 14px; color: #B2C7B7; line-height: 1.6;">
-                  High molecular concentration formulated specifically to stay crisp, luxurious, and radiant through 45°C summer heat and coastal humidity.
+                  High molecular concentration formulated specifically to stay crisp, luxurious, and radiant through 45&deg;C summer heat and coastal humidity.
                 </p>
               </div>
               <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(217,177,90,0.2); display: flex; justify-content: space-between; align-items: center;">
-                <span style="font-size: 12px; color: var(--gold-light);">Extrait de Parfum • 35% Concentration</span>
+                <span style="font-size: 12px; color: var(--gold-light);">Extrait de Parfum &bull; 35% Concentration</span>
                 <a href="shop.html" class="btn btn-outline-gold btn-sm" style="font-size: 12px; padding: 6px 14px;">Explore Scents</a>
               </div>
             </div>
@@ -847,7 +1023,7 @@
             </div>
             <div style="padding: 24px; flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
               <div>
-                <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--gold-light); font-weight: 600;">Chapter II • The Craft</span>
+                <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--gold-light); font-weight: 600;">Chapter II &bull; The Craft</span>
                 <h3 style="font-size: 20px; color: #F5EFDC; margin: 6px 0 10px;">Artisanal Distillation & Maturation</h3>
                 <p style="font-size: 14px; color: #B2C7B7; line-height: 1.6;">
                   Handcrafted in small batches with imported French oils, Himalayan cedar, and Kashmir saffron, aged for 45 days in dark maturation chambers.
@@ -877,31 +1053,41 @@
 
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:20px;">
           <a href="shop.html?family=Fresh" class="trust-item reveal" style="--i:0;flex-direction:column;padding:28px 20px;border-radius:var(--radius-md);">
-            <div style="font-size:28px;margin-bottom:8px;">🌊</div>
+            <div style="margin-bottom:8px;display:flex;justify-content:center;">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D4AF5F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12c3-4 6-4 9 0s6 4 9 0"/><path d="M2 17c3-4 6-4 9 0s6 4 9 0"/></svg>
+            </div>
             <h4>Fresh & Aquatic</h4>
             <p style="font-size:13.5px;color:var(--muted);margin-bottom:12px;">Petrichor, wet earth, citrus zest & crisp vetiver.</p>
             <span style="color:var(--gold);font-weight:600;font-size:13px;">View Scents &rarr;</span>
           </a>
           <a href="shop.html?family=Woody" class="trust-item reveal" style="--i:1;flex-direction:column;padding:28px 20px;border-radius:var(--radius-md);">
-            <div style="font-size:28px;margin-bottom:8px;">🌲</div>
+            <div style="margin-bottom:8px;display:flex;justify-content:center;">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D4AF5F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 4 11 8 11 3 17 10 17 10 22 14 22 14 17 21 17 16 11 20 11 12 2"/></svg>
+            </div>
             <h4>Woody & Earthy</h4>
             <p style="font-size:13.5px;color:var(--muted);margin-bottom:12px;">Atlas cedarwood, Haitian vetiver, cypress & oakmoss.</p>
             <span style="color:var(--gold);font-weight:600;font-size:13px;">View Scents &rarr;</span>
           </a>
           <a href="shop.html?family=Floral" class="trust-item reveal" style="--i:2;flex-direction:column;padding:28px 20px;border-radius:var(--radius-md);">
-            <div style="font-size:28px;margin-bottom:8px;">🌸</div>
+            <div style="margin-bottom:8px;display:flex;justify-content:center;">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D4AF5F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2a4 4 0 0 1 4 4c0 2-2 3-4 6-2-3-4-4-4-6a4 4 0 0 1 4-4z"/><path d="M22 12a4 4 0 0 1-4 4c-2 0-3-2-6-4 3-2 4-4 6-4a4 4 0 0 1 4 4z"/><path d="M12 22a4 4 0 0 1-4-4c0-2 2-3 4-6 2 3 4 4 4 6a4 4 0 0 1-4 4z"/><path d="M2 12a4 4 0 0 1 4-4c2 0 3 2 6 4-3 2-4 4-6 4a4 4 0 0 1-4-4z"/></svg>
+            </div>
             <h4>Radiant Floral</h4>
             <p style="font-size:13.5px;color:var(--muted);margin-bottom:12px;">Sambac jasmine (Mogra), Taif rose & orange blossom.</p>
             <span style="color:var(--gold);font-weight:600;font-size:13px;">View Scents &rarr;</span>
           </a>
           <a href="shop.html?family=Oriental" class="trust-item reveal" style="--i:3;flex-direction:column;padding:28px 20px;border-radius:var(--radius-md);">
-            <div style="font-family:var(--display-font);font-size:28px;margin-bottom:8px;">✨</div>
+            <div style="margin-bottom:8px;display:flex;justify-content:center;">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D4AF5F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5L12 3z"/><path d="M19 3l1 2.5L22.5 6.5 20 7.5 19 10 18 7.5 15.5 6.5 18 5.5 19 3z"/></svg>
+            </div>
             <h4>Warm Oriental</h4>
             <p style="font-size:13.5px;color:var(--muted);margin-bottom:12px;">Kashmiri saffron, warm amber, vanilla bourbon & oud.</p>
             <span style="color:var(--gold);font-weight:600;font-size:13px;">View Scents &rarr;</span>
           </a>
           <a href="shop.html?family=Citrus" class="trust-item reveal" style="--i:4;flex-direction:column;padding:28px 20px;border-radius:var(--radius-md);">
-            <div style="font-size:28px;margin-bottom:8px;">🍊</div>
+            <div style="margin-bottom:8px;display:flex;justify-content:center;">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D4AF5F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 12L7 7"/><path d="M12 12L12 5"/><path d="M12 12L17 7"/><path d="M12 12L19 12"/><path d="M12 12L16 17"/><path d="M12 12L12 19"/><path d="M12 12L8 17"/><path d="M12 12L5 12"/></svg>
+            </div>
             <h4>Zesty Citrus</h4>
             <p style="font-size:13.5px;color:var(--muted);margin-bottom:12px;">Blood orange, pink grapefruit, bergamot & sea salt.</p>
             <span style="color:var(--gold);font-weight:600;font-size:13px;">View Scents &rarr;</span>
@@ -963,30 +1149,48 @@
 
         <div class="reviews-grid">
           <div class="checkout-card reveal" style="--i:0;padding:28px;margin-bottom:0;">
-            <div class="product-rating-stars" style="margin-bottom:12px;">★★★★★</div>
+            <div class="product-rating-stars" style="margin-bottom:12px;display:flex;gap:3px;" aria-label="5 out of 5 stars">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#D4AF5F"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#D4AF5F"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#D4AF5F"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#D4AF5F"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#D4AF5F"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
             <p style="font-size:15px;line-height:1.6;color:var(--ink);margin-bottom:16px;">
-              "I applied Royal Vetiver for my brother's daytime Mehndi in Lahore (41°C humidity). 9 hours later, relatives were still asking what niche perfume I was wearing. Genuinely lasts all day."
+              "I applied Royal Vetiver for my brother&apos;s daytime Mehndi in Lahore (41&deg;C humidity). 9 hours later, relatives were still asking what niche perfume I was wearing. Genuinely lasts all day."
             </p>
             <div style="font-weight:600;font-size:14px;color:var(--ink);">Hamza Tariq</div>
-            <div style="font-size:12px;color:var(--muted);">Gulberg, Lahore • Verified Purchase</div>
+            <div style="font-size:12px;color:var(--muted);">Gulberg, Lahore &bull; Verified Purchase</div>
           </div>
 
           <div class="checkout-card reveal" style="--i:1;padding:28px;margin-bottom:0;">
-            <div class="product-rating-stars" style="margin-bottom:12px;">★★★★★</div>
+            <div class="product-rating-stars" style="margin-bottom:12px;display:flex;gap:3px;" aria-label="5 out of 5 stars">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#D4AF5F"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#D4AF5F"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#D4AF5F"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#D4AF5F"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#D4AF5F"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
             <p style="font-size:15px;line-height:1.6;color:var(--ink);margin-bottom:16px;">
               "Jasmine Blanc is breathtaking. It smells like fresh Karachi evening Mogra without being artificial or overwhelming. It stayed fragrant on my organza dupatta for two days!"
             </p>
             <div style="font-weight:600;font-size:14px;color:var(--ink);">Ayesha Khan</div>
-            <div style="font-size:12px;color:var(--muted);">DHA Phase 6, Karachi • Verified Purchase</div>
+            <div style="font-size:12px;color:var(--muted);">DHA Phase 6, Karachi &bull; Verified Purchase</div>
           </div>
 
           <div class="checkout-card reveal" style="--i:2;padding:28px;margin-bottom:0;">
-            <div class="product-rating-stars" style="margin-bottom:12px;">★★★★★</div>
+            <div class="product-rating-stars" style="margin-bottom:12px;display:flex;gap:3px;" aria-label="5 out of 5 stars">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#D4AF5F"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#D4AF5F"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#D4AF5F"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#D4AF5F"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#D4AF5F"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
             <p style="font-size:15px;line-height:1.6;color:var(--ink);margin-bottom:16px;">
               "Ordered Amber Mirage on Cash on Delivery. Parcel arrived in Islamabad within 48 hours via TCS. The saffron and oud blend rivals Tom Ford and Amouage at a fraction of the cost."
             </p>
             <div style="font-weight:600;font-size:14px;color:var(--ink);">Bilal Farooq</div>
-            <div style="font-size:12px;color:var(--muted);">F-7/2, Islamabad • Verified Purchase</div>
+            <div style="font-size:12px;color:var(--muted);">F-7/2, Islamabad &bull; Verified Purchase</div>
           </div>
         </div>
       </div>
@@ -1010,22 +1214,30 @@
       </div>
       <div class="container" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;">
         <div class="reveal" style="--i:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:24px;text-align:center;">
-          <div style="font-size:32px;margin-bottom:8px;">🌿</div>
+          <div style="margin-bottom:8px;display:flex;justify-content:center;">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D4AF5F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 4 13c0-5 4-9 16-9 0 12-4 16-9 16z"/><path d="M9 15L15 9"/></svg>
+          </div>
           <strong style="display:block;font-size:13.5px;color:var(--ink);">Fresh Harvest</strong>
           <span style="font-size:12px;color:var(--muted);">Calabrian Bergamot</span>
         </div>
         <div class="reveal" style="--i:1;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:24px;text-align:center;">
-          <div style="font-size:32px;margin-bottom:8px;">🌧️</div>
+          <div style="margin-bottom:8px;display:flex;justify-content:center;">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D4AF5F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="M8 19v2"/><path d="M12 19v2"/><path d="M16 19v2"/></svg>
+          </div>
           <strong style="display:block;font-size:13.5px;color:var(--ink);">Petrichor Extracts</strong>
           <span style="font-size:12px;color:var(--muted);">Mitti & Cypress</span>
         </div>
         <div class="reveal" style="--i:2;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:24px;text-align:center;">
-          <div style="font-size:32px;margin-bottom:8px;">🪵</div>
+          <div style="margin-bottom:8px;display:flex;justify-content:center;">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D4AF5F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="7" rx="8" ry="4"/><path d="M4 7v10c0 2.21 3.58 4 8 4s8-1.79 8-4V7"/><path d="M4 12c0 2.21 3.58 4 8 4s8-1.79 8-4"/></svg>
+          </div>
           <strong style="display:block;font-size:13.5px;color:var(--ink);">Aged Assam Oud</strong>
           <span style="font-size:12px;color:var(--muted);">Smoked Wood Stills</span>
         </div>
         <div class="reveal" style="--i:3;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:24px;text-align:center;">
-          <div style="font-size:32px;margin-bottom:8px;">✨</div>
+          <div style="margin-bottom:8px;display:flex;justify-content:center;">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D4AF5F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5L12 3z"/><path d="M19 3l1 2.5L22.5 6.5 20 7.5 19 10 18 7.5 15.5 6.5 18 5.5 19 3z"/></svg>
+          </div>
           <strong style="display:block;font-size:13.5px;color:var(--ink);">Shaadi Signature</strong>
           <span style="font-size:12px;color:var(--muted);">Golden Saffron</span>
         </div>
@@ -1033,6 +1245,38 @@
     </section>
 
   </main>
+
+  <!-- CART DRAWER / MODAL (EMPTY & ACTIVE STATES) -->
+  <div id="cartDrawerBackdrop" class="cart-drawer-backdrop" aria-hidden="true"></div>
+  <aside id="cartDrawer" class="cart-drawer-panel" aria-label="Shopping Cart" aria-hidden="true" role="dialog" aria-modal="true">
+    <button type="button" class="cart-drawer-close" id="cartDrawerCloseBtn" aria-label="Close cart">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+
+    <!-- Empty Cart Panel Content -->
+    <div class="cart-drawer-content" id="cartDrawerEmptyState">
+      <!-- Inline SVG Shopping Bag in Gold (stroke #d4af5f, 56px) -->
+      <div class="cart-empty-icon-wrap" aria-hidden="true">
+        <svg class="cart-empty-bag-svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#d4af5f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <path d="M16 10a4 4 0 0 1-8 0"></path>
+        </svg>
+      </div>
+
+      <h2 class="cart-empty-title">Your Cart is Empty</h2>
+      <p class="cart-empty-desc">
+        You have not added any perfumes to your shopping bag yet. Explore our signature collection of heat-resistant Extrait de Parfum.
+      </p>
+
+      <button type="button" id="cartBrowseBtn" class="cart-browse-btn">
+        Browse Fragrance Collection
+      </button>
+    </div>
+  </aside>
 
   <!-- Dynamic Footer Injected by JS -->
   <div id="site-footer"></div>
@@ -1055,9 +1299,9 @@
       const toggleBtn = document.getElementById("filmToggleBtn");
 
       const playlist = window.HERO_VIDEOS || [
-        { id: "film-1", badge: "Film I • The Essence", src: "videos/gemini_generated_video_5357ccaa.mp4" },
-        { id: "film-2", badge: "Film II • The Craft", src: "videos/gemini_generated_video_8819b247.mp4" },
-        { id: "film-3", badge: "Film III • Signature Sillage", src: "videos/hero.mp4" }
+        { id: "film-1", badge: "Film I \u2022 The Essence", src: "videos/gemini_generated_video_5357ccaa.mp4" },
+        { id: "film-2", badge: "Film II \u2022 The Craft", src: "videos/gemini_generated_video_8819b247.mp4" },
+        { id: "film-3", badge: "Film III \u2022 Signature Sillage", src: "videos/hero.mp4" }
       ];
 
       let currentFilmIndex = 0;
@@ -1141,11 +1385,18 @@
               ${getBottleSvg(p, "100%", "auto")}
             </div>
             <div class="product-card-body">
-              <div class="product-card-family">${p.category} • ${p.scentFamily}</div>
+              <div class="product-card-family">${p.category} &bull; ${p.scentFamily}</div>
               <h3 class="product-card-title"><a href="product.html?id=${p.id}">${p.name}</a></h3>
               <p class="product-card-tagline">${p.tagline}</p>
-              <div class="product-rating-stars">
-                ★★★★★ <span class="count">(${p.reviewCount})</span>
+              <div class="product-rating-stars" style="display:flex;align-items:center;gap:4px;">
+                <span style="display:inline-flex;gap:2px;">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="#D4AF5F"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="#D4AF5F"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="#D4AF5F"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="#D4AF5F"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="#D4AF5F"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </span>
+                <span class="count">(${p.reviewCount})</span>
               </div>
               <div class="product-card-foot">
                 <div class="price-display">
@@ -1164,7 +1415,72 @@
 
       // 5. Realistic Hero Soap-Bubble Canvas & Interactive Pop System
       initHeroBubbles();
+
+      // 6. Interactive Cart Drawer & Empty Cart Modal
+      initCartDrawer();
     });
+
+    function initCartDrawer() {
+      const drawer = document.getElementById("cartDrawer");
+      const backdrop = document.getElementById("cartDrawerBackdrop");
+      const closeBtn = document.getElementById("cartDrawerCloseBtn");
+      const browseBtn = document.getElementById("cartBrowseBtn");
+
+      if (!drawer || !backdrop) return;
+
+      function openCart() {
+        drawer.classList.add("active");
+        backdrop.classList.add("active");
+        drawer.setAttribute("aria-hidden", "false");
+        backdrop.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeCart() {
+        drawer.classList.remove("active");
+        backdrop.classList.remove("active");
+        drawer.setAttribute("aria-hidden", "true");
+        backdrop.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+      }
+
+      window.openCartDrawer = openCart;
+      window.closeCartDrawer = closeCart;
+
+      if (closeBtn) closeBtn.addEventListener("click", closeCart);
+      backdrop.addEventListener("click", closeCart);
+
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && drawer.classList.contains("active")) {
+          closeCart();
+        }
+      });
+
+      if (browseBtn) {
+        browseBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          closeCart();
+          const target = document.getElementById("homeBestsellersGrid") || document.querySelector(".section-alt") || document.querySelector("section");
+          if (target) {
+            setTimeout(() => {
+              target.scrollIntoView({ behavior: "smooth", block: "start" });
+            }, 150);
+          }
+        });
+      }
+
+      // Intercept clicks on cart button in header & mobile drawer
+      document.addEventListener("click", (e) => {
+        const trigger = e.target.closest('.cart-pill-btn, a[href="cart.html"]');
+        if (trigger) {
+          e.preventDefault();
+          if (typeof window.closeMobileMenu === "function") {
+            window.closeMobileMenu();
+          }
+          openCart();
+        }
+      });
+    }
 
     function initHeroBubbles() {
       const heroSection = document.querySelector('.hero-section');
@@ -1479,7 +1795,7 @@
         ctx.save();
         ctx.translate(b.x, b.y);
 
-        // Wobble oscillation of ±4%
+        // Wobble oscillation of +/-4%
         const wobble = Math.sin(t * b.wobbleSpeed + b.wobblePhase) * 0.04;
         let sx = 1 + wobble;
         let sy = 1 - wobble;
@@ -1631,7 +1947,7 @@
             continue;
           }
 
-          // Physics: velocity + gravity (65 px/s²)
+          // Physics: velocity + gravity (65 px/s^2)
           p.vy += 65 * dt;
           p.x += p.vx * dt;
           p.y += p.vy * dt;
