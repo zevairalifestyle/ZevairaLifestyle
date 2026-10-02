@@ -463,25 +463,32 @@
     function showAuthError(msg)   { const el = document.getElementById('authError');   el.textContent = msg; el.style.display = 'block'; }
     function showAuthSuccess(msg) { const el = document.getElementById('authSuccess'); el.textContent = msg; el.style.display = 'block'; }
 
-    /* ── Show dashboard when user signs in ───────────────────────── */
+    /* ─── Track the real-time orders subscription so we can cancel it ───── */
+    let _ordersUnsub = null;
+
+    /* ── Show dashboard (from cache → instant, then from real auth) ──────── */
     window.addEventListener('zevaira-auth-changed', (e) => {
-      const user = e.detail.user;
+      const user     = e.detail.user;
+      const isCached = e.detail.cached;
+
       if (user) {
-        showDashboard(user);
-      } else {
-        document.getElementById('authSection').style.display       = 'flex';
-        document.getElementById('accountDashboard').style.display  = 'none';
+        showDashboard(user, isCached);
+      } else if (!isCached) {
+        // Only hide dashboard when we get a confirmed "not logged in" from Firebase
+        if (_ordersUnsub) { _ordersUnsub(); _ordersUnsub = null; }
+        document.getElementById('authSection').style.display      = 'flex';
+        document.getElementById('accountDashboard').style.display = 'none';
       }
     });
 
-    function showDashboard(user) {
+    function showDashboard(user, isCached) {
       document.getElementById('authSection').style.display      = 'none';
       document.getElementById('accountDashboard').style.display = 'block';
 
-      const initial = (user.displayName || user.email || 'U')[0].toUpperCase();
+      const initial  = (user.displayName || user.email || 'U')[0].toUpperCase();
       const avatarEl = document.getElementById('dashAvatar');
       if (user.photoURL) {
-        avatarEl.innerHTML = `<img src="${user.photoURL}" alt="${user.displayName || 'User'}">`;
+        avatarEl.innerHTML = `<img src="${user.photoURL}" alt="${user.displayName || 'User'}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">`;
       } else {
         avatarEl.textContent = initial;
       }
@@ -490,25 +497,47 @@
       document.getElementById('profileName').value     = user.displayName || '';
       document.getElementById('profileEmail').value    = user.email || '';
 
-      // Load orders
-      loadOrdersForDashboard(user.uid);
-      // Render wishlist
+      // Start real-time orders subscription only once we have the real UID
+      if (!isCached && user.uid) {
+        subscribeToOrders(user.uid);
+      } else if (isCached) {
+        // Show spinner while we wait for real auth
+        document.getElementById('ordersLoading').style.display = 'flex';
+        document.getElementById('ordersList').style.display    = 'none';
+      }
+
       renderWishlistPanel();
     }
 
-    /* ── Load orders ─────────────────────────────────────────────── */
-    async function loadOrdersForDashboard(uid) {
+    /* ── Real-time orders via onSnapshot ─────────────────────────── */
+    async function subscribeToOrders(uid) {
       const loadingEl = document.getElementById('ordersLoading');
       const listEl    = document.getElementById('ordersList');
-      loadingEl.style.display = 'flex';
-      listEl.style.display    = 'none';
 
-      // Wait for auth module
+      if (_ordersUnsub) { _ordersUnsub(); _ordersUnsub = null; }
+
       await waitForZAuth();
-      const orders = await window.zAuth.loadMyOrders(uid);
-      loadingEl.style.display = 'none';
-      listEl.style.display    = 'block';
 
+      if (!window.zAuth?.subscribeToMyOrders) {
+        loadingEl.style.display = 'flex'; listEl.style.display = 'none';
+        const orders = await window.zAuth.loadMyOrders(uid);
+        loadingEl.style.display = 'none'; listEl.style.display = 'block';
+        renderOrdersList(orders);
+        return;
+      }
+
+      loadingEl.style.display = 'flex'; listEl.style.display = 'none';
+
+      _ordersUnsub = window.zAuth.subscribeToMyOrders(uid, (orders) => {
+        loadingEl.style.display = 'none';
+        listEl.style.display    = 'block';
+        renderOrdersList(orders);
+      });
+    }
+
+    /* ── Render orders list ──────────────────────────────────────── */
+    function renderOrdersList(orders) {
+      const listEl = document.getElementById('ordersList');
       if (!orders.length) {
         listEl.innerHTML = `
           <div class="empty-state">
@@ -521,7 +550,6 @@
           </div>`;
         return;
       }
-
       listEl.innerHTML = orders.map(o => {
         const statusClass = 'status-' + (o.status || 'New').replace(/\s/g, '');
         const items = (o.items || []).map(i =>
@@ -660,6 +688,8 @@
     async function handleSignOut() {
       await waitForZAuth();
       await window.zAuth.signOut();
+      // Cache is cleared in auth.js; redirect to home
+      window.location.href = 'index.html';
     }
 
     async function handleForgotPassword(fromProfile = false) {
