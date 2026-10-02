@@ -1,4 +1,4 @@
-/**
+﻿/**
  * ZevairaLifestyle - Master Application Engine
  * --------------------------------------------------------------------------
  * Handles:
@@ -34,19 +34,19 @@ const HERO_VIDEOS = [
   {
     id: "film-1",
     title: "Scent That Outlasts The Heat",
-    badge: "Film I • The Essence",
+    badge: "Film I â€¢ The Essence",
     src: "videos/gemini_generated_video_5357ccaa.mp4"
   },
   {
     id: "film-2",
     title: "Artisanal Distillation & Craft",
-    badge: "Film II • The Craft",
+    badge: "Film II â€¢ The Craft",
     src: "videos/gemini_generated_video_8819b247.mp4"
   },
   {
     id: "film-3",
     title: "The Zevaira Experience",
-    badge: "Film III • Signature Sillage",
+    badge: "Film III â€¢ Signature Sillage",
     src: "videos/hero.mp4"
   }
 ];
@@ -295,15 +295,15 @@ function injectHeaderAndFooter() {
       <div class="announcement-marquee">
         <div class="announcement-track">
           <span>Free delivery above Rs 6,000</span>
-          <span class="announcement-dot">✦</span>
+          <span class="announcement-dot">âœ¦</span>
           <span>Cash on delivery across Pakistan</span>
-          <span class="announcement-dot">✦</span>
+          <span class="announcement-dot">âœ¦</span>
           <span>100% Authentic Extrait de Parfum (35%)</span>
-          <span class="announcement-dot">✦</span>
+          <span class="announcement-dot">âœ¦</span>
           <span>Free delivery above Rs 6,000</span>
-          <span class="announcement-dot">✦</span>
+          <span class="announcement-dot">âœ¦</span>
           <span>Cash on delivery across Pakistan</span>
-          <span class="announcement-dot">✦</span>
+          <span class="announcement-dot">âœ¦</span>
           <span>100% Authentic Extrait de Parfum (35%)</span>
         </div>
       </div>
@@ -410,8 +410,8 @@ function injectHeaderAndFooter() {
         <a href="delivery-returns.html" ${isActive("delivery-returns.html")}>Delivery & Returns</a>
         <a href="faq.html" ${isActive("faq.html")}>FAQ</a>
         <a href="#footer-contact" onclick="closeMobileMenu()">Contact Us</a>
-        <a href="cart.html" ${isActive("cart.html")}>My Cart (<span class="mobile-cart-count">0</span>)</a>
-        <a href="account.html" ${isActive("account.html")}>👤 My Account</a>
+        <a href="cart.html" ${isActive("cart.html")}><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-3px;margin-right:6px;"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>My Cart <span class="mobile-cart-count" style="background:var(--gold);color:#0F2A1D;font-size:11px;font-weight:700;min-width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;margin-left:6px;">0</span></a>
+        <a href="account.html" ${isActive("account.html")}><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-3px;margin-right:6px;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>My Account</a>
       </div>
       <div class="mobile-menu-footer">
         <a href="${INSTAGRAM_URL}" target="_blank" rel="noopener noreferrer" class="instagram-link-badge" aria-label="ZevairaLifestyle on Instagram" style="justify-content:center;margin-bottom:10px;">
@@ -460,7 +460,7 @@ function injectHeaderAndFooter() {
           <div class="footer-col">
             <h3 style="color:#F5EFDC;margin-bottom:12px;font-size:24px;">ZevairaLifestyle</h3>
             <p style="color:#A9BBA9;font-size:14px;line-height:1.6;margin-bottom:18px;">
-              Formulated specifically for Pakistan’s climate. High-concentration Extrait de Parfum handcrafted to stay fresh through scorching summer days and humid monsoons.
+              Formulated specifically for Pakistanâ€™s climate. High-concentration Extrait de Parfum handcrafted to stay fresh through scorching summer days and humid monsoons.
             </p>
             <div style="margin-top:16px;">
               <a href="${INSTAGRAM_URL}" target="_blank" rel="noopener noreferrer" class="instagram-link-badge" aria-label="ZevairaLifestyle on Instagram">
@@ -532,7 +532,7 @@ function injectHeaderAndFooter() {
         <!-- Bottom Bar -->
         <div class="footer-bottom">
           <div>
-            © 2026 ZevairaLifestyle. All rights reserved. Handcrafted in Pakistan.
+            Â© 2026 ZevairaLifestyle. All rights reserved. Handcrafted in Pakistan.
           </div>
           <div class="payment-badges-row">
             <span class="payment-pill">Cash on Delivery</span>
@@ -702,7 +702,7 @@ function initHeaderInteractions() {
               </div>
               <div style="flex:1;">
                 <div style="font-weight:600;font-size:15px;color:var(--ink);">${p.name}</div>
-                <div style="font-size:12px;color:var(--muted);">${p.category} • ${p.scentFamily} • From ${formatPKR(p.sizes[0].price)}</div>
+                <div style="font-size:12px;color:var(--muted);">${p.category} â€¢ ${p.scentFamily} â€¢ From ${formatPKR(p.sizes[0].price)}</div>
               </div>
               <span class="badge" style="font-size:10px;">${p.badge || 'Extrait'}</span>
             </a>
@@ -799,7 +799,7 @@ function generateWhatsAppOrderUrl(order) {
   msg += `*ITEMS ORDERED:*\n`;
 
   items.forEach((item, index) => {
-    msg += `${index + 1}. *${item.name}* (${item.size})\n   Qty: ${item.qty} × ${formatPKR(item.price)} = ${formatPKR(item.price * item.qty)}\n`;
+    msg += `${index + 1}. *${item.name}* (${item.size})\n   Qty: ${item.qty} Ã— ${formatPKR(item.price)} = ${formatPKR(item.price * item.qty)}\n`;
   });
 
   msg += `--------------------------------------\n`;

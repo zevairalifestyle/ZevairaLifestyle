@@ -90,20 +90,27 @@
       justify-content: center;
       gap: 10px;
       width: 100%;
-      padding: 11px 20px;
-      background: #fff;
-      border: 1.5px solid var(--line);
+      height: 48px;
+      padding: 0 20px;
+      background: #ffffff;
+      border: 1.5px solid #dadce0;
       border-radius: 8px;
       font-family: inherit;
       font-size: 14px;
-      font-weight: 600;
-      color: var(--text);
+      font-weight: 500;
+      color: #1f1f1f;
       cursor: pointer;
       transition: box-shadow .15s, border-color .15s;
     }
+    /* Force white bg + dark text in dark theme too */
+    [data-theme="dark"] .btn-google {
+      background: #ffffff;
+      color: #1f1f1f;
+      border-color: #dadce0;
+    }
     .btn-google:hover {
       border-color: var(--gold);
-      box-shadow: 0 2px 12px rgba(184,134,43,.12);
+      box-shadow: 0 2px 12px rgba(184,134,43,.18);
     }
     /* Error text */
     .auth-error {

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+Ôªø<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -67,7 +67,7 @@
           <!-- Price Display -->
           <div class="price-hero" style="margin:8px 0 16px;">
             <span class="current-price" id="currentPriceDisplay">Rs 4,200</span>
-            <span style="font-size:13px;color:var(--muted);">Includes all taxes "¢ Cash on delivery available</span>
+            <span style="font-size:13px;color:var(--muted);">Includes all taxes ‚Äî Cash on delivery available</span>
           </div>
 
           <p id="productDescription" style="color:var(--ink-light);line-height:1.7;font-size:15.5px;">
@@ -88,7 +88,7 @@
           <div class="purchase-actions">
             <!-- Quantity Control -->
             <div class="quantity-control" aria-label="Quantity Selector">
-              <button type="button" id="qtyMinusBtn" aria-label="Decrease quantity">‚àí</button>
+              <button type="button" id="qtyMinusBtn" aria-label="Decrease quantity">√¢ÀÜ‚Äô</button>
               <input type="text" id="qtyInput" value="1" readonly aria-label="Selected quantity">
               <button type="button" id="qtyPlusBtn" aria-label="Increase quantity">+</button>
             </div>
@@ -121,7 +121,7 @@
           <div style="background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px 16px;display:flex;align-items:center;gap:12px;font-size:13.5px;">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
             <div>
-              <strong>Fast Pakistan Delivery:</strong> Karachi & Lahore: 2"ì3 business days. Islamabad & other cities: 3"ì4 business days. Free delivery above Rs 6,000.
+              <strong>Fast Pakistan Delivery:</strong> Karachi & Lahore: 2‚Äì3 business days. Islamabad & other cities: 3‚Äì4 business days. Free delivery above Rs 6,000.
             </div>
           </div>
 
@@ -134,7 +134,21 @@
     <section class="section-alt">
       <div class="container">
         
-        <div style="display:grid;grid-template-columns:1.1fr 0.9fr;gap:clamp(32px,5vw,64px);align-items:start;">
+        <style>
+          .pyramid-perf-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: clamp(32px, 5vw, 64px);
+            align-items: start;
+          }
+          @media (max-width: 768px) {
+            .pyramid-perf-grid {
+              grid-template-columns: 1fr;
+              gap: 32px;
+            }
+          }
+        </style>
+        <div class="pyramid-perf-grid">
           
           <!-- Olfactory Pyramid -->
           <div>
@@ -234,7 +248,7 @@
           </button>
           <div class="accordion-content">
             <p>
-              Due to our high 35% oil concentration, spray directly onto pulse points (sides of neck, wrists, collarbone). For extreme 40∞C+ heat, spray 2 mists on your cotton kurta or linen shirt from 8 inches away"îthe textile fibers anchor the base notes for up to 24 hours. Always store your flacon away from direct bathroom sunlight and car gloveboxes.
+              Due to our high 35% oil concentration, spray directly onto pulse points (sides of neck, wrists, collarbone). For extreme 40&deg;C+ heat, spray 2 mists on your cotton kurta or linen shirt from 8 inches away √¢‚Ç¨‚Äù the textile fibers anchor the base notes for up to 24 hours. Always store your flacon away from direct bathroom sunlight and car gloveboxes.
             </p>
           </div>
         </div>
@@ -423,7 +437,7 @@
           <input type="radio" name="productSize" id="size_${idx}" class="size-radio" value="${s.size}" ${idx === 0 ? 'checked' : ''}>
           <label for="size_${idx}" class="size-label">
             <span>${s.size}</span>
-            <span style="color:var(--gold);font-size:12px;">"¢ ${formatPKR(s.price)}</span>
+            <span style="color:var(--gold);font-size:12px;">‚Äî ${formatPKR(s.price)}</span>
           </label>
         </div>
       `).join("");
@@ -515,9 +529,9 @@
             <div class="product-rating-stars" style="margin-bottom:8px;">?????</div>
             <strong style="color:var(--ink);display:block;margin-bottom:4px;">Stunning Heat Resistance</strong>
             <p style="font-size:14px;color:var(--muted);line-height:1.5;margin-bottom:12px;">
-              "Tested during a wedding reception in 38∞C Karachi weather. Still projecting strongly at midnight. Packaging is breathtaking."
+              "Tested during a wedding reception in 38&deg;C Karachi weather. Still projecting strongly at midnight. Packaging is breathtaking."
             </p>
-            <div style="font-size:12px;color:var(--ink);font-weight:600;">Saad Munir "¢ Karachi (Verified)</div>
+            <div style="font-size:12px;color:var(--ink);font-weight:600;">Saad Munir ‚Äî Karachi (Verified)</div>
           </div>
           <div class="checkout-card" style="padding:24px;margin-bottom:0;">
             <div class="product-rating-stars" style="margin-bottom:8px;">?????</div>
@@ -525,7 +539,7 @@
             <p style="font-size:14px;color:var(--muted);line-height:1.5;margin-bottom:12px;">
               "The weight of the bottle and the quality of atomization are on par with international niche perfume houses. Highly recommended."
             </p>
-            <div style="font-size:12px;color:var(--ink);font-weight:600;">Dr. Zainab Tariq "¢ Lahore (Verified)</div>
+            <div style="font-size:12px;color:var(--ink);font-weight:600;">Dr. Zainab Tariq ‚Äî Lahore (Verified)</div>
           </div>
           <div class="checkout-card" style="padding:24px;margin-bottom:0;">
             <div class="product-rating-stars" style="margin-bottom:8px;">?????</div>
@@ -533,7 +547,7 @@
             <p style="font-size:14px;color:var(--muted);line-height:1.5;margin-bottom:12px;">
               "Ordered via Cash on Delivery. Rider called before arrival and allowed parcel inspection. Scent is 10/10."
             </p>
-            <div style="font-size:12px;color:var(--ink);font-weight:600;">Usman Qureshi "¢ Islamabad (Verified)</div>
+            <div style="font-size:12px;color:var(--ink);font-weight:600;">Usman Qureshi ‚Äî Islamabad (Verified)</div>
           </div>
         `;
       }
@@ -549,7 +563,7 @@
               ${getBottleSvg(p, "100%", "auto")}
             </div>
             <div class="product-card-body">
-              <div class="product-card-family">${p.category} ï ${p.scentFamily}</div>
+              <div class="product-card-family">${p.category} &bull; ${p.scentFamily}</div>
               <h3 class="product-card-title"><a href="product.html?id=${p.id}">${p.name}</a></h3>
               <p class="product-card-tagline">${p.tagline}</p>
               <div class="product-card-foot">
@@ -579,7 +593,7 @@
             </div>
             <div class="product-card-body">
               <h4 style="font-size:18px;"><a href="product.html?id=${p.id}">${p.name}</a></h4>
-              <div style="font-size:12px;color:var(--muted);">${p.category} ï From ${formatPKR(p.sizes[0].price)}</div>
+              <div style="font-size:12px;color:var(--muted);">${p.category} &bull; From ${formatPKR(p.sizes[0].price)}</div>
             </div>
           </div>
         `).join("");
@@ -589,3 +603,4 @@
   </script>
 </body>
 </html>
+

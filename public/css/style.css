@@ -1329,6 +1329,12 @@ section {
   border-bottom: none;
   padding-bottom: 0;
 }
+@media (max-width: 768px) {
+  .pyramid-step {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+}
 
 .pyramid-label {
   font-size: 12px;
@@ -1347,10 +1353,11 @@ section {
 .note-tag {
   background: var(--bg);
   border: 1px solid var(--line);
-  padding: 4px 10px;
-  border-radius: var(--radius-full);
+  padding: 8px 14px;
+  border-radius: 999px;
   font-size: 13px;
   color: var(--ink);
+  white-space: nowrap;
 }
 
 /* Longevity & Projection Meters */
@@ -2129,11 +2136,12 @@ footer.site-footer .instagram-link-badge:hover svg {
     flex-shrink: 1;
   }
   .logo-brand {
-    font-size: 18px;
+    font-size: clamp(13px, 3.8vw, 18px);
     gap: 6px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    min-width: 0;
   }
   .logo-brand svg {
     width: 26px;
@@ -2193,6 +2201,12 @@ footer.site-footer .instagram-link-badge:hover svg {
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+}
+
+@media (max-width: 360px) {
+  .logo-brand > div {
+    display: none;
   }
 }
 

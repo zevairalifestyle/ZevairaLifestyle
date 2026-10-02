@@ -1,4 +1,4 @@
-/**
+﻿/**
  * ZevairaLifestyle — Customer Auth Module
  * ─────────────────────────────────────────────────────────────────────────────
  * Fixes:
@@ -242,19 +242,19 @@ waitForFirebase().then(({ auth, db }) => {
     }
   }
 
-  /* ── Google Sign-In ──────────────────────────────────────────────────── */
+  /* Google Sign-In */
   async function signInWithGoogle() {
     return signInWithPopup(auth, googleProvider);
   }
 
-  /* ── Email Sign-Up ───────────────────────────────────────────────────── */
+  /* Email Sign-Up */
   async function signUpWithEmail(name, email, password) {
     const cred = await createUserWithEmailAndPassword(auth, email, password);
     if (name) await updateProfile(cred.user, { displayName: name });
     return cred.user;
   }
 
-  /* ── Email Sign-In ───────────────────────────────────────────────────── */
+  /* Email Sign-In */
   async function signInWithEmail(email, password) {
     return signInWithEmailAndPassword(auth, email, password);
   }
@@ -284,3 +284,4 @@ waitForFirebase().then(({ auth, db }) => {
 
   window.dispatchEvent(new CustomEvent('zevaira-auth-ready'));
 });
+
