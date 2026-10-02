@@ -31,8 +31,29 @@ const STORE_EMAIL = "zevairalifestyle@gmail.com";
 // Store Phone for standard telephone calls
 const STORE_PHONE = "+92 300 1234567";
 
-// Hero Video path (set to an mp4 file in your site; if missing or empty, the animated flacon is shown)
-const HERO_VIDEO_SRC = "videos/hero.mp4";
+// Hero Video Playlist (Showcasing all user's real artisanal videos)
+const HERO_VIDEOS = [
+  {
+    id: "film-1",
+    title: "Scent That Outlasts The Heat",
+    badge: "Film I • The Essence",
+    src: "videos/gemini_generated_video_5357ccaa.mp4"
+  },
+  {
+    id: "film-2",
+    title: "Artisanal Distillation & Craft",
+    badge: "Film II • The Craft",
+    src: "videos/gemini_generated_video_8819b247.mp4"
+  },
+  {
+    id: "film-3",
+    title: "The Zevaira Experience",
+    badge: "Film III • Signature Sillage",
+    src: "videos/hero.mp4"
+  }
+];
+
+const HERO_VIDEO_SRC = HERO_VIDEOS[0].src;
 
 // Free Delivery Threshold in PKR (Rs)
 const FREE_DELIVERY_THRESHOLD = 6000;
@@ -659,8 +680,8 @@ function initHeaderInteractions() {
         } else {
           searchResults.innerHTML = matches.map(p => `
             <a href="product.html?id=${p.id}" class="search-result-item" style="display:flex;align-items:center;gap:12px;padding:10px;border-bottom:1px solid var(--line);">
-              <div style="width:48px;height:48px;background:var(--surface-alt);border-radius:4px;display:grid;place-items:center;flex-shrink:0;">
-                <div style="transform:scale(0.28);transform-origin:center;">${getBottleSvg(p, "60px")}</div>
+              <div style="width:48px;height:48px;background:var(--surface-alt);border-radius:4px;display:grid;place-items:center;flex-shrink:0;overflow:hidden;">
+                ${p.image ? `<img src="${p.image}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;border-radius:4px;">` : `<div style="transform:scale(0.28);transform-origin:center;">${getBottleSvg(p, "60px")}</div>`}
               </div>
               <div style="flex:1;">
                 <div style="font-weight:600;font-size:15px;color:var(--ink);">${p.name}</div>
@@ -799,6 +820,7 @@ if (typeof window !== "undefined") {
   window.STORE_EMAIL = STORE_EMAIL;
   window.STORE_PHONE = STORE_PHONE;
   window.HERO_VIDEO_SRC = HERO_VIDEO_SRC;
+  window.HERO_VIDEOS = HERO_VIDEOS;
   window.FREE_DELIVERY_THRESHOLD = FREE_DELIVERY_THRESHOLD;
   window.STANDARD_DELIVERY_FEE = STANDARD_DELIVERY_FEE;
   window.GIFT_WRAP_FEE = GIFT_WRAP_FEE;

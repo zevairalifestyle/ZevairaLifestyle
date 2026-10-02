@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -77,7 +77,7 @@
               <div style="font-size:13px;color:var(--muted);" id="invoiceDate">Date: 28 Sep 2026</div>
             </div>
             <button onclick="window.print()" class="btn btn-outline btn-sm no-print">
-              🖨️ Print Invoice
+              ðŸ–¨ï¸ Print Invoice
             </button>
           </div>
 
@@ -135,7 +135,7 @@
 
         <!-- Next Steps Notice -->
         <div style="background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:18px 24px;text-align:left;font-size:13.5px;color:var(--muted);margin-bottom:28px;">
-          <h4 style="font-size:15px;color:var(--ink);margin-bottom:6px;">📦 What happens next?</h4>
+          <h4 style="font-size:15px;color:var(--ink);margin-bottom:6px;">ðŸ“¦ What happens next?</h4>
           <ol style="padding-left:18px;line-height:1.6;">
             <li>Our Karachi/Lahore dispatch desk checks bottle seals and batch maturity numbers.</li>
             <li>We send you a WhatsApp dispatch tracking message via courier (TCS / Call Courier / Trax).</li>
@@ -220,7 +220,7 @@
         <div style="display:flex;justify-content:space-between;align-items:center;">
           <div>
             <strong>${item.name}</strong> <span style="color:var(--muted);font-size:12px;">(${item.size})</span>
-            <div style="font-size:12px;color:var(--muted);">Qty: ${item.qty} × ${formatPKR(item.price)}</div>
+            <div style="font-size:12px;color:var(--muted);">Qty: ${item.qty} Ã— ${formatPKR(item.price)}</div>
           </div>
           <div style="font-weight:600;">${formatPKR(item.price * item.qty)}</div>
         </div>
@@ -251,5 +251,8 @@
 
     });
   </script>
-  <script type="module" src="js/firebase-config.js"></script>`n  <script type="module" src="js/firestore-sync.js"></script>`n  <script type="module" src="js/auth.js"></script>`n</body>
+  <script type="module" src="js/firebase-config.js"></script>
+  <script type="module" src="js/firestore-sync.js"></script>
+  <script type="module" src="js/auth.js"></script>
+</body>
 </html>

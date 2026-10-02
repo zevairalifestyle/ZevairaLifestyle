@@ -412,7 +412,10 @@
       <div class="tab-panel active" id="tab-products">
         <div class="panel-header">
           <h2>Products</h2>
-          <button class="btn btn-gold" id="addProductBtn">＋ Add Product</button>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button class="btn btn-outline btn-sm" id="seedProductsBtn" style="border-color:var(--gold);color:var(--gold-lt);">⚡ Sync 8 Real Scents to Firestore</button>
+            <button class="btn btn-gold" id="addProductBtn">＋ Add Product</button>
+          </div>
         </div>
         <div class="tbl-wrap">
           <table id="productsTable">
@@ -746,6 +749,8 @@
 <!-- ════════════════════════════════════════════════════════════════
      FIREBASE SDK + ADMIN LOGIC
 ════════════════════════════════════════════════════════════════ -->
+<script src="js/products.js"></script>
+
 <script type="module">
 import { initializeApp }   from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
 import {
@@ -881,19 +886,34 @@ async function loadProducts() {
 function renderProductsTable(list) {
   const tbody = document.getElementById('productsBody');
   if (!list.length) {
-    tbody.innerHTML = '<tr><td colspan="7" class="empty-msg">No products yet. Add your first product!</td></tr>';
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="7" class="empty-msg" style="padding:40px 20px;">
+          <div style="font-size:16px;font-weight:600;margin-bottom:8px;color:var(--gold-lt);">No products in Firestore yet.</div>
+          <p style="margin-bottom:16px;color:var(--muted);font-size:13.5px;">Click <strong>⚡ Sync 8 Real Scents to Firestore</strong> above to import Zevara, Noiré, Élan, Velora, Auren, Sérén, Obsidian, Luméa & Discovery Vault with one click!</p>
+          <button class="btn btn-gold btn-sm" onclick="seedDefaultProducts()">⚡ Import All 8 Scents Now</button>
+        </td>
+      </tr>`;
     return;
   }
   tbody.innerHTML = list.map(p => {
     const sizesStr = (p.sizes || []).map(s => `${s.size} = ${pkr(s.price)}`).join(', ');
     return `
       <tr>
-        <td><strong>${p.name || '—'}</strong></td>
+        <td>
+          <div style="display:flex;align-items:center;gap:12px;">
+            ${p.image ? `<img src="${p.image}" alt="${p.name}" style="width:36px;height:48px;object-fit:cover;border-radius:4px;border:1px solid var(--line);flex-shrink:0;">` : ''}
+            <div>
+              <strong style="color:var(--text);font-size:14px;">${p.name || '—'}</strong>
+              <div class="text-sm text-muted">${p.concentration || ''}</div>
+            </div>
+          </div>
+        </td>
         <td>${p.category || '—'}</td>
         <td>${p.scentFamily || '—'}</td>
         <td class="text-sm text-muted">${sizesStr || '—'}</td>
-        <td>${p.badge || '—'}</td>
-        <td>${p.soldOut ? '✅ Yes' : 'No'}</td>
+        <td>${p.badge ? `<span class="badge" style="font-size:11px;">${p.badge}</span>` : '—'}</td>
+        <td>${p.soldOut ? '<span style="color:var(--danger);font-weight:600;">Sold Out</span>' : '<span style="color:#2ecc71;">Active</span>'}</td>
         <td style="white-space:nowrap;">
           <button class="btn btn-outline btn-sm" onclick="editProduct('${p._id}')">Edit</button>
           <button class="btn btn-danger btn-sm" style="margin-left:4px;" onclick="deleteProduct('${p._id}', '${(p.name||'').replace(/'/g,'&#39;')}')">Del</button>
@@ -901,6 +921,54 @@ function renderProductsTable(list) {
       </tr>`;
   }).join('');
 }
+
+/* Sync 8 Real Products into Firestore */
+async function seedDefaultProducts() {
+  const defaultList = window.PRODUCTS || [];
+  if (!defaultList.length) {
+    showToast('No default products found in products.js', 'danger');
+    return;
+  }
+
+  const btn = document.getElementById('seedProductsBtn');
+  if (btn) { btn.disabled = true; btn.textContent = 'Syncing…'; }
+  showToast(`Syncing ${defaultList.length} products to Firestore…`);
+
+  try {
+    let count = 0;
+    for (let i = 0; i < defaultList.length; i++) {
+      const p = defaultList[i];
+      const data = {
+        name:          p.name || '',
+        category:      p.category || '',
+        scentFamily:   p.scentFamily || '',
+        concentration: p.concentration || 'Eau de Parfum (50ml Extrait)',
+        badge:         p.badge || '',
+        tagline:       p.tagline || '',
+        description:   p.description || '',
+        notes:         p.notes || { top: [], heart: [], base: [] },
+        sizes:         p.sizes || [],
+        image:         p.image || '',
+        sortOrder:     (i + 1) * 10,
+        soldOut:       false,
+        updatedAt:     serverTimestamp(),
+        createdAt:     serverTimestamp()
+      };
+      await addDoc(collection(db, 'products'), data);
+      count++;
+    }
+    showToast(`Successfully synced ${count} perfumes to Firestore!`, 'success');
+    await loadProducts();
+  } catch (err) {
+    showToast(`Sync failed: ${err.message}`, 'danger');
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = '⚡ Sync 8 Real Scents to Firestore'; }
+  }
+}
+window.seedDefaultProducts = seedDefaultProducts;
+
+const seedBtn = document.getElementById('seedProductsBtn');
+if (seedBtn) seedBtn.addEventListener('click', seedDefaultProducts);
 
 /* Open modal */
 document.getElementById('addProductBtn').addEventListener('click', () => openProductModal(null));

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -34,7 +34,7 @@
 
         <!-- EMPTY CART STATE -->
         <div id="emptyCartView" style="display:none;background:var(--surface);border:1px dashed var(--line);border-radius:var(--radius-md);padding:64px 20px;text-align:center;max-width:680px;margin:0 auto;">
-          <div style="font-size:56px;margin-bottom:16px;">🛍️</div>
+          <div style="font-size:56px;margin-bottom:16px;">ðŸ›ï¸</div>
           <h2 style="font-size:28px;margin-bottom:8px;">Your Cart is Empty</h2>
           <p style="color:var(--muted);max-width:44ch;margin:0 auto 28px;line-height:1.6;">
             You have not added any perfumes to your shopping bag yet. Explore our signature collection of heat-resistant Extrait de Parfum.
@@ -139,8 +139,8 @@
               </div>
 
               <div style="font-size:12.5px;color:var(--muted);margin-bottom:20px;line-height:1.5;">
-                • Cash on delivery & Online payments accepted at checkout.<br>
-                • Orders confirmed on WhatsApp prior to dispatch.
+                â€¢ Cash on delivery & Online payments accepted at checkout.<br>
+                â€¢ Orders confirmed on WhatsApp prior to dispatch.
               </div>
 
               <button type="button" id="proceedToCheckoutBtn" class="btn btn-primary btn-block btn-lg">
@@ -218,12 +218,12 @@
               </div>
               <div class="cart-item-details">
                 <h4><a href="product.html?id=${item.id}">${item.name}</a></h4>
-                <div class="item-variant">Size: <strong>${item.size}</strong> • ${formatPKR(item.price)} each</div>
+                <div class="item-variant">Size: <strong>${item.size}</strong> â€¢ ${formatPKR(item.price)} each</div>
                 <button type="button" class="btn-remove-item" onclick="handleRemoveItem('${item.id}', '${item.size}')">Remove</button>
               </div>
               <div>
                 <div class="quantity-control" style="height:38px;">
-                  <button type="button" onclick="handleQtyChange('${item.id}', '${item.size}', ${item.qty - 1})">−</button>
+                  <button type="button" onclick="handleQtyChange('${item.id}', '${item.size}', ${item.qty - 1})">âˆ’</button>
                   <input type="text" value="${item.qty}" readonly>
                   <button type="button" onclick="handleQtyChange('${item.id}', '${item.size}', ${item.qty + 1})">+</button>
                 </div>
@@ -244,7 +244,7 @@
         // Progress toward free delivery
         if (subtotal >= freeThreshold) {
           progressBar.style.width = "100%";
-          deliveryMessage.innerHTML = "✨ <strong>Congratulations!</strong> You have unlocked <strong>FREE Delivery</strong> across Pakistan!";
+          deliveryMessage.innerHTML = "âœ¨ <strong>Congratulations!</strong> You have unlocked <strong>FREE Delivery</strong> across Pakistan!";
         } else {
           const needed = freeThreshold - subtotal;
           const percent = Math.min(100, Math.round((subtotal / freeThreshold) * 100));
@@ -348,5 +348,8 @@
       renderCartUI();
     });
   </script>
-  <script type="module" src="js/firebase-config.js"></script>`n  <script type="module" src="js/firestore-sync.js"></script>`n  <script type="module" src="js/auth.js"></script>`n</body>
+  <script type="module" src="js/firebase-config.js"></script>
+  <script type="module" src="js/firestore-sync.js"></script>
+  <script type="module" src="js/auth.js"></script>
+</body>
 </html>
