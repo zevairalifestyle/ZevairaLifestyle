@@ -398,14 +398,150 @@
       }
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      .reveal {
-        opacity: 1 !important;
-        transform: none !important;
+    /* Hero Interactive Soap-Bubble System & Touch Feedback */
+    .hero-section {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bubbles-container {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    #heroBubbleCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+    }
+
+    .bubble-sound-btn {
+      position: absolute;
+      bottom: 16px;
+      right: 20px;
+      background: rgba(7, 23, 15, 0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: #CFD8C8;
+      min-height: 44px;
+      min-width: 44px;
+      padding: 8px 16px;
+      border-radius: var(--radius-full);
+      font-size: 12px;
+      font-weight: 600;
+      border: 1px solid rgba(217, 177, 90, 0.35);
+      z-index: 4;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: all 0.25s var(--ease);
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    .bubble-sound-btn:hover {
+      background: var(--gold);
+      color: #0F2A1D;
+      border-color: var(--gold-light);
+    }
+
+    .bubble-sound-btn.sound-on {
+      border-color: var(--gold);
+      color: var(--gold-light);
+      background: rgba(15, 42, 29, 0.9);
+    }
+
+    @media (max-width: 768px) {
+      .bubble-sound-btn {
+        bottom: 10px;
+        right: 12px;
+        padding: 8px 12px;
+        font-size: 11px;
       }
-      .gold-divider {
-        transform: none !important;
-      }
+    }
+
+    /* Tactile button & card feedback */
+    button, .btn, .icon-btn, .product-card-thumb, .wishlist-heart-btn, .cart-pill-btn, .hamburger-btn, .tab-btn {
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    .btn, .film-reel-btn, .tab-btn {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn:active {
+      transform: scale(0.97) !important;
+      transition: transform 0.1s ease !important;
+    }
+
+    .film-reel-btn:active {
+      transform: scale(0.98) !important;
+      border-color: var(--gold-light) !important;
+      box-shadow: 0 0 10px rgba(217, 177, 90, 0.4) !important;
+    }
+
+    .checkout-card, .product-card {
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .checkout-card:active, .product-card:active {
+      transform: scale(0.985);
+      border-color: var(--gold);
+      box-shadow: 0 4px 18px rgba(217, 177, 90, 0.25);
+    }
+
+    /* Soft gold touch ripple at touch point */
+    .hero-touch-ripple {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      margin-left: -40px;
+      margin-top: -40px;
+      border-radius: 50%;
+      pointer-events: none;
+      background: radial-gradient(circle, rgba(217, 177, 90, 0.35) 0%, rgba(217, 177, 90, 0.08) 55%, transparent 75%);
+      border: 1px solid rgba(217, 177, 90, 0.5);
+      transform: scale(0);
+      opacity: 0.35;
+      animation: heroRippleExpand 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+      z-index: 99999;
+    }
+
+    @keyframes heroRippleExpand {
+      0% { transform: scale(0); opacity: 0.35; }
+      100% { transform: scale(1); opacity: 0; }
+    }
+
+    /* Material-style clipped button ripple */
+    .btn-ripple {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%) scale(0);
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, rgba(217, 177, 90, 0.35) 60%, transparent 100%);
+      animation: btnRippleFade 0.5s ease-out forwards;
+    }
+
+    @keyframes btnRippleFade {
+      0% { transform: translate(-50%, -50%) scale(0); opacity: 0.7; }
+      100% { transform: translate(-50%, -50%) scale(2.5); opacity: 0; }
     }
   </style>
 
@@ -425,6 +561,26 @@
 
     <!-- HERO SECTION -->
     <section class="hero-section">
+      <!-- Interactive Luxury Soap-Bubble Canvas Layer -->
+      <div class="hero-bubbles-container" aria-hidden="true">
+        <canvas id="heroBubbleCanvas"></canvas>
+      </div>
+
+      <!-- Sound toggle button (Web Audio soft pop) -->
+      <button id="bubbleSoundToggle" class="bubble-sound-btn" type="button" aria-label="Toggle bubble pop sound" title="Bubble Sound: Muted">
+        <svg class="sound-icon-off" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <line x1="23" y1="9" x2="17" y2="15"></line>
+          <line x1="17" y1="9" x2="23" y2="15"></line>
+        </svg>
+        <svg class="sound-icon-on" style="display:none;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+        </svg>
+        <span class="sound-label">Sound Off</span>
+      </button>
+
       <div class="container hero-grid">
         <div class="hero-text reveal">
           <span class="eyebrow" style="color:var(--gold-light);">Artisanal Extrait de Parfum</span>
@@ -999,7 +1155,556 @@
 
       // 4. Lightweight IntersectionObserver Scroll Animations
       initScrollAnimations();
+
+      // 5. Realistic Hero Soap-Bubble Canvas & Interactive Pop System
+      initHeroBubbles();
     });
+
+    function initHeroBubbles() {
+      const heroSection = document.querySelector('.hero-section');
+      const canvas = document.getElementById('heroBubbleCanvas');
+      const soundToggleBtn = document.getElementById('bubbleSoundToggle');
+      if (!heroSection || !canvas) return;
+
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      // 1. Web Audio Synthesizer for Pop Sound (Muted by default)
+      let audioCtx = null;
+      let soundEnabled = false;
+
+      function initAudioContext() {
+        if (!audioCtx) {
+          const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
+          if (AudioCtxClass) audioCtx = new AudioCtxClass();
+        }
+        if (audioCtx && audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+      }
+
+      function playPopSound() {
+        if (!soundEnabled) return;
+        initAudioContext();
+        if (!audioCtx) return;
+        try {
+          const now = audioCtx.currentTime;
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+
+          osc.type = 'sine';
+          const startFreq = 480 + Math.random() * 140;
+          osc.frequency.setValueAtTime(startFreq, now);
+          osc.frequency.exponentialRampToValueAtTime(130, now + 0.055);
+
+          gain.gain.setValueAtTime(0.12, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.055);
+
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+
+          osc.start(now);
+          osc.stop(now + 0.06);
+        } catch (e) {}
+      }
+
+      if (soundToggleBtn) {
+        soundToggleBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          soundEnabled = !soundEnabled;
+          initAudioContext();
+
+          soundToggleBtn.classList.toggle('sound-on', soundEnabled);
+          const iconOff = soundToggleBtn.querySelector('.sound-icon-off');
+          const iconOn = soundToggleBtn.querySelector('.sound-icon-on');
+          const label = soundToggleBtn.querySelector('.sound-label');
+
+          if (iconOff) iconOff.style.display = soundEnabled ? 'none' : 'inline-block';
+          if (iconOn) iconOn.style.display = soundEnabled ? 'inline-block' : 'none';
+          if (label) label.textContent = soundEnabled ? 'Sound On' : 'Sound Off';
+          soundToggleBtn.title = soundEnabled ? 'Bubble Sound: Active' : 'Bubble Sound: Muted';
+
+          if (soundEnabled) playPopSound();
+        });
+      }
+
+      // 2. Responsive Sizing & Canvas Setup (devicePixelRatio capped at 2)
+      let width = 0;
+      let height = 0;
+      let dpr = 1;
+
+      function resizeCanvas() {
+        const rect = heroSection.getBoundingClientRect();
+        width = rect.width;
+        height = rect.height;
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+        canvas.width = Math.round(width * dpr);
+        canvas.height = Math.round(height * dpr);
+        canvas.style.width = width + 'px';
+        canvas.style.height = height + 'px';
+
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+
+      resizeCanvas();
+
+      let resizeTimer = null;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          resizeCanvas();
+        }, 100);
+      }, { passive: true });
+
+      // 3. Motion Preference
+      const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // 4. Object Pools for Droplets & Shockwaves (Zero Garbage Collection)
+      const MAX_PARTICLES = 160;
+      const particlePool = [];
+      for (let i = 0; i < MAX_PARTICLES; i++) {
+        particlePool.push({
+          active: false,
+          x: 0,
+          y: 0,
+          vx: 0,
+          vy: 0,
+          size: 0,
+          life: 0,
+          maxLife: 0.5,
+          alpha: 1,
+          color: 'rgba(217, 177, 90, '
+        });
+      }
+
+      const MAX_SHOCKWAVES = 20;
+      const shockwavePool = [];
+      for (let i = 0; i < MAX_SHOCKWAVES; i++) {
+        shockwavePool.push({
+          active: false,
+          x: 0,
+          y: 0,
+          radius: 0,
+          targetRadius: 0,
+          life: 0,
+          maxLife: 0.3
+        });
+      }
+
+      function spawnBurstParticles(bx, by, bradius) {
+        if (prefersReducedMotion) return;
+        const count = Math.floor(10 + Math.random() * 7); // 10 to 16 droplet particles
+        let spawned = 0;
+
+        for (let i = 0; i < particlePool.length && spawned < count; i++) {
+          const p = particlePool[i];
+          if (!p.active) {
+            p.active = true;
+            const angle = (spawned / count) * Math.PI * 2 + (Math.random() - 0.5) * 0.35;
+            p.x = bx + Math.cos(angle) * bradius;
+            p.y = by + Math.sin(angle) * bradius;
+
+            const speed = 40 + Math.random() * 110;
+            p.vx = Math.cos(angle) * speed;
+            p.vy = Math.sin(angle) * speed - 15;
+            p.size = 1.5 + Math.random() * 2.2;
+            p.life = 0;
+            p.maxLife = 0.4 + Math.random() * 0.2; // 400 to 600ms
+            p.alpha = 0.9;
+            p.color = Math.random() > 0.4 ? 'rgba(217, 177, 90, ' : 'rgba(255, 255, 255, ';
+            spawned++;
+          }
+        }
+
+        // Spawn expanding thin ring shockwave
+        for (let i = 0; i < shockwavePool.length; i++) {
+          const sw = shockwavePool[i];
+          if (!sw.active) {
+            sw.active = true;
+            sw.x = bx;
+            sw.y = by;
+            sw.radius = bradius;
+            sw.targetRadius = bradius * 1.55;
+            sw.life = 0;
+            sw.maxLife = 0.3; // 300ms
+            break;
+          }
+        }
+      }
+
+      // 5. Bubbles Setup
+      // Mobile: 8 to 12 bubbles; Desktop: 18 to 25 bubbles
+      const isMobile = window.innerWidth <= 768;
+      const BUBBLE_COUNT = isMobile ? Math.floor(9 + Math.random() * 3) : Math.floor(19 + Math.random() * 6);
+      const bubbles = [];
+
+      function createBubble(initial = false) {
+        // Skew distribution toward smaller sizes (14px to 90px)
+        const radius = Math.round(14 + Math.pow(Math.random(), 2.3) * 76);
+        // Bigger bubbles move slower (20 to 60 px/s)
+        const speedFactor = 1 - (radius - 14) / 76;
+        const vy = -(20 + speedFactor * 34 + Math.random() * 6);
+
+        return {
+          active: true,
+          x: Math.random() * width,
+          y: initial ? (Math.random() * height) : (height + radius + 10 + Math.random() * 40),
+          radius: radius,
+          vy: vy,
+          vx: (Math.random() - 0.5) * 12,
+          swayAmp: 14 + Math.random() * 24,
+          swaySpeed: 1.2 + Math.random() * 1.6,
+          swayPhase: Math.random() * Math.PI * 2,
+          wobbleSpeed: 2.5 + Math.random() * 2.0,
+          wobblePhase: Math.random() * Math.PI * 2,
+          alpha: 0,
+          targetAlpha: 0.75 + Math.random() * 0.25,
+          popping: false,
+          popProgress: 0
+        };
+      }
+
+      for (let i = 0; i < BUBBLE_COUNT; i++) {
+        bubbles.push(createBubble(true));
+      }
+
+      // 6. Pop Bubble Function
+      function popBubble(b) {
+        if (!b.active || b.popping) return;
+        b.popping = true;
+        b.popProgress = 0;
+
+        // Haptic feedback on supported devices
+        if (navigator.vibrate) {
+          try { navigator.vibrate(10); } catch (e) {}
+        }
+
+        // Web Audio soft pop
+        playPopSound();
+
+        // Push neighboring bubbles within 120px away from pop
+        for (let i = 0; i < bubbles.length; i++) {
+          const other = bubbles[i];
+          if (other !== b && other.active && !other.popping) {
+            const dx = other.x - b.x;
+            const dy = other.y - b.y;
+            const dist = Math.hypot(dx, dy);
+            if (dist < 120 && dist > 0.001) {
+              const force = (1 - dist / 120) * 85;
+              other.vx += (dx / dist) * force;
+              other.vy += (dy / dist) * force * 0.4;
+            }
+          }
+        }
+
+        // Flash brighter and scale to 1.08 in ~60ms, then burst membrane
+        const startTime = performance.now();
+        function animatePop(now) {
+          const elapsed = (now - startTime) / 1000;
+          if (elapsed < 0.06) {
+            b.popProgress = elapsed / 0.06;
+            requestAnimationFrame(animatePop);
+          } else {
+            // Burst membrane
+            spawnBurstParticles(b.x, b.y, b.radius * 1.08);
+            b.active = false;
+            b.popping = false;
+            b.y = -9999;
+
+            // Respawn new bubble at bottom after 1 to 2 seconds
+            const respawnDelay = 1000 + Math.random() * 1000;
+            setTimeout(() => {
+              Object.assign(b, createBubble(false));
+            }, respawnDelay);
+          }
+        }
+        requestAnimationFrame(animatePop);
+      }
+
+      // 7. Hit Testing & Touch Drag Interactions
+      let isPointerDown = false;
+
+      function hitTestAndPop(clientX, clientY) {
+        const rect = heroSection.getBoundingClientRect();
+        const px = clientX - rect.left;
+        const py = clientY - rect.top;
+
+        // Hit-test bubbles from top to bottom (radius + 10px forgiving tolerance for fingers)
+        for (let i = bubbles.length - 1; i >= 0; i--) {
+          const b = bubbles[i];
+          if (!b.active || b.popping) continue;
+          const dist = Math.hypot(px - b.x, py - b.y);
+          if (dist <= b.radius + 10) {
+            popBubble(b);
+            return true;
+          }
+        }
+        return false;
+      }
+
+      heroSection.addEventListener('pointerdown', (e) => {
+        // Do not intercept if clicking buttons, links, video player, or sound toggle
+        if (e.target.closest('a, button, input, select, textarea, .film-box, .film-reel-nav, #bubbleSoundToggle')) {
+          return;
+        }
+        isPointerDown = true;
+        hitTestAndPop(e.clientX, e.clientY);
+      }, { passive: true });
+
+      heroSection.addEventListener('pointermove', (e) => {
+        if (!isPointerDown) return;
+        if (e.target.closest('a, button, input, select, textarea, .film-box, .film-reel-nav, #bubbleSoundToggle')) {
+          return;
+        }
+        hitTestAndPop(e.clientX, e.clientY);
+      }, { passive: true });
+
+      window.addEventListener('pointerup', () => { isPointerDown = false; }, { passive: true });
+      window.addEventListener('pointercancel', () => { isPointerDown = false; }, { passive: true });
+
+      // 8. Main Render & Animation Loop
+      let lastTime = performance.now();
+      let animationFrameId = null;
+      let isHeroVisible = true;
+      let isTabVisible = true;
+
+      function drawBubble(b, t) {
+        ctx.save();
+        ctx.translate(b.x, b.y);
+
+        // Wobble oscillation of ±4%
+        const wobble = Math.sin(t * b.wobbleSpeed + b.wobblePhase) * 0.04;
+        let sx = 1 + wobble;
+        let sy = 1 - wobble;
+
+        if (b.popping) {
+          const popScale = 1 + 0.08 * b.popProgress;
+          sx *= popScale;
+          sy *= popScale;
+        }
+
+        ctx.scale(sx, sy);
+
+        const r = b.radius;
+        const alpha = b.alpha * (b.popping ? (1 + 0.45 * b.popProgress) : 1);
+        ctx.globalAlpha = Math.max(0, Math.min(1, alpha));
+
+        // 1. Soap-bubble body: radial gradient
+        const grad = ctx.createRadialGradient(-r * 0.38, -r * 0.38, r * 0.05, 0, 0, r);
+        grad.addColorStop(0, 'rgba(255, 255, 255, 0.45)');
+        grad.addColorStop(0.25, 'rgba(255, 255, 255, 0.12)');
+        grad.addColorStop(0.55, 'rgba(31, 74, 51, 0.06)');
+        grad.addColorStop(0.75, 'rgba(217, 177, 90, 0.12)');
+        grad.addColorStop(0.92, 'rgba(217, 177, 90, 0.28)');
+        grad.addColorStop(1, 'rgba(212, 175, 95, 0.52)');
+
+        ctx.beginPath();
+        ctx.arc(0, 0, r, 0, Math.PI * 2);
+        ctx.fillStyle = grad;
+        ctx.fill();
+
+        // 2. Thin iridescent rim
+        ctx.lineWidth = Math.max(1, r * 0.024);
+        ctx.strokeStyle = 'rgba(212, 175, 95, 0.55)';
+        ctx.stroke();
+
+        // 3. Soft white highlight in top-left (lunar arc)
+        const hlGrad = ctx.createRadialGradient(-r * 0.35, -r * 0.35, 0, -r * 0.35, -r * 0.35, r * 0.45);
+        hlGrad.addColorStop(0, 'rgba(255, 255, 255, 0.85)');
+        hlGrad.addColorStop(0.45, 'rgba(255, 255, 255, 0.3)');
+        hlGrad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+
+        ctx.beginPath();
+        ctx.arc(-r * 0.32, -r * 0.32, r * 0.34, 0, Math.PI * 2);
+        ctx.fillStyle = hlGrad;
+        ctx.fill();
+
+        // 4. Secondary warm reflection in bottom-right
+        const refGrad = ctx.createRadialGradient(r * 0.36, r * 0.36, 0, r * 0.36, r * 0.36, r * 0.36);
+        refGrad.addColorStop(0, 'rgba(217, 177, 90, 0.32)');
+        refGrad.addColorStop(0.6, 'rgba(245, 239, 220, 0.12)');
+        refGrad.addColorStop(1, 'rgba(217, 177, 90, 0)');
+
+        ctx.beginPath();
+        ctx.arc(r * 0.35, r * 0.35, r * 0.3, 0, Math.PI * 2);
+        ctx.fillStyle = refGrad;
+        ctx.fill();
+
+        ctx.restore();
+      }
+
+      function loop(now) {
+        if (!isHeroVisible || !isTabVisible) {
+          animationFrameId = null;
+          return;
+        }
+
+        const dt = Math.min((now - lastTime) / 1000, 0.08); // cap delta time to 80ms
+        lastTime = now;
+        const timeSec = now / 1000;
+
+        ctx.clearRect(0, 0, width, height);
+
+        // Reduced motion: draw static bubbles once and exit
+        if (prefersReducedMotion) {
+          bubbles.forEach(b => {
+            b.alpha = 0.5;
+            drawBubble(b, timeSec);
+          });
+          return;
+        }
+
+        // 1. Gentle inter-bubble repulsion
+        for (let i = 0; i < bubbles.length; i++) {
+          const b1 = bubbles[i];
+          if (!b1.active || b1.popping) continue;
+          for (let j = i + 1; j < bubbles.length; j++) {
+            const b2 = bubbles[j];
+            if (!b2.active || b2.popping) continue;
+            const dx = b2.x - b1.x;
+            const dy = b2.y - b1.y;
+            const dist = Math.hypot(dx, dy);
+            const minDist = (b1.radius + b2.radius) * 0.88;
+            if (dist < minDist && dist > 0.001) {
+              const overlap = (minDist - dist) * 0.5;
+              const nx = dx / dist;
+              const ny = dy / dist;
+              b1.x -= nx * overlap * 0.04;
+              b1.y -= ny * overlap * 0.04;
+              b2.x += nx * overlap * 0.04;
+              b2.y += ny * overlap * 0.04;
+            }
+          }
+        }
+
+        // 2. Update & Draw Bubbles
+        for (let i = 0; i < bubbles.length; i++) {
+          const b = bubbles[i];
+          if (!b.active) continue;
+
+          if (!b.popping) {
+            // Rise
+            b.y += b.vy * dt;
+
+            // Horizontal sway + friction on burst pushes
+            const sway = Math.sin(timeSec * b.swaySpeed + b.swayPhase) * b.swayAmp * dt * 0.8;
+            b.x += sway + b.vx * dt;
+            b.vx *= 0.94; // damp lateral burst pushes
+
+            // Opacity fade in from bottom, fade out near top
+            if (b.y > height - 100) {
+              b.alpha = Math.min(b.targetAlpha, (height - b.y) / 100);
+            } else if (b.y < 120) {
+              b.alpha = Math.max(0, (b.y + b.radius) / (120 + b.radius)) * b.targetAlpha;
+            } else {
+              b.alpha = b.targetAlpha;
+            }
+
+            // Screen boundary respawn
+            if (b.y + b.radius < -20) {
+              Object.assign(b, createBubble(false));
+            }
+
+            // Horizontal wrap guard
+            if (b.x < -b.radius) b.x = width + b.radius;
+            if (b.x > width + b.radius) b.x = -b.radius;
+          }
+
+          drawBubble(b, timeSec);
+        }
+
+        // 3. Update & Draw Droplet Particles
+        for (let i = 0; i < particlePool.length; i++) {
+          const p = particlePool[i];
+          if (!p.active) continue;
+
+          p.life += dt;
+          if (p.life >= p.maxLife) {
+            p.active = false;
+            continue;
+          }
+
+          // Physics: velocity + gravity (65 px/s²)
+          p.vy += 65 * dt;
+          p.x += p.vx * dt;
+          p.y += p.vy * dt;
+
+          const progress = p.life / p.maxLife;
+          const currentAlpha = (1 - progress) * p.alpha;
+          const currentSize = Math.max(0.5, p.size * (1 - progress * 0.6));
+
+          ctx.save();
+          ctx.globalAlpha = Math.max(0, currentAlpha);
+          ctx.fillStyle = p.color + currentAlpha + ')';
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, currentSize, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+        }
+
+        // 4. Update & Draw Expanding Shockwaves
+        for (let i = 0; i < shockwavePool.length; i++) {
+          const sw = shockwavePool[i];
+          if (!sw.active) continue;
+
+          sw.life += dt;
+          if (sw.life >= sw.maxLife) {
+            sw.active = false;
+            continue;
+          }
+
+          const progress = sw.life / sw.maxLife;
+          const currentRadius = sw.radius + (sw.targetRadius - sw.radius) * progress;
+          const currentAlpha = (1 - progress) * 0.65;
+
+          ctx.save();
+          ctx.globalAlpha = Math.max(0, currentAlpha);
+          ctx.strokeStyle = `rgba(217, 177, 90, ${currentAlpha})`;
+          ctx.lineWidth = Math.max(1, 2 * (1 - progress));
+          ctx.beginPath();
+          ctx.arc(sw.x, sw.y, currentRadius, 0, Math.PI * 2);
+          ctx.stroke();
+          ctx.restore();
+        }
+
+        animationFrameId = requestAnimationFrame(loop);
+      }
+
+      function startLoop() {
+        if (!animationFrameId && isHeroVisible && isTabVisible) {
+          lastTime = performance.now();
+          animationFrameId = requestAnimationFrame(loop);
+        }
+      }
+
+      function stopLoop() {
+        if (animationFrameId) {
+          cancelAnimationFrame(animationFrameId);
+          animationFrameId = null;
+        }
+      }
+
+      // 9. Visibility & Intersection Observers
+      document.addEventListener('visibilitychange', () => {
+        isTabVisible = !document.hidden;
+        if (isTabVisible) startLoop();
+        else stopLoop();
+      });
+
+      if ('IntersectionObserver' in window) {
+        const heroObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            isHeroVisible = entry.isIntersecting;
+            if (isHeroVisible) startLoop();
+            else stopLoop();
+          });
+        }, { threshold: 0.05 });
+        heroObserver.observe(heroSection);
+      } else {
+        startLoop();
+      }
+    }
 
     function initScrollAnimations() {
       if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
