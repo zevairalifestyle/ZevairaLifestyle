@@ -17,6 +17,7 @@
   --line-light: rgba(184, 134, 43, 0.22);
   
   --forest: #1F4A33;
+  --green: #1F4A33;
   --deep-green: #0F2A1D;
   --accent: #1F4A33;
   --accent-ink: #F5EFDC;
@@ -72,6 +73,7 @@
     --line: #26402F;
     --line-light: rgba(217, 177, 90, 0.18);
     --forest: #2A5E42;
+    --green: #2A5E42;
     --deep-green: #07170F;
     --accent: #D9B15A;
     --accent-ink: #0C1A12;
@@ -95,6 +97,7 @@
   --line: #26402F;
   --line-light: rgba(217, 177, 90, 0.18);
   --forest: #2A5E42;
+  --green: #2A5E42;
   --deep-green: #07170F;
   --accent: #D9B15A;
   --accent-ink: #0C1A12;
@@ -114,6 +117,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html {
@@ -502,8 +506,10 @@ nav.desktop-nav a[aria-current="page"]::after {
   align-items: center;
   justify-content: center;
   position: relative;
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
   border-radius: 50%;
   color: var(--ink);
   transition: all var(--duration) var(--ease);
@@ -1380,7 +1386,8 @@ section {
 }
 
 .quantity-control button {
-  width: 38px;
+  width: 44px;
+  min-width: 44px;
   height: 100%;
   font-size: 18px;
   display: grid;
@@ -1989,6 +1996,14 @@ footer.site-footer .instagram-link-badge:hover svg {
   z-index: 85;
 }
 
+@media (max-width: 480px) {
+  .floating-actions-container {
+    right: 16px;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    gap: 10px;
+  }
+}
+
 .btn-floating-whatsapp {
   width: 56px;
   height: 56px;
@@ -2258,10 +2273,10 @@ footer.site-footer .instagram-link-badge:hover svg {
   }
 
   .icon-btn {
-    width: 36px;
-    height: 36px;
-    min-width: 36px;
-    min-height: 36px;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
     padding: 0;
     display: inline-flex;
     align-items: center;
@@ -2274,10 +2289,10 @@ footer.site-footer .instagram-link-badge:hover svg {
 
   .cart-pill-btn {
     padding: 0;
-    width: 40px;
-    height: 40px;
-    min-width: 40px;
-    min-height: 40px;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
     border-radius: 50%;
     display: inline-flex;
     align-items: center;

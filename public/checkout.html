@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <script>/* Inline theme restore — runs before first paint, prevents FOUC */
@@ -11,6 +11,15 @@ html,body{background:#0c1a12;color:#f3ecd6;}
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Checkout | ZevairaLifestyle Pakistan</title>
   <meta name="description" content="Secure checkout for your Zevaira perfumes. Cash on delivery and JazzCash. Fast delivery across Pakistan.">
+  <link rel="canonical" href="https://zevairalifestyle.pages.dev/checkout.html">
+  <meta property="og:title" content="Checkout | ZevairaLifestyle Pakistan">
+  <meta property="og:description" content="Secure checkout for your Zevaira perfumes. Cash on delivery and JazzCash. Fast delivery across Pakistan.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="favicon.svg">
+  <meta property="og:url" content="https://zevairalifestyle.pages.dev/checkout.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Checkout | ZevairaLifestyle Pakistan">
+  <meta name="twitter:description" content="Secure checkout for your Zevaira perfumes. Cash on delivery and JazzCash. Fast delivery across Pakistan.">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   
   <!-- Google Fonts -->
@@ -411,6 +420,13 @@ html,body{background:#0c1a12;color:#f3ecd6;}
           return;
         }
 
+        // Double submit protection
+        const submitBtn = document.getElementById("submitOrderBtn");
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = "Securing Order & Redirecting...";
+        }
+
         // Create Order Object
         const orderNumber = `ZEV-${Date.now().toString().slice(-6)}-${Math.floor(100 + Math.random() * 900)}`;
         const currentUser = window._zevairaCurrentUser || null;
@@ -446,7 +462,7 @@ html,body{background:#0c1a12;color:#f3ecd6;}
         localStorage.removeItem("zevaira_order_note");
         localStorage.removeItem("zevaira_checkout_meta");
 
-        // Also save to Firestore (non-blocking "� WhatsApp still opens if Firestore fails)
+        // Also save to Firestore (non-blocking — WhatsApp still opens if Firestore fails)
         if (typeof window.saveOrderToFirestore === "function") {
           window.saveOrderToFirestore(orderData).catch(() => {});
         }

@@ -34,19 +34,19 @@ const HERO_VIDEOS = [
   {
     id: "film-1",
     title: "Scent That Outlasts The Heat",
-    badge: "Film I â€¢ The Essence",
+    badge: "Film I • The Essence",
     src: "videos/gemini_generated_video_5357ccaa.mp4"
   },
   {
     id: "film-2",
     title: "Artisanal Distillation & Craft",
-    badge: "Film II â€¢ The Craft",
+    badge: "Film II • The Craft",
     src: "videos/gemini_generated_video_8819b247.mp4"
   },
   {
     id: "film-3",
     title: "The Zevaira Experience",
-    badge: "Film III â€¢ Signature Sillage",
+    badge: "Film III • Signature Sillage",
     src: "videos/hero.mp4"
   }
 ];
@@ -85,6 +85,17 @@ const PAYMENT_ACCOUNTS = {
 /* ==========================================================================
    2. FORMATTERS & UTILITIES
    ========================================================================== */
+function escapeHtml(str) {
+  if (typeof str !== "string") return str == null ? "" : String(str);
+  return str.replace(/[&<>"']/g, (m) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  }[m]));
+}
+
 function formatPKR(num) {
   return "Rs " + Math.round(num || 0).toLocaleString("en-PK");
 }
@@ -440,7 +451,7 @@ function injectHeaderAndFooter() {
           <div class="footer-col">
             <h3 style="color:#F5EFDC;margin-bottom:12px;font-size:24px;">ZevairaLifestyle</h3>
             <p style="color:#A9BBA9;font-size:14px;line-height:1.6;margin-bottom:18px;">
-              Formulated specifically for Pakistanâ€™s climate. High-concentration Extrait de Parfum handcrafted to stay fresh through scorching summer days and humid monsoons.
+              Formulated specifically for Pakistan's climate. High-concentration Extrait de Parfum handcrafted to stay fresh through scorching summer days and humid monsoons.
             </p>
             <div style="margin-top:16px;">
               <a href="${INSTAGRAM_URL}" target="_blank" rel="noopener noreferrer" class="instagram-link-badge" aria-label="ZevairaLifestyle on Instagram">
@@ -678,8 +689,8 @@ function initHeaderInteractions() {
                 ${p.image ? `<img src="${p.image}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;border-radius:4px;">` : `<div style="transform:scale(0.28);transform-origin:center;">${getBottleSvg(p, "60px")}</div>`}
               </div>
               <div style="flex:1;">
-                <div style="font-weight:600;font-size:15px;color:var(--ink);">${p.name}</div>
-                <div style="font-size:12px;color:var(--muted);">${p.category} â€¢ ${p.scentFamily} â€¢ From ${formatPKR(p.sizes[0].price)}</div>
+                <div style="font-weight:600;font-size:15px;color:var(--ink);">${escapeHtml(p.name)}</div>
+                <div style="font-size:12px;color:var(--muted);">${escapeHtml(p.category)} • ${escapeHtml(p.scentFamily)} • From ${formatPKR(p.sizes[0].price)}</div>
               </div>
               <span class="badge" style="font-size:10px;">${p.badge || 'Extrait'}</span>
             </a>
@@ -747,10 +758,22 @@ function initScrollTop() {
 /* ==========================================================================
    9. NEWSLETTER SUBMIT
    ========================================================================== */
+let lastNewsletterSubmission = 0;
 function handleNewsletterSubmit(e) {
   e.preventDefault();
+  const now = Date.now();
+  if (now - lastNewsletterSubmission < 3000) {
+    showToast("Please wait a moment before submitting again.", "error");
+    return;
+  }
   const input = e.target.querySelector("input[type=email]");
   if (input) {
+    const email = input.value.trim();
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showToast("Please enter a valid email address.", "error");
+      return;
+    }
+    lastNewsletterSubmission = now;
     showToast("Welcome to Zevaira circle! Use code ZEVAIRA10 for 10% off.");
     input.value = "";
   }
@@ -776,7 +799,7 @@ function generateWhatsAppOrderUrl(order) {
   msg += `*ITEMS ORDERED:*\n`;
 
   items.forEach((item, index) => {
-    msg += `${index + 1}. *${item.name}* (${item.size})\n   Qty: ${item.qty} Ã— ${formatPKR(item.price)} = ${formatPKR(item.price * item.qty)}\n`;
+    msg += `${index + 1}. *${item.name}* (${item.size})\n   Qty: ${item.qty} × ${formatPKR(item.price)} = ${formatPKR(item.price * item.qty)}\n`;
   });
 
   msg += `--------------------------------------\n`;
@@ -891,6 +914,7 @@ if (typeof window !== "undefined") {
   window.DISCOUNT_CODES = DISCOUNT_CODES;
   window.PAYMENT_ACCOUNTS = PAYMENT_ACCOUNTS;
 
+  window.escapeHtml = escapeHtml;
   window.formatPKR = formatPKR;
   window.getProductById = getProductById;
   window.getCart = getCart;

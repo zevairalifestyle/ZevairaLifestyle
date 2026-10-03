@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <script>/* Inline theme restore — runs before first paint, prevents FOUC */
@@ -11,6 +11,15 @@ html,body{background:#0c1a12;color:#f3ecd6;}
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>My Account | ZevairaLifestyle Pakistan</title>
   <meta name="description" content="Sign in or create your ZevairaLifestyle account. Track orders, manage your wishlist and enjoy a seamless fragrance shopping experience.">
+  <link rel="canonical" href="https://zevairalifestyle.pages.dev/account.html">
+  <meta property="og:title" content="My Account | ZevairaLifestyle Pakistan">
+  <meta property="og:description" content="Sign in or create your ZevairaLifestyle account. Track orders and manage your wishlist.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="favicon.svg">
+  <meta property="og:url" content="https://zevairalifestyle.pages.dev/account.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="My Account | ZevairaLifestyle Pakistan">
+  <meta name="twitter:description" content="Sign in or create your ZevairaLifestyle account. Track orders and manage your wishlist.">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -500,8 +509,9 @@ html,body{background:#0c1a12;color:#f3ecd6;}
 
       const initial  = (user.displayName || user.email || 'U')[0].toUpperCase();
       const avatarEl = document.getElementById('dashAvatar');
-      if (user.photoURL) {
-        avatarEl.innerHTML = `<img src="${user.photoURL}" alt="${user.displayName || 'User'}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">`;
+      if (user.photoURL && /^https?:\/\//i.test(user.photoURL)) {
+        const safeName = (user.displayName || 'User').replace(/[&<>"']/g, '');
+        avatarEl.innerHTML = `<img src="${encodeURI(user.photoURL)}" alt="${safeName}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">`;
       } else {
         avatarEl.textContent = initial;
       }

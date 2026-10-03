@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <script>/* Inline theme restore — runs before first paint, prevents FOUC */
@@ -11,6 +11,15 @@ html,body{background:#0c1a12;color:#f3ecd6;}
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Order Confirmed | ZevairaLifestyle Pakistan</title>
   <meta name="description" content="Thank you for your order with ZevairaLifestyle. Confirm your dispatch directly via WhatsApp.">
+  <link rel="canonical" href="https://zevairalifestyle.pages.dev/order-success.html">
+  <meta property="og:title" content="Order Confirmed | ZevairaLifestyle Pakistan">
+  <meta property="og:description" content="Thank you for your order with ZevairaLifestyle. Confirm your dispatch directly via WhatsApp.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="favicon.svg">
+  <meta property="og:url" content="https://zevairalifestyle.pages.dev/order-success.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Order Confirmed | ZevairaLifestyle Pakistan">
+  <meta name="twitter:description" content="Thank you for your order with ZevairaLifestyle. Confirm your dispatch directly via WhatsApp.">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   
   <!-- Google Fonts -->
@@ -185,7 +194,7 @@ html,body{background:#0c1a12;color:#f3ecd6;}
           createdAt: new Date().toISOString(),
           customer: {
             name: "Honored Patron",
-            phone: window.STORE_PHONE || "0300 1234567",
+            phone: window.STORE_PHONE || "+92 334 7555147",
             email: "",
             city: "Pakistan",
             address: "Your specified delivery address",
@@ -193,13 +202,13 @@ html,body{background:#0c1a12;color:#f3ecd6;}
             notes: ""
           },
           items: [
-            { name: "Royal Vetiver", size: "50ml", price: 4200, qty: 1 }
+            { name: "ZEVARA", size: "50ml", price: 4800, qty: 1 }
           ],
-          subtotal: 4200,
+          subtotal: 4800,
           discount: 0,
           giftWrap: 0,
           deliveryFee: 250,
-          total: 4450,
+          total: 5050,
           paymentMethod: "Cash on Delivery (COD)"
         };
       }
@@ -222,10 +231,11 @@ html,body{background:#0c1a12;color:#f3ecd6;}
 
       // Items Table
       const itemsContainer = document.getElementById("invItemsList");
+      const escapeFn = typeof window.escapeHtml === 'function' ? window.escapeHtml : (s) => s;
       itemsContainer.innerHTML = order.items.map(item => `
         <div style="display:flex;justify-content:space-between;align-items:center;">
           <div>
-            <strong>${item.name}</strong> <span style="color:var(--muted);font-size:12px;">(${item.size})</span>
+            <strong>${escapeFn(item.name)}</strong> <span style="color:var(--muted);font-size:12px;">(${escapeFn(item.size)})</span>
             <div style="font-size:12px;color:var(--muted);">Qty: ${item.qty} × ${formatPKR(item.price)}</div>
           </div>
           <div style="font-weight:600;">${formatPKR(item.price * item.qty)}</div>

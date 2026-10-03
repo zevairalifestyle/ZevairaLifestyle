@@ -510,7 +510,7 @@
           <div class="form-row">
             <div class="form-group">
               <label>WhatsApp Number (no + or spaces)</label>
-              <input type="text" id="set_whatsapp" class="form-control" placeholder="923001234567">
+              <input type="text" id="set_whatsapp" class="form-control" placeholder="923347555147">
             </div>
             <div class="form-group">
               <label>Free Delivery Threshold (PKR)</label>
@@ -542,50 +542,13 @@
 
           <div class="form-row">
             <div class="form-group">
-              <label>EasyPaisa Account Number</label>
-              <input type="text" id="set_ep_account" class="form-control" placeholder="0300 1234567">
-            </div>
-            <div class="form-group">
-              <label>EasyPaisa Account Title</label>
-              <input type="text" id="set_ep_title" class="form-control" placeholder="Zevaira Lifestyle">
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
               <label>JazzCash Account Number</label>
-              <input type="text" id="set_jc_account" class="form-control" placeholder="0300 1234567">
+              <input type="text" id="set_jc_account" class="form-control" placeholder="0334 7555147">
             </div>
             <div class="form-group">
               <label>JazzCash Account Title</label>
               <input type="text" id="set_jc_title" class="form-control" placeholder="Zevaira Lifestyle">
             </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label>UPaisa Account Number</label>
-              <input type="text" id="set_up_account" class="form-control" placeholder="0300 1234567">
-            </div>
-            <div class="form-group">
-              <label>Bank Name</label>
-              <input type="text" id="set_bk_name" class="form-control" placeholder="Meezan Bank Ltd">
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label>Bank Account Number</label>
-              <input type="text" id="set_bk_account" class="form-control" placeholder="01020304050607">
-            </div>
-            <div class="form-group">
-              <label>Bank IBAN</label>
-              <input type="text" id="set_bk_iban" class="form-control" placeholder="PK64MEZN0001020304050607">
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Bank Account Title</label>
-            <input type="text" id="set_bk_title" class="form-control" placeholder="Zevaira Lifestyle">
           </div>
         </div>
 
@@ -1281,33 +1244,16 @@ async function loadSettings() {
     if (s.giftWrapFee !== undefined) document.getElementById('set_giftWrapFee').value = s.giftWrapFee;
     const pa = s.paymentAccounts || {};
     if (pa.cod)       document.getElementById('set_cod_desc').value    = pa.cod.desc || '';
-    if (pa.easypaisa) {
-      document.getElementById('set_ep_account').value = pa.easypaisa.accountNumber || '';
-      document.getElementById('set_ep_title').value   = pa.easypaisa.title || '';
-    }
     if (pa.jazzcash) {
       document.getElementById('set_jc_account').value = pa.jazzcash.accountNumber || '';
       document.getElementById('set_jc_title').value   = pa.jazzcash.title || '';
-    }
-    if (pa.upaisa)  document.getElementById('set_up_account').value  = pa.upaisa.accountNumber || '';
-    if (pa.bank) {
-      document.getElementById('set_bk_name').value    = pa.bank.bankName || '';
-      document.getElementById('set_bk_account').value = pa.bank.accountNumber || '';
-      document.getElementById('set_bk_iban').value    = pa.bank.iban || '';
-      document.getElementById('set_bk_title').value   = pa.bank.title || '';
     }
   } catch (e) { toast('Could not load settings: ' + e.message, true); }
 }
 
 document.getElementById('saveSettingsBtn').addEventListener('click', async () => {
-  const epAcct  = document.getElementById('set_ep_account').value.trim();
-  const epTitle = document.getElementById('set_ep_title').value.trim() || 'Zevaira Lifestyle';
   const jcAcct  = document.getElementById('set_jc_account').value.trim();
   const jcTitle = document.getElementById('set_jc_title').value.trim() || 'Zevaira Lifestyle';
-  const bkName  = document.getElementById('set_bk_name').value.trim() || 'Meezan Bank Ltd';
-  const bkAcct  = document.getElementById('set_bk_account').value.trim();
-  const bkIban  = document.getElementById('set_bk_iban').value.trim();
-  const bkTitle = document.getElementById('set_bk_title').value.trim() || 'Zevaira Lifestyle';
 
   const data = {
     whatsappNumber:        document.getElementById('set_whatsapp').value.trim(),
@@ -1319,31 +1265,11 @@ document.getElementById('saveSettingsBtn').addEventListener('click', async () =>
         name: 'Cash on Delivery (COD)',
         desc: document.getElementById('set_cod_desc').value.trim()
       },
-      easypaisa: {
-        name:          'EasyPaisa',
-        title:         epTitle,
-        accountNumber: epAcct,
-        instructions:  `Transfer to EasyPaisa Mobile Account: ${epAcct} (Title: ${epTitle}). Send screenshot on WhatsApp for instant confirmation.`
-      },
       jazzcash: {
-        name:          'JazzCash',
+        name:          'JazzCash Mobile Wallet',
         title:         jcTitle,
         accountNumber: jcAcct,
-        instructions:  `Transfer to JazzCash Mobile Account: ${jcAcct} (Title: ${jcTitle}). Send screenshot on WhatsApp for instant confirmation.`
-      },
-      upaisa: {
-        name:          'UPaisa',
-        title:         'Zevaira Lifestyle',
-        accountNumber: document.getElementById('set_up_account').value.trim(),
-        instructions:  `Transfer to UPaisa Wallet: ${document.getElementById('set_up_account').value.trim()} (Title: Zevaira Lifestyle). Share receipt on WhatsApp.`
-      },
-      bank: {
-        name:          'Bank Transfer',
-        bankName:      bkName,
-        title:         bkTitle,
-        accountNumber: bkAcct,
-        iban:          bkIban,
-        instructions:  `Transfer to ${bkName} (Title: ${bkTitle} | Account: ${bkAcct} | IBAN: ${bkIban}). Share transfer receipt on WhatsApp.`
+        instructions:  `Transfer to JazzCash: ${jcAcct} (Title: ${jcTitle}). After sending, share the payment screenshot on WhatsApp to confirm your order.`
       }
     },
     updatedAt: serverTimestamp()
